@@ -48,4 +48,11 @@ public class PitchDetector {
   public func addSamples(samples: Int16, inNumberFrames frames: Int) {
 
   }
+
+  // MARK: - Private Helpers
+
+  private func interpolate(y1: Float, y2: Float, y3: Float, k: Int) -> Float {
+    let d = (y3 - y1) / (2 * (2 * y2 - y1 - y3))
+    return Float(k) + d
+  }
 }
