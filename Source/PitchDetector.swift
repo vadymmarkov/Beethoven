@@ -45,6 +45,8 @@ public class PitchDetector {
       vDSP_hann_window(hanningWindow, vDSP_Length(bufferLength), Int32(vDSP_HANN_NORM))
   }
 
+  // MARK: - Public
+
   public func addSamples(samples: UnsafeMutablePointer<Int16>, framesCount: Int) {
     var newLength = framesCount
     if samplesInBuffer > 0 {
@@ -73,6 +75,8 @@ public class PitchDetector {
       samplesInBuffer = 0
     }
   }
+
+  // MARK: - Private
 
   private func correlate(framesCount: Int) {
     var frequency: Float = 0
@@ -122,8 +126,6 @@ public class PitchDetector {
     }
     active = false
   }
-
-  // MARK: - Private Helpers
 
   private func interpolate(y1 y1: Float, y2: Float, y3: Float, k: Int) -> Float {
     let d = (y3 - y1) / (2 * (2 * y2 - y1 - y3))
