@@ -1,5 +1,3 @@
-import Foundation
-import AVFoundation
 import Accelerate
 
 public protocol PitchDetectorDelegate: class {
