@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14A139B41AEFC72B00AD732F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A139B31AEFC72B00AD732F /* Tests.swift */; };
+		D5457A461BE1848B00771C8C /* AudioReciever.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5457A451BE1848B00771C8C /* AudioReciever.swift */; settings = {ASSET_TAGS = (); }; };
 		D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546C19E1BE03B4600B915F8 /* PitchDetector.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -20,6 +21,7 @@
 		14C136521AB784B200B7B07A /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = ../CONTRIBUTING.md; sourceTree = "<group>"; };
 		14C136541AB784B200B7B07A /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
 		14C136551AB784B200B7B07A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		D5457A451BE1848B00771C8C /* AudioReciever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioReciever.swift; sourceTree = "<group>"; };
 		D546C19E1BE03B4600B915F8 /* PitchDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D546C19E1BE03B4600B915F8 /* PitchDetector.swift */,
+				D5457A451BE1848B00771C8C /* AudioReciever.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -162,6 +165,7 @@
 			files = (
 				D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */,
 				14A139B41AEFC72B00AD732F /* Tests.swift in Sources */,
+				D5457A461BE1848B00771C8C /* AudioReciever.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
