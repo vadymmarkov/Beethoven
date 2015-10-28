@@ -14,7 +14,7 @@ public class PitchDetector {
   }
 
   public weak var delegate: PitchDetectorDelegate?
-  public var isActive = false
+  public var active = false
   public var highBoundFrequency: Int = 0
   public var lowBoundFrequency: Int = 0
   public var sampleRate: Float
@@ -45,8 +45,27 @@ public class PitchDetector {
       vDSP_hann_window(hanningWindow, vDSP_Length(bufferLength), Int32(vDSP_HANN_NORM))
   }
 
-  public func addSamples(samples: Int16, inNumberFrames frames: Int) {
+  public func addSamples(samples: UnsafeMutablePointer<Int16>, inNumberFrames frames: Int) {
+    var newLength = frames
+    if samplesInBuffer > 0 {
+      newLength += samplesInBuffer
+    }
 
+    let newBuffer = UnsafeMutablePointer<Int16>.alloc(newLength)
+    memcpy(newBuffer, buffer, samplesInBuffer * sizeof(Int16))
+    memcpy(&newBuffer[samplesInBuffer], samples, frames * sizeof(Int16))
+
+    free(buffer)
+    buffer = newBuffer
+    samplesInBuffer = newLength
+
+    if Float(samplesInBuffer) > sampleRate / Float(lowBoundFrequency) {
+      if !active {
+        active = true
+        //[self performSelectorInBackground:@selector(performWithNumFrames:) withObject:[NSNumber numberWithInt:newLength]];
+      }
+      samplesInBuffer = 0
+    }
   }
 
   // MARK: - Private Helpers
