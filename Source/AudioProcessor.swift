@@ -17,12 +17,12 @@ public class AudioProcessor {
     inputNode.installTapOnBus(bus, bufferSize: 2048, format:inputNode.inputFormatForBus(bus)) {
       (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
       dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.audioProcessorDidReceiveSamples(buffer.int16ChannelData[0], framesCount: Int(buffer.frameLength))
+        self.delegate?.audioProcessorDidReceiveSamples(buffer.int16ChannelData.memory, framesCount: Int(buffer.frameLength))
       }
     }
 
     audioEngine.prepare()
-    
+
     do {
       try audioEngine.start()
       print("Star")
