@@ -17,15 +17,20 @@ public class AudioInputProcessor {
 
   private let audioEngine = AVAudioEngine()
   private let bus = 0
+  private let bufferSize: AVAudioFrameCount
+
+  public init(bufferSize: AVAudioFrameCount) {
+    self.bufferSize = bufferSize
+  }
 
   public func start() throws {
     guard let inputNode = audioEngine.inputNode else {
       throw Error.InputNodeMissing
     }
 
-    inputNode.installTapOnBus(bus, bufferSize: 44100, format:inputNode.inputFormatForBus(bus)) {
-      buffer, time in
+    let format = inputNode.inputFormatForBus(bus)
 
+    inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.audioInputProcessorDidReceiveSamples(buffer.int16ChannelData.memory,
           framesCount: Int(buffer.frameLength))
