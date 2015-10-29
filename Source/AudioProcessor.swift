@@ -6,15 +6,21 @@ public protocol AudioProcessorDelegate: class {
 
 public class AudioProcessor {
 
-  private let audioEngine = AVAudioEngine()
+  enum InputError: ErrorType {
+    case InputNodeMissing
+  }
+
   public weak var delegate: AudioProcessorDelegate?
 
-  public func start() {
-    guard let inputNode = audioEngine.inputNode else { return }
+  private let audioEngine = AVAudioEngine()
+  private let bus = 0
 
-    let bus = 0
+  public func start() throws {
+    guard let inputNode = audioEngine.inputNode else {
+      throw InputError.InputNodeMissing
+    }
 
-    inputNode.installTapOnBus(bus, bufferSize: 2048, format:inputNode.inputFormatForBus(bus)) {
+    inputNode.installTapOnBus(bus, bufferSize: 44100, format:inputNode.inputFormatForBus(bus)) {
       (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.audioProcessorDidReceiveSamples(buffer.int16ChannelData.memory, framesCount: Int(buffer.frameLength))
@@ -22,17 +28,10 @@ public class AudioProcessor {
     }
 
     audioEngine.prepare()
-
-    do {
-      try audioEngine.start()
-      print("Star")
-    } catch {
-      print("Error")
-    }
+    try audioEngine.start()
   }
 
   public func stop() {
-    print("Stop")
     audioEngine.stop()
   }
 }
