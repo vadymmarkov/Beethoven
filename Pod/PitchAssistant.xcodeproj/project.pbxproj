@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14A139B41AEFC72B00AD732F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A139B31AEFC72B00AD732F /* Tests.swift */; };
-		D5457A461BE1848B00771C8C /* AudioProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5457A451BE1848B00771C8C /* AudioProcessor.swift */; settings = {ASSET_TAGS = (); }; };
+		D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */; settings = {ASSET_TAGS = (); }; };
 		D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546C19E1BE03B4600B915F8 /* PitchDetector.swift */; settings = {ASSET_TAGS = (); }; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -24,7 +24,7 @@
 		14C136551AB784B200B7B07A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		716897C2D5B5626C8648DBB1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7BBA2578CC3D0D752EAD4195 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5457A451BE1848B00771C8C /* AudioProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioProcessor.swift; sourceTree = "<group>"; };
+		D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioInputProcessor.swift; sourceTree = "<group>"; };
 		D546C19E1BE03B4600B915F8 /* PitchDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				D546C19E1BE03B4600B915F8 /* PitchDetector.swift */,
-				D5457A451BE1848B00771C8C /* AudioProcessor.swift */,
+				D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -240,7 +240,7 @@
 			files = (
 				D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */,
 				14A139B41AEFC72B00AD732F /* Tests.swift in Sources */,
-				D5457A461BE1848B00771C8C /* AudioProcessor.swift in Sources */,
+				D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
