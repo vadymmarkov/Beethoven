@@ -19,9 +19,13 @@ public class AudioInputProcessor {
   private let bus = 0
   private let bufferSize: AVAudioFrameCount
 
+  // MARK: - Initialization
+
   public init(bufferSize: AVAudioFrameCount) {
     self.bufferSize = bufferSize
   }
+
+  // MARK: - Processing
 
   public func start() throws {
     guard let inputNode = audioEngine.inputNode else {
