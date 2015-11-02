@@ -29,8 +29,38 @@ public class PitchEngine {
     return pitchDetector
     }()
 
+  // MARK: - Initialization
+
   public init(bufferSize: AVAudioFrameCount = 2048) {
     self.bufferSize = bufferSize
+  }
+
+  // MARK: - Helpers
+
+  public func averageFrequency(frequency: Float) -> Float {
+    var result = frequency
+
+    frequencies.insert(frequency, atIndex: 0)
+
+    if frequencies.count > 22 {
+      frequencies.removeAtIndex(frequencies.count - 1)
+    }
+
+    let count = frequencies.count
+
+    if count > 1 {
+      var sortedFrequencies = frequencies.sort { $0 > $1 }
+
+      if count % 2 == 0 {
+        let value1 = sortedFrequencies[count / 2 - 1]
+        let value2 = sortedFrequencies[count / 2]
+        result = (value1 + value2) / 2
+      } else {
+        result = sortedFrequencies[count / 2]
+      }
+    }
+
+    return result
   }
 }
 
@@ -49,29 +79,7 @@ extension PitchEngine: AudioInputProcessorDelegate {
 extension PitchEngine: PitchDetectorDelegate {
 
   public func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float) {
-    var result = frequency
-    frequencies.insert(frequency, atIndex: 0)
-
-    if frequencies.count > 22 {
-      frequencies.removeAtIndex(frequencies.count - 1)
-    }
-
-    var median: Float = 0
-    var count = frequencies.count
-
-    if count > 1 {
-      var sortedFrequencies = frequencies.sort { $0 > $1 }
-
-      if count % 2 == 0 {
-        let value1 = sortedFrequencies[count / 2 - 1]
-        let value2 = sortedFrequencies[count / 2]
-        median = (value1 + value2) / 2
-        result = median
-      } else {
-        median = sortedFrequencies[count / 2]
-        result = median
-      }
-    }
+    //delegate averageFrequency(frequency)
   }
 }
 
