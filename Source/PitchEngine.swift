@@ -38,9 +38,22 @@ public class PitchEngine {
     self.delegate = delegate
   }
 
+  // MARK: - Processing
+
+  public func start() {
+    do {
+      try audioInputProcessor.start()
+    } catch {}
+  }
+
+  public func stop() {
+    audioInputProcessor.stop()
+    frequencies = [Float]()
+  }
+
   // MARK: - Helpers
 
-  public func averageFrequency(frequency: Float) -> Float {
+  private func averageFrequency(frequency: Float) -> Float {
     var result = frequency
 
     frequencies.insert(frequency, atIndex: 0)

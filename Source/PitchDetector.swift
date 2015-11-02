@@ -12,11 +12,11 @@ public class PitchDetector {
   }
 
   public weak var delegate: PitchDetectorDelegate?
-  public var active = false
   public var highBoundFrequency: Float
   public var lowBoundFrequency: Float
   public var sampleRate: Float
 
+  private var active = false
   private var bufferLength: Int
   private var hanningWindow: UnsafeMutablePointer<Float>
   private var result: UnsafeMutablePointer<Float>
