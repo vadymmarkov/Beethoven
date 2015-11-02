@@ -10,7 +10,11 @@ public class PitchEngine {
   private let bufferSize: AVAudioFrameCount
 
   private lazy var audioInputProcessor: AudioInputProcessor = { [unowned self] in
-    let audioInputProcessor = AudioInputProcessor(bufferSize: self.bufferSize)
+    let audioInputProcessor = AudioInputProcessor(
+      bufferSize: self.bufferSize,
+      delegate: self
+    )
+
     return audioInputProcessor
     }()
 
@@ -29,6 +33,16 @@ public class PitchEngine {
   }
 }
 
+// MARK: - AudioInputProcessorDelegate
+
+extension PitchEngine: AudioInputProcessorDelegate {
+
+  public func audioInputProcessorDidReceiveSamples(samples: UnsafeMutablePointer<Int16>,
+    framesCount: Int) {
+      pitchDetector.addSamples(samples, framesCount: framesCount)
+  }
+}
+
 // MARK: - PitchDetectorDelegate
 
 extension PitchEngine: PitchDetectorDelegate {
@@ -37,3 +51,5 @@ extension PitchEngine: PitchDetectorDelegate {
 
   }
 }
+
+
