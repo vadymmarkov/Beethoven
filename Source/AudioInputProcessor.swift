@@ -21,8 +21,9 @@ public class AudioInputProcessor {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048) {
+  public init(bufferSize: AVAudioFrameCount = 2048, delegate: AudioInputProcessorDelegate? = nil) {
     self.bufferSize = bufferSize
+    self.delegate = delegate
   }
 
   // MARK: - Processing
