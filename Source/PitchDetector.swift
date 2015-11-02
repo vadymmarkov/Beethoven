@@ -7,16 +7,16 @@ public protocol PitchDetectorDelegate: class {
 public class PitchDetector {
 
   public struct Defaults {
-    static let lowBoundFrequency: Float = 40.0
+    static let lowBoundFrequency: Float = 30.0
     static let highBoundFrequency: Float = 4500.0
   }
 
   public weak var delegate: PitchDetectorDelegate?
-  public var active = false
   public var highBoundFrequency: Float
   public var lowBoundFrequency: Float
   public var sampleRate: Float
 
+  private var active = false
   private var bufferLength: Int
   private var hanningWindow: UnsafeMutablePointer<Float>
   private var result: UnsafeMutablePointer<Float>
