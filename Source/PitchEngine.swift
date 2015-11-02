@@ -7,6 +7,8 @@ public protocol PitchEngineDelegate: class {
 
 public class PitchEngine {
 
+  public weak var delegate: PitchEngineDelegate?
+
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
 
@@ -31,8 +33,9 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048) {
+  public init(bufferSize: AVAudioFrameCount = 2048, delegate: PitchEngineDelegate?) {
     self.bufferSize = bufferSize
+    self.delegate = delegate
   }
 
   // MARK: - Helpers
@@ -79,7 +82,7 @@ extension PitchEngine: AudioInputProcessorDelegate {
 extension PitchEngine: PitchDetectorDelegate {
 
   public func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float) {
-    //delegate averageFrequency(frequency)
+    delegate?.pitchEngineDidRecieveFrequency(self, frequency: averageFrequency(frequency))
   }
 }
 
