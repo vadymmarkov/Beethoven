@@ -85,5 +85,3 @@ extension PitchEngine: PitchDetectorDelegate {
     delegate?.pitchEngineDidRecieveFrequency(self, frequency: averageFrequency(frequency))
   }
 }
-
-
