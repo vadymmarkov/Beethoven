@@ -85,7 +85,6 @@ class ViewController: UIViewController {
 extension ViewController: PitchEngineDelegate {
 
   func pitchEngineDidRecieveFrequency(pitchEngine: PitchEngine, frequency: Float) {
-
+    noteLabel.text = "\(frequency)"
   }
 }
-
