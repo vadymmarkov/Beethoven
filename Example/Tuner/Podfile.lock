@@ -1,0 +1,14 @@
+PODS:
+  - PitchAssistant (0.1.0)
+
+DEPENDENCIES:
+  - PitchAssistant (from `../../`)
+
+EXTERNAL SOURCES:
+  PitchAssistant:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  PitchAssistant: c6df8acc3e026d66b371b0fb758fee43f1a76c30
+
+COCOAPODS: 0.39.0
