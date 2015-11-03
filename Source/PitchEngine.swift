@@ -8,6 +8,7 @@ public protocol PitchEngineDelegate: class {
 public class PitchEngine {
 
   public weak var delegate: PitchEngineDelegate?
+  public var active = false
 
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
@@ -43,12 +44,14 @@ public class PitchEngine {
   public func start() {
     do {
       try audioInputProcessor.start()
+      active = true
     } catch {}
   }
 
   public func stop() {
     audioInputProcessor.stop()
     frequencies = [Float]()
+    active = false
   }
 
   // MARK: - Helpers
