@@ -1,4 +1,5 @@
 import UIKit
+import Hex
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,22 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
       window?.rootViewController = navigationController
-      window?.makeKeyAndVisible()
 
       applyStyles()
+
+      window?.makeKeyAndVisible()
 
       return true
   }
 
   func applyStyles() {
-    UIApplication.sharedApplication().statusBarStyle = .LightContent
-
     let navigationBar = UINavigationBar.appearance()
-    navigationBar.barTintColor = UIColor(red:0.000, green:0.000, blue:0.000, alpha: 1)
-    navigationBar.tintColor = UIColor(red:1.000, green:1.000, blue:1.000, alpha: 1)
+    navigationBar.barTintColor = UIColor(hex: "111011")
+    navigationBar.translucent = false
     navigationBar.shadowImage = UIImage()
     navigationBar.titleTextAttributes = [
-      NSForegroundColorAttributeName: UIColor(red:1.000, green:1.000, blue:1.000, alpha: 1)
+      NSForegroundColorAttributeName: UIColor.whiteColor()
     ]
   }
 }

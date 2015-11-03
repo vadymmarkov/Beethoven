@@ -1,4 +1,5 @@
 import UIKit
+import Hex
 import PitchAssistant
 
 class ViewController: UIViewController {
@@ -7,7 +8,7 @@ class ViewController: UIViewController {
     let label = UILabel()
     label.text = "--"
     label.font = UIFont(name: "HelveticaNeue-Medium", size: 30)!
-    label.textColor = UIColor(red:0.86, green:0.86, blue:0.86, alpha:1)
+    label.textColor = UIColor(hex: "DCD9DB")
     label.textAlignment = .Center
     label.numberOfLines = 0
     label.sizeToFit()
@@ -16,15 +17,15 @@ class ViewController: UIViewController {
     }()
 
   lazy var actionButton: UIButton = { [unowned self] in
-    let button = UIButton()
-    button.setTitleColor(UIColor.grayColor(), forState: .Normal)
-    button.layer.borderColor = UIColor.grayColor().CGColor
-    button.layer.borderWidth = 1.5
-    button.layer.cornerRadius = 7.5
+    let button = UIButton(type: .System)
+    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    button.layer.cornerRadius = 20
+    button.backgroundColor = UIColor(hex: "E13C6C")
 
     button.addTarget(self, action: "actionButtonDidPress:",
       forControlEvents: .TouchUpInside)
-    button.setTitle("Start", forState: .Normal)
+    button.setTitle("Start".uppercaseString, forState: .Normal)
+    button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 18)!
 
     return button
     }()
@@ -43,8 +44,8 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Tuner"
-    view.backgroundColor = UIColor.whiteColor()
+    title = "Tuner".uppercaseString
+    view.backgroundColor = UIColor(hex: "181717")
 
     [noteLabel, actionButton].forEach {
       view.addSubview($0)
@@ -64,8 +65,8 @@ class ViewController: UIViewController {
   func actionButtonDidPress(button: UIButton) {
     pitchEngine.active ? pitchEngine.stop() : pitchEngine.start()
     pitchEngine.active
-      ? button.setTitle("Stop", forState: .Normal)
-      : button.setTitle("Start", forState: .Normal)
+      ? button.setTitle("Stop".uppercaseString, forState: .Normal)
+      : button.setTitle("Start".uppercaseString, forState: .Normal)
   }
 
   // MARK: - Configuration
@@ -73,9 +74,9 @@ class ViewController: UIViewController {
   func setupLayout() {
     let totalSize = UIScreen.mainScreen().bounds
 
-    actionButton.frame = CGRect(x: 50, y: (totalSize.height - 50) / 2,
+    actionButton.frame = CGRect(x: 50, y: (totalSize.height - 120) / 2,
       width: totalSize.width - 100, height: 50)
-    noteLabel.frame = CGRect(x: 0, y: actionButton.frame.minY - 40,
+    noteLabel.frame = CGRect(x: 0, y: actionButton.frame.minY - 140,
       width: totalSize.width, height: 40)
   }
 }
