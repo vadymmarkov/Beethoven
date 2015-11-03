@@ -1,7 +1,9 @@
 PODS:
+  - Hex (3.0.0)
   - PitchAssistant (0.1.0)
 
 DEPENDENCIES:
+  - Hex
   - PitchAssistant (from `../../`)
 
 EXTERNAL SOURCES:
@@ -9,6 +11,7 @@ EXTERNAL SOURCES:
     :path: ../../
 
 SPEC CHECKSUMS:
+  Hex: ee430da9c4412d9196366ae5327f279021dc03eb
   PitchAssistant: c6df8acc3e026d66b371b0fb758fee43f1a76c30
 
 COCOAPODS: 0.39.0
