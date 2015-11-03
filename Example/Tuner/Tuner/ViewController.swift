@@ -73,9 +73,10 @@ class ViewController: UIViewController {
   func setupLayout() {
     let totalSize = UIScreen.mainScreen().bounds
 
-    noteLabel.frame.origin = CGPoint(x: (totalSize.width - noteLabel.frame.width) / 2, y: 90)
-    actionButton.frame = CGRect(x: 50, y: noteLabel.frame.maxY + 50,
+    actionButton.frame = CGRect(x: 50, y: (totalSize.height - 50) / 2,
       width: totalSize.width - 100, height: 50)
+    noteLabel.frame = CGRect(x: 0, y: actionButton.frame.minY - 40,
+      width: totalSize.width, height: 40)
   }
 }
 
