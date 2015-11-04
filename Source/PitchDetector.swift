@@ -1,4 +1,5 @@
 import Accelerate
+import AVFoundation
 
 public protocol PitchDetectorDelegate: class {
   func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float)
@@ -6,127 +7,60 @@ public protocol PitchDetectorDelegate: class {
 
 public class PitchDetector {
 
-  public struct Defaults {
-    static let lowBoundFrequency: Float = 30.0
-    static let highBoundFrequency: Float = 4500.0
-  }
-
   public weak var delegate: PitchDetectorDelegate?
-  public var highBoundFrequency: Float
-  public var lowBoundFrequency: Float
-  public var sampleRate: Float
 
-  private var active = false
-  private var bufferLength: Int
-  private var hanningWindow: UnsafeMutablePointer<Float>
-  private var result: UnsafeMutablePointer<Float>
-  private var buffer: UnsafeMutablePointer<Float>
-  private var samplesInBuffer: Int
+  private var sampleRate: Float
+  private var bufferSize: AVAudioFrameCount
 
   // MARK: - Initialization
 
   public init(sampleRate: Float,
-    lowBoundFrequency: Float = Defaults.lowBoundFrequency,
-    highBoundFrequency: Float = Defaults.highBoundFrequency,
+    bufferSize: AVAudioFrameCount,
     delegate: PitchDetectorDelegate? = nil) {
       self.sampleRate = sampleRate
-      self.lowBoundFrequency = lowBoundFrequency
-      self.highBoundFrequency = highBoundFrequency
+      self.bufferSize = bufferSize
       self.delegate = delegate
-
-      bufferLength = Int(sampleRate / lowBoundFrequency)
-      hanningWindow = UnsafeMutablePointer<Float>.alloc(bufferLength)
-      result = UnsafeMutablePointer<Float>.alloc(bufferLength)
-      buffer = UnsafeMutablePointer<Float>.alloc(2048)
-      samplesInBuffer = 0
-
-      vDSP_hann_window(hanningWindow, vDSP_Length(bufferLength), Int32(vDSP_HANN_NORM))
   }
 
-  // MARK: - Public
+  // MARK: - Reading
 
-  public func addSamples(samples: UnsafeMutablePointer<Float>, framesCount: Int) {
-    var newLength = framesCount
-    //if samplesInBuffer > 0 {
-      newLength += samplesInBuffer
-    //}
+  public func readBuffer(buffer: AVAudioPCMBuffer) {
+    let frameCount = buffer.frameLength
+    let log2n = UInt(round(log2(Double(frameCount))))
+    let bufferSizePOT = Int(1 << log2n)
+    let inputCount = bufferSizePOT / 2
+    let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
 
-    let newBuffer = UnsafeMutablePointer<Float>.alloc(newLength)
-    memcpy(newBuffer, buffer, samplesInBuffer * sizeof(Float))
-    memcpy(&newBuffer[samplesInBuffer], samples, framesCount * sizeof(Float))
+    var realp = [Float](count: inputCount, repeatedValue: 0)
+    var imagp = [Float](count: inputCount, repeatedValue: 0)
+    var output = DSPSplitComplex(realp: &realp, imagp: &imagp)
 
-    free(buffer)
-    buffer = newBuffer
-    samplesInBuffer = newLength
+    vDSP_ctoz(UnsafePointer<DSPComplex>(buffer.floatChannelData.memory), 2,
+      &output, 1, vDSP_Length(inputCount))
+    vDSP_fft_zrip(fftSetup, &output, 1, log2n, FFTDirection(FFT_FORWARD))
 
-    if Float(samplesInBuffer) > sampleRate / lowBoundFrequency {
-      if !active {
-        active = true
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+    var magnitudes = [Float](count:inputCount, repeatedValue:0.0)
+    vDSP_zvmags(&output, 1, &magnitudes, 1, vDSP_Length(inputCount))
 
-        dispatch_async(backgroundQueue) {
-          self.correlate(newLength)
-        }
-      }
+    var normalizedMagnitudes = [Float](count: inputCount, repeatedValue: 0.0)
+    vDSP_vsmul(sqrt(magnitudes), 1, [2.0 / Float(inputCount)],
+      &normalizedMagnitudes, 1, vDSP_Length(inputCount))
 
-      samplesInBuffer = 0
+    vDSP_destroy_fftsetup(fftSetup)
+
+    if let maxMagnitude = normalizedMagnitudes.maxElement(),
+      maxIndex = normalizedMagnitudes.indexOf(maxMagnitude) {
+        let freq = Float(maxIndex) * sampleRate / Float(inputCount)
+        delegate?.pitchDetectorDidUpdateFrequency(self, frequency: freq)
     }
   }
 
-  // MARK: - Private
+  // MARK: - Helpers
 
-  private func correlate(framesCount: Int) {
-    var frequency: Float = 0
-    let samples = buffer
-    var returnIndex = 0
-    var sum: Float = 0
-    var goingUp = false
-    var normalize: Float = 0
+  private func sqrt(x: [Float]) -> [Float] {
+    var results = [Float](count: x.count, repeatedValue: 0.0)
+    vvsqrtf(&results, x, [Int32(x.count)])
 
-    for i in 0..<framesCount {
-      sum = 0
-
-      for j in 0..<framesCount {
-        sum += Float(samples[j] * samples[j + i]) * hanningWindow[j]
-      }
-
-      if i == 0 { normalize = sum }
-      result[i] = sum / normalize
-    }
-
-    for var i in 0..<(framesCount - 8) {
-      if result[i] < 0 {
-        i += 2
-      } else {
-        if result[i] > result[i - 1] && !goingUp && i > 1 {
-          goingUp = true
-        } else if goingUp && result[i] < result[i - 1] {
-          if returnIndex == 0 && result[i - 1] > result[0] * 0.95 {
-            returnIndex = i - 1
-            break
-          }
-          goingUp = false
-        }
-      }
-    }
-
-    frequency = sampleRate / interpolate(
-      y1: result[returnIndex-1],
-      y2: result[returnIndex],
-      y3: result[returnIndex+1],
-      k: returnIndex)
-
-    if frequency >= 27.5 && frequency <= 4500.0 {
-      dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.pitchDetectorDidUpdateFrequency(self, frequency: frequency)
-      }
-    }
-    active = false
-  }
-
-  private func interpolate(y1 y1: Float, y2: Float, y3: Float, k: Int) -> Float {
-    let d = (y3 - y1) / (2 * (2 * y2 - y1 - y3))
-    return Float(k) + d
+    return results
   }
 }
