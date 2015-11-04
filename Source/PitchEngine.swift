@@ -25,8 +25,7 @@ public class PitchEngine {
   private lazy var pitchDetector: PitchDetector = { [unowned self] in
     let pitchDetector = PitchDetector(
       sampleRate: 44100.0,
-      lowBoundFrequency: 30.0,
-      highBoundFrequency: 4500,
+      bufferSize: self.bufferSize,
       delegate: self)
 
     return pitchDetector
@@ -87,9 +86,8 @@ public class PitchEngine {
 
 extension PitchEngine: AudioInputProcessorDelegate {
 
-  public func audioInputProcessorDidReceiveSamples(samples: UnsafeMutablePointer<Float>,
-    framesCount: Int) {
-      pitchDetector.addSamples(samples, framesCount: framesCount)
+  public func audioInputProcessorDidReceiveBuffer(buffer: AVAudioPCMBuffer) {
+    pitchDetector.readBuffer(buffer)
   }
 }
 
