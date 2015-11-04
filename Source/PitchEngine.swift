@@ -8,6 +8,7 @@ public protocol PitchEngineDelegate: class {
 public class PitchEngine {
 
   public weak var delegate: PitchEngineDelegate?
+  public var active = false
 
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
@@ -24,8 +25,7 @@ public class PitchEngine {
   private lazy var pitchDetector: PitchDetector = { [unowned self] in
     let pitchDetector = PitchDetector(
       sampleRate: 44100.0,
-      lowBoundFrequency: 30.0,
-      highBoundFrequency: 4500,
+      bufferSize: self.bufferSize,
       delegate: self)
 
     return pitchDetector
@@ -43,12 +43,14 @@ public class PitchEngine {
   public func start() {
     do {
       try audioInputProcessor.start()
+      active = true
     } catch {}
   }
 
   public func stop() {
     audioInputProcessor.stop()
     frequencies = [Float]()
+    active = false
   }
 
   // MARK: - Helpers
@@ -84,9 +86,8 @@ public class PitchEngine {
 
 extension PitchEngine: AudioInputProcessorDelegate {
 
-  public func audioInputProcessorDidReceiveSamples(samples: UnsafeMutablePointer<Int16>,
-    framesCount: Int) {
-      pitchDetector.addSamples(samples, framesCount: framesCount)
+  public func audioInputProcessorDidReceiveBuffer(buffer: AVAudioPCMBuffer) {
+    pitchDetector.readBuffer(buffer)
   }
 }
 

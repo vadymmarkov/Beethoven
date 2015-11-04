@@ -1,0 +1,6 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+pod 'Hex'
+pod 'PitchAssistant', path: '../../'
