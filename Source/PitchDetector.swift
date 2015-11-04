@@ -20,7 +20,7 @@ public class PitchDetector {
   private var bufferLength: Int
   private var hanningWindow: UnsafeMutablePointer<Float>
   private var result: UnsafeMutablePointer<Float>
-  private var buffer: UnsafeMutablePointer<Int16>
+  private var buffer: UnsafeMutablePointer<Float>
   private var samplesInBuffer: Int
 
   // MARK: - Initialization
@@ -37,7 +37,7 @@ public class PitchDetector {
       bufferLength = Int(sampleRate / lowBoundFrequency)
       hanningWindow = UnsafeMutablePointer<Float>.alloc(bufferLength)
       result = UnsafeMutablePointer<Float>.alloc(bufferLength)
-      buffer = UnsafeMutablePointer<Int16>.alloc(512)
+      buffer = UnsafeMutablePointer<Float>.alloc(2048)
       samplesInBuffer = 0
 
       vDSP_hann_window(hanningWindow, vDSP_Length(bufferLength), Int32(vDSP_HANN_NORM))
@@ -45,15 +45,15 @@ public class PitchDetector {
 
   // MARK: - Public
 
-  public func addSamples(samples: UnsafeMutablePointer<Int16>, framesCount: Int) {
+  public func addSamples(samples: UnsafeMutablePointer<Float>, framesCount: Int) {
     var newLength = framesCount
-    if samplesInBuffer > 0 {
+    //if samplesInBuffer > 0 {
       newLength += samplesInBuffer
-    }
+    //}
 
-    let newBuffer = UnsafeMutablePointer<Int16>.alloc(newLength)
-    memcpy(newBuffer, buffer, samplesInBuffer * sizeof(Int16))
-    memcpy(&newBuffer[samplesInBuffer], samples, framesCount * sizeof(Int16))
+    let newBuffer = UnsafeMutablePointer<Float>.alloc(newLength)
+    memcpy(newBuffer, buffer, samplesInBuffer * sizeof(Float))
+    memcpy(&newBuffer[samplesInBuffer], samples, framesCount * sizeof(Float))
 
     free(buffer)
     buffer = newBuffer

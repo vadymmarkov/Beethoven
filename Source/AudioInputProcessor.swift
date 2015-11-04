@@ -3,7 +3,7 @@ import AVFoundation
 public protocol AudioInputProcessorDelegate: class {
 
   func audioInputProcessorDidReceiveSamples(
-    samples: UnsafeMutablePointer<Int16>,
+    samples: UnsafeMutablePointer<Float>,
     framesCount: Int)
 }
 
@@ -37,7 +37,7 @@ public class AudioInputProcessor {
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.audioInputProcessorDidReceiveSamples(buffer.int16ChannelData.memory,
+        self.delegate?.audioInputProcessorDidReceiveSamples(buffer.floatChannelData.memory,
           framesCount: Int(buffer.frameLength))
       }
     }

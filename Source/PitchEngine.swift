@@ -87,7 +87,7 @@ public class PitchEngine {
 
 extension PitchEngine: AudioInputProcessorDelegate {
 
-  public func audioInputProcessorDidReceiveSamples(samples: UnsafeMutablePointer<Int16>,
+  public func audioInputProcessorDidReceiveSamples(samples: UnsafeMutablePointer<Float>,
     framesCount: Int) {
       pitchDetector.addSamples(samples, framesCount: framesCount)
   }
