@@ -1,7 +1,4 @@
 public enum Note: String {
-  case A = "A"
-  case ASharp = "A#"
-  case B = "B"
   case C = "C"
   case CSharp = "C#"
   case D = "D"
@@ -11,6 +8,9 @@ public enum Note: String {
   case FSharp = "F#"
   case G = "G"
   case GSharp = "G#"
+  case A = "A"
+  case ASharp = "A#"
+  case B = "B"
 
   public static var values = [
     A, ASharp, B, C, CSharp, D,
