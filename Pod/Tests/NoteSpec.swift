@@ -6,7 +6,7 @@ class NoteSpec: QuickSpec {
   override func spec() {
     describe("Note") {
       describe(".values") {
-
+        
         it("returns an array of 12 notes") {
           let notes = Note.values
           expect(notes.count).to(equal(12))

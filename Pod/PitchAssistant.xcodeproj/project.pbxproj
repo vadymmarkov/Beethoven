@@ -12,6 +12,7 @@
 		D5B2D69B1BEAD39B00DCC8CB /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69A1BEAD39B00DCC8CB /* Pitch.swift */; };
 		D5B2D69D1BEAD3BA00DCC8CB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69C1BEAD3BA00DCC8CB /* Note.swift */; };
 		D5B2D69F1BEAD6DF00DCC8CB /* NoteSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */; };
+		D5B2D6A11BEADEC100DCC8CB /* PitchSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */; };
 		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		D5B2D69A1BEAD39B00DCC8CB /* Pitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
 		D5B2D69C1BEAD3BA00DCC8CB /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSpec.swift; sourceTree = "<group>"; };
+		D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchSpec.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* PitchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 			children = (
 				146D72B01AB782920058798C /* Supporting Files */,
 				D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */,
+				D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
 				D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */,
 				D5B2D69B1BEAD39B00DCC8CB /* Pitch.swift in Sources */,
+				D5B2D6A11BEADEC100DCC8CB /* PitchSpec.swift in Sources */,
 				D5B2D69D1BEAD3BA00DCC8CB /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
