@@ -1,6 +1,6 @@
 import UIKit
 import Hex
-import PitchAssistant
+import Pitchy
 
 class ViewController: UIViewController {
 
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Tuner".uppercaseString
+    title = "Pitchy".uppercaseString
     view.backgroundColor = UIColor(hex: "181717")
 
     [noteLabel, actionButton].forEach {
