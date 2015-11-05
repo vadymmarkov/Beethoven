@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14A139B41AEFC72B00AD732F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A139B31AEFC72B00AD732F /* Tests.swift */; };
-		D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */; settings = {ASSET_TAGS = (); }; };
-		D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546C19E1BE03B4600B915F8 /* PitchDetector.swift */; settings = {ASSET_TAGS = (); }; };
-		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; settings = {ASSET_TAGS = (); }; };
+		D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */; };
+		D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546C19E1BE03B4600B915F8 /* PitchDetector.swift */; };
+		D5B2D69B1BEAD39B00DCC8CB /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69A1BEAD39B00DCC8CB /* Pitch.swift */; };
+		D5B2D69D1BEAD3BA00DCC8CB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69C1BEAD3BA00DCC8CB /* Note.swift */; };
+		D5B2D69F1BEAD6DF00DCC8CB /* NoteSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */; };
+		D5B2D6A11BEADEC100DCC8CB /* PitchSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */; };
+		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		146D72AC1AB782920058798C /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146D72B11AB782920058798C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14A139B21AEFC72B00AD732F /* Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Bridging-Header.h"; sourceTree = "<group>"; };
-		14A139B31AEFC72B00AD732F /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		14C136511AB784B200B7B07A /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		14C136521AB784B200B7B07A /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = ../CONTRIBUTING.md; sourceTree = "<group>"; };
 		14C136541AB784B200B7B07A /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
@@ -27,6 +28,10 @@
 		7BBA2578CC3D0D752EAD4195 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioInputProcessor.swift; sourceTree = "<group>"; };
 		D546C19E1BE03B4600B915F8 /* PitchDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
+		D5B2D69A1BEAD39B00DCC8CB /* Pitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
+		D5B2D69C1BEAD3BA00DCC8CB /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSpec.swift; sourceTree = "<group>"; };
+		D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchSpec.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* PitchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,8 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				146D72B01AB782920058798C /* Supporting Files */,
-				14A139B31AEFC72B00AD732F /* Tests.swift */,
-				14A139B21AEFC72B00AD732F /* Tests-Bridging-Header.h */,
+				D5B2D69E1BEAD6DF00DCC8CB /* NoteSpec.swift */,
+				D5B2D6A01BEADEC100DCC8CB /* PitchSpec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -100,6 +105,8 @@
 				D546C19E1BE03B4600B915F8 /* PitchDetector.swift */,
 				D5457A451BE1848B00771C8C /* AudioInputProcessor.swift */,
 				D5BE32F11BE815FB00945677 /* PitchEngine.swift */,
+				D5B2D69A1BEAD39B00DCC8CB /* Pitch.swift */,
+				D5B2D69C1BEAD3BA00DCC8CB /* Note.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -242,9 +249,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D546C19F1BE03B4600B915F8 /* PitchDetector.swift in Sources */,
+				D5B2D69F1BEAD6DF00DCC8CB /* NoteSpec.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
-				14A139B41AEFC72B00AD732F /* Tests.swift in Sources */,
 				D5457A461BE1848B00771C8C /* AudioInputProcessor.swift in Sources */,
+				D5B2D69B1BEAD39B00DCC8CB /* Pitch.swift in Sources */,
+				D5B2D6A11BEADEC100DCC8CB /* PitchSpec.swift in Sources */,
+				D5B2D69D1BEAD3BA00DCC8CB /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +355,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Tests-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -363,7 +374,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Tests-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
