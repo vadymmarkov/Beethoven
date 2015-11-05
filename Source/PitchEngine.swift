@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 
 public protocol PitchEngineDelegate: class {
-  func pitchEngineDidRecieveFrequency(pitchEngine: PitchEngine, frequency: Float)
+  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch)
 }
 
 public class PitchEngine {
@@ -96,6 +96,8 @@ extension PitchEngine: AudioInputProcessorDelegate {
 extension PitchEngine: PitchDetectorDelegate {
 
   public func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float) {
-    delegate?.pitchEngineDidRecieveFrequency(self, frequency: averageFrequency(frequency))
+    let pitch = Pitch(frequency: averageFrequency(frequency))
+
+    delegate?.pitchEngineDidRecievePitch(self, pitch: pitch)
   }
 }
