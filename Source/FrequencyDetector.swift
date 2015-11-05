@@ -1,13 +1,16 @@
 import Accelerate
 import AVFoundation
 
-public protocol PitchDetectorDelegate: class {
-  func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float)
+public protocol FrequencyDetectorDelegate: class {
+
+  func frequencyDetectorDidRetrieveFrequency(
+    frequencyDetector: FrequencyDetector,
+    frequency: Float)
 }
 
-public class PitchDetector {
+public class FrequencyDetector {
 
-  public weak var delegate: PitchDetectorDelegate?
+  public weak var delegate: FrequencyDetectorDelegate?
 
   private var sampleRate: Float
   private var bufferSize: AVAudioFrameCount
@@ -16,7 +19,7 @@ public class PitchDetector {
 
   public init(sampleRate: Float,
     bufferSize: AVAudioFrameCount,
-    delegate: PitchDetectorDelegate? = nil) {
+    delegate: FrequencyDetectorDelegate? = nil) {
       self.sampleRate = sampleRate
       self.bufferSize = bufferSize
       self.delegate = delegate
@@ -50,8 +53,8 @@ public class PitchDetector {
 
     if let maxMagnitude = normalizedMagnitudes.maxElement(),
       maxIndex = normalizedMagnitudes.indexOf(maxMagnitude) {
-        let freq = Float(maxIndex) * sampleRate / Float(inputCount)
-        delegate?.pitchDetectorDidUpdateFrequency(self, frequency: freq)
+        let frequency = Float(maxIndex) * sampleRate / Float(inputCount)
+        delegate?.frequencyDetectorDidRetrieveFrequency(self, frequency: frequency)
     }
   }
 

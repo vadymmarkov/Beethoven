@@ -22,13 +22,13 @@ public class PitchEngine {
     return audioInputProcessor
     }()
 
-  private lazy var pitchDetector: PitchDetector = { [unowned self] in
-    let pitchDetector = PitchDetector(
+  private lazy var frequencyDetector: FrequencyDetector = { [unowned self] in
+    let frequencyDetector = FrequencyDetector(
       sampleRate: 44100.0,
       bufferSize: self.bufferSize,
       delegate: self)
 
-    return pitchDetector
+    return frequencyDetector
     }()
 
   // MARK: - Initialization
@@ -87,15 +87,15 @@ public class PitchEngine {
 extension PitchEngine: AudioInputProcessorDelegate {
 
   public func audioInputProcessorDidReceiveBuffer(buffer: AVAudioPCMBuffer) {
-    pitchDetector.readBuffer(buffer)
+    frequencyDetector.readBuffer(buffer)
   }
 }
 
-// MARK: - PitchDetectorDelegate
+// MARK: - FrequencyDetectorDelegate
 
-extension PitchEngine: PitchDetectorDelegate {
+extension PitchEngine: FrequencyDetectorDelegate {
 
-  public func pitchDetectorDidUpdateFrequency(pitchDetector: PitchDetector, frequency: Float) {
+  public func frequencyDetectorDidRetrieveFrequency(frequencyDetector: FrequencyDetector, frequency: Float) {
     let pitch = Pitch(frequency: averageFrequency(frequency))
 
     delegate?.pitchEngineDidRecievePitch(self, pitch: pitch)
