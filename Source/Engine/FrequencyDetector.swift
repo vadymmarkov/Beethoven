@@ -3,9 +3,8 @@ import AVFoundation
 
 public protocol FrequencyDetectorDelegate: class {
 
-  func frequencyDetectorDidRetrieveFrequency(
-    frequencyDetector: FrequencyDetector,
-    frequency: Float)
+  func frequencyDetector(frequencyDetector: FrequencyDetector,
+    didRetrieveFrequency frequency: Float)
 }
 
 public class FrequencyDetector {
@@ -54,7 +53,7 @@ public class FrequencyDetector {
     if let maxMagnitude = normalizedMagnitudes.maxElement(),
       maxIndex = normalizedMagnitudes.indexOf(maxMagnitude) {
         let frequency = Float(maxIndex) * sampleRate / Float(inputCount)
-        delegate?.frequencyDetectorDidRetrieveFrequency(self, frequency: frequency)
+        delegate?.frequencyDetector(self, didRetrieveFrequency: frequency)
     }
   }
 

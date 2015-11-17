@@ -87,8 +87,9 @@ public class Tuner {
 
 extension Tuner: AudioInputProcessorDelegate {
 
-  public func audioInputProcessorDidReceiveBuffer(buffer: AVAudioPCMBuffer) {
-    frequencyDetector.readBuffer(buffer)
+  public func audioInputProcessor(audioInputProcessor: AudioInputProcessor,
+    didReceiveBuffer buffer: AVAudioPCMBuffer) {
+      frequencyDetector.readBuffer(buffer)
   }
 }
 
@@ -96,9 +97,9 @@ extension Tuner: AudioInputProcessorDelegate {
 
 extension Tuner: FrequencyDetectorDelegate {
 
-  public func frequencyDetectorDidRetrieveFrequency(frequencyDetector: FrequencyDetector, frequency: Float) {
-    let pitch = Pitch(frequency: Double(averageFrequency(frequency)))
-
-    delegate?.tunerDidRecievePitch(self, pitch: pitch)
+  public func frequencyDetector(frequencyDetector: FrequencyDetector,
+    didRetrieveFrequency frequency: Float) {
+      let pitch = Pitch(frequency: Double(averageFrequency(frequency)))
+      delegate?.tunerDidRecievePitch(self, pitch: pitch)
   }
 }
