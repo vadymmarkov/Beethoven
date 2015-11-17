@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Pitchy:
-    :commit: 71939eee129d07374cbe4484601125dded823897
+    :commit: d88e2a8084c2aa59db6ee0fc17eb1cc100f2584d
     :git: https://github.com/vadymmarkov/Pitchy
 
 SPEC CHECKSUMS:
