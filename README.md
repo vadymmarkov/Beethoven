@@ -1,9 +1,9 @@
-# Pitchy
+# Tuner
 
-[![CI Status](http://img.shields.io/travis/vadymmarkov/Pitchy.svg?style=flat)](https://travis-ci.org/vadymmarkov/Pitchy)
-[![Version](https://img.shields.io/cocoapods/v/Pitchy.svg?style=flat)](http://cocoadocs.org/docsets/Pitchy)
-[![License](https://img.shields.io/cocoapods/l/Pitchy.svg?style=flat)](http://cocoadocs.org/docsets/Pitchy)
-[![Platform](https://img.shields.io/cocoapods/p/Pitchy.svg?style=flat)](http://cocoadocs.org/docsets/Pitchy)
+[![CI Status](http://img.shields.io/travis/vadymmarkov/Tuner.svg?style=flat)](https://travis-ci.org/vadymmarkov/Tuner)
+[![Version](https://img.shields.io/cocoapods/v/Tuner.svg?style=flat)](http://cocoadocs.org/docsets/Tuner)
+[![License](https://img.shields.io/cocoapods/l/Tuner.svg?style=flat)](http://cocoadocs.org/docsets/Tuner)
+[![Platform](https://img.shields.io/cocoapods/p/Tuner.svg?style=flat)](http://cocoadocs.org/docsets/Tuner)
 
 ## Usage
 
@@ -13,11 +13,11 @@
 
 ## Installation
 
-**Pitchy** is available through [CocoaPods](http://cocoapods.org). To install
+**Tuner** is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'Pitchy'
+pod 'Tuner'
 ```
 
 ## Author
@@ -26,4 +26,4 @@ Vadym Markov, markov.vadym@gmail.com
 
 ## License
 
-**Pitchy** is available under the MIT license. See the LICENSE file for more info.
+**Tuner** is available under the MIT license. See the LICENSE file for more info.
