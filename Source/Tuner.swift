@@ -2,13 +2,13 @@ import Foundation
 import AVFoundation
 import Pitchy
 
-public protocol PitchEngineDelegate: class {
-  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch)
+public protocol TunerDelegate: class {
+  func tunerDidRecievePitch(tuner: Tuner, pitch: Pitch)
 }
 
-public class PitchEngine {
+public class Tuner {
 
-  public weak var delegate: PitchEngineDelegate?
+  public weak var delegate: TunerDelegate?
   public var active = false
 
   private let bufferSize: AVAudioFrameCount
@@ -34,7 +34,7 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048, delegate: PitchEngineDelegate?) {
+  public init(bufferSize: AVAudioFrameCount = 2048, delegate: TunerDelegate?) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -85,7 +85,7 @@ public class PitchEngine {
 
 // MARK: - AudioInputProcessorDelegate
 
-extension PitchEngine: AudioInputProcessorDelegate {
+extension Tuner: AudioInputProcessorDelegate {
 
   public func audioInputProcessorDidReceiveBuffer(buffer: AVAudioPCMBuffer) {
     frequencyDetector.readBuffer(buffer)
@@ -94,11 +94,11 @@ extension PitchEngine: AudioInputProcessorDelegate {
 
 // MARK: - FrequencyDetectorDelegate
 
-extension PitchEngine: FrequencyDetectorDelegate {
+extension Tuner: FrequencyDetectorDelegate {
 
   public func frequencyDetectorDidRetrieveFrequency(frequencyDetector: FrequencyDetector, frequency: Float) {
     let pitch = Pitch(frequency: Double(averageFrequency(frequency)))
 
-    delegate?.pitchEngineDidRecievePitch(self, pitch: pitch)
+    delegate?.tunerDidRecievePitch(self, pitch: pitch)
   }
 }
