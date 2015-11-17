@@ -87,6 +87,6 @@ class ViewController: UIViewController {
 extension ViewController: TunerDelegate {
 
   func tunerDidRecievePitch(tuner: Tuner, pitch: Pitch) {
-    noteLabel.text = pitch.offsets.closest.note.string
+    noteLabel.text = pitch.note.string
   }
 }
