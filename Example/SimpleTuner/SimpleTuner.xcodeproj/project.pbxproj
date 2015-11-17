@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		04C4BE8A74712506927C1A5A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE5E2252A207B0034BD027E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D57D40FD1BE95A350026B005 /* Tuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D57D40FD1BE95A350026B005 /* SimpleTuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleTuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57D41001BE95A350026B005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D57D41021BE95A350026B005 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D57D41071BE95A350026B005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		D57D40FE1BE95A350026B005 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D57D40FD1BE95A350026B005 /* Tuner.app */,
+				D57D40FD1BE95A350026B005 /* SimpleTuner.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,9 +88,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D57D40FC1BE95A350026B005 /* Tuner */ = {
+		D57D40FC1BE95A350026B005 /* SimpleTuner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "Tuner" */;
+			buildConfigurationList = D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "SimpleTuner" */;
 			buildPhases = (
 				66A9FD38F43B817419D16E65 /* Check Pods Manifest.lock */,
 				D57D40F91BE95A350026B005 /* Sources */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = Tuner;
+			name = SimpleTuner;
 			productName = Tuner;
-			productReference = D57D40FD1BE95A350026B005 /* Tuner.app */;
+			productReference = D57D40FD1BE95A350026B005 /* SimpleTuner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "Tuner" */;
+			buildConfigurationList = D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "SimpleTuner" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -135,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D57D40FC1BE95A350026B005 /* Tuner */,
+				D57D40FC1BE95A350026B005 /* SimpleTuner */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 				INFOPLIST_FILE = Tuner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.Tuner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleTuner;
 			};
 			name = Debug;
 		};
@@ -325,14 +325,14 @@
 				INFOPLIST_FILE = Tuner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.Tuner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleTuner;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "Tuner" */ = {
+		D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "SimpleTuner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D57D410D1BE95A350026B005 /* Debug */,
@@ -341,7 +341,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "Tuner" */ = {
+		D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "SimpleTuner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D57D41101BE95A350026B005 /* Debug */,
