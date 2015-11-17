@@ -1,5 +1,6 @@
 import UIKit
 import Hex
+import Tuner
 import Pitchy
 
 class ViewController: UIViewController {
@@ -30,8 +31,8 @@ class ViewController: UIViewController {
     return button
     }()
 
-  lazy var pitchEngine: PitchEngine = { [unowned self] in
-    let pitchEngine = PitchEngine(
+  lazy var tuner: Tuner = { [unowned self] in
+    let pitchEngine = Tuner(
       bufferSize: 2048,
       delegate: self
     )
@@ -63,8 +64,8 @@ class ViewController: UIViewController {
   // MARK: - Action methods
 
   func actionButtonDidPress(button: UIButton) {
-    pitchEngine.active ? pitchEngine.stop() : pitchEngine.start()
-    pitchEngine.active
+    tuner.active ? tuner.stop() : tuner.start()
+    tuner.active
       ? button.setTitle("Stop".uppercaseString, forState: .Normal)
       : button.setTitle("Start".uppercaseString, forState: .Normal)
   }
@@ -81,11 +82,11 @@ class ViewController: UIViewController {
   }
 }
 
-// MARK: - PitchEngineDelegate
+// MARK: - TunerDelegate
 
-extension ViewController: PitchEngineDelegate {
+extension ViewController: TunerDelegate {
 
-  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch) {
-    noteLabel.text = "\(pitch.note.rawValue)\(pitch.octave)"
+  func tunerDidRecievePitch(tuner: Tuner, pitch: Pitch) {
+    noteLabel.text = pitch.offsets.closest.note.string
   }
 }

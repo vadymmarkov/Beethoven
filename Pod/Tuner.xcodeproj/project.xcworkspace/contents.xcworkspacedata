@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Tuner.xcodeproj">
+      location = "self:/Users/vadym/Development/markvaldy/ios/opensource/Tuner/Pod/Tuner.xcodeproj">
    </FileRef>
 </Workspace>

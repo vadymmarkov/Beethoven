@@ -1,16 +1,19 @@
 PODS:
-  - Nimble (3.0.0)
+  - Hex (3.0.0)
   - Pitchy (0.1.0)
-  - Quick (0.8.0)
+  - Tuner (0.1.0):
+    - Pitchy
 
 DEPENDENCIES:
-  - Nimble
+  - Hex
   - Pitchy (from `https://github.com/vadymmarkov/Pitchy`)
-  - Quick
+  - Tuner (from `../../`)
 
 EXTERNAL SOURCES:
   Pitchy:
     :git: https://github.com/vadymmarkov/Pitchy
+  Tuner:
+    :path: ../../
 
 CHECKOUT OPTIONS:
   Pitchy:
@@ -18,8 +21,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/vadymmarkov/Pitchy
 
 SPEC CHECKSUMS:
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Hex: ee430da9c4412d9196366ae5327f279021dc03eb
   Pitchy: a41a236f8bf01ac97f6790d1267c154ca4e86688
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  Tuner: b8339bf332388aeaafeed03283b59679b93d9864
 
 COCOAPODS: 0.39.0

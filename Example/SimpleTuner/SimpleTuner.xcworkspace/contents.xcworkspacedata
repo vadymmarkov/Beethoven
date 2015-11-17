@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/vadym/Development/markvaldy/ios/opensource/PitchAssistant/Pod/Pitchy.xcodeproj">
+      location = "group:SimpleTuner.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
