@@ -24,17 +24,13 @@ public class Tuner {
     }()
 
   private lazy var frequencyDetector: FrequencyDetector = { [unowned self] in
-    let frequencyDetector = FrequencyDetector(
-      sampleRate: 44100.0,
-      bufferSize: self.bufferSize,
-      delegate: self)
-
+    let frequencyDetector = FrequencyDetector(delegate: self)
     return frequencyDetector
     }()
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048, delegate: TunerDelegate?) {
+  public init(bufferSize: AVAudioFrameCount = 4096, delegate: TunerDelegate?) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -88,8 +84,8 @@ public class Tuner {
 extension Tuner: AudioInputProcessorDelegate {
 
   public func audioInputProcessor(audioInputProcessor: AudioInputProcessor,
-    didReceiveBuffer buffer: AVAudioPCMBuffer) {
-      frequencyDetector.readBuffer(buffer)
+    didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
+      frequencyDetector.readBuffer(buffer, atTime: time)
   }
 }
 
@@ -99,7 +95,7 @@ extension Tuner: FrequencyDetectorDelegate {
 
   public func frequencyDetector(frequencyDetector: FrequencyDetector,
     didRetrieveFrequency frequency: Float) {
-      let pitch = Pitch(frequency: Double(averageFrequency(frequency)))
+      let pitch = Pitch(frequency: Double(frequency))
       delegate?.tunerDidRecievePitch(self, pitch: pitch)
   }
 }
