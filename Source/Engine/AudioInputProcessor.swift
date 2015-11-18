@@ -3,7 +3,8 @@ import AVFoundation
 public protocol AudioInputProcessorDelegate: class {
 
   func audioInputProcessor(audioInputProcessor: AudioInputProcessor,
-    didReceiveBuffer buffer: AVAudioPCMBuffer)
+    didReceiveBuffer buffer: AVAudioPCMBuffer,
+    atTime time: AVAudioTime)
 }
 
 public class AudioInputProcessor {
@@ -36,7 +37,7 @@ public class AudioInputProcessor {
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.audioInputProcessor(self, didReceiveBuffer: buffer)
+        self.delegate?.audioInputProcessor(self, didReceiveBuffer: buffer, atTime: time)
       }
     }
 
