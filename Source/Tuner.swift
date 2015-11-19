@@ -14,13 +14,13 @@ public class Tuner {
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
 
-  private lazy var audioInputProcessor: AudioInputProcessor = { [unowned self] in
-    let audioInputProcessor = AudioInputProcessor(
+  private lazy var inputMonitor: InputMonitor = { [unowned self] in
+    let inputMonitor = InputMonitor(
       bufferSize: self.bufferSize,
       delegate: self
     )
 
-    return audioInputProcessor
+    return inputMonitor
     }()
 
   private lazy var frequencyDetector: FrequencyDetector = { [unowned self] in
@@ -39,13 +39,13 @@ public class Tuner {
 
   public func start() {
     do {
-      try audioInputProcessor.start()
+      try inputMonitor.start()
       active = true
     } catch {}
   }
 
   public func stop() {
-    audioInputProcessor.stop()
+    inputMonitor.stop()
     frequencies = [Float]()
     active = false
   }
@@ -79,11 +79,11 @@ public class Tuner {
   }
 }
 
-// MARK: - AudioInputProcessorDelegate
+// MARK: - InputMonitorDelegate
 
-extension Tuner: AudioInputProcessorDelegate {
+extension Tuner: InputMonitorDelegate {
 
-  public func audioInputProcessor(audioInputProcessor: AudioInputProcessor,
+  public func inputMonitor(inputMonitor: InputMonitor,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       frequencyDetector.readBuffer(buffer, atTime: time)
   }
