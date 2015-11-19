@@ -1,19 +1,19 @@
 import AVFoundation
 
-public protocol AudioInputProcessorDelegate: class {
+public protocol InputMonitorDelegate: class {
 
-  func audioInputProcessor(audioInputProcessor: AudioInputProcessor,
+  func inputMonitor(inputMonitor: InputMonitor,
     didReceiveBuffer buffer: AVAudioPCMBuffer,
     atTime time: AVAudioTime)
 }
 
-public class AudioInputProcessor {
+public class InputMonitor {
 
   enum Error: ErrorType {
     case InputNodeMissing
   }
 
-  public weak var delegate: AudioInputProcessorDelegate?
+  public weak var delegate: InputMonitorDelegate?
 
   private let audioEngine = AVAudioEngine()
   private let bus = 0
@@ -21,12 +21,12 @@ public class AudioInputProcessor {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048, delegate: AudioInputProcessorDelegate? = nil) {
+  public init(bufferSize: AVAudioFrameCount = 2048, delegate: InputMonitorDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
 
-  // MARK: - Processing
+  // MARK: - Monitoring
 
   public func start() throws {
     guard let inputNode = audioEngine.inputNode else {
@@ -37,7 +37,7 @@ public class AudioInputProcessor {
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.audioInputProcessor(self, didReceiveBuffer: buffer, atTime: time)
+        self.delegate?.inputMonitor(self, didReceiveBuffer: buffer, atTime: time)
       }
     }
 
