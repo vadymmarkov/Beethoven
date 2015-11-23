@@ -14,6 +14,10 @@ public class Tuner {
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
 
+
+  public var pitches = [Pitch]()
+  public var currentPitch: Pitch!
+
   private lazy var inputMonitor: InputMonitor = { [unowned self] in
     let inputMonitor = InputMonitor(
       bufferSize: self.bufferSize,
@@ -52,30 +56,23 @@ public class Tuner {
 
   // MARK: - Helpers
 
-  private func averageFrequency(frequency: Float) -> Float {
-    var result = frequency
+  private func averagePitch(pitch: Pitch) -> Pitch {
+    if let first = pitches.first where first.note.letter != pitch.note.letter {
+      pitches = []
+    }
+    pitches.append(pitch)
 
-    frequencies.insert(frequency, atIndex: 0)
-
-    if frequencies.count > 22 {
-      frequencies.removeAtIndex(frequencies.count - 1)
+    if pitches.count == 1 {
+      currentPitch = pitch
+      return currentPitch
     }
 
-    let count = frequencies.count
+    let pts1 = pitches.filter({ $0.note.index == pitch.note.index }).count
+    let pts2 = pitches.filter({ $0.note.index == currentPitch.note.index }).count
 
-    if count > 1 {
-      var sortedFrequencies = frequencies.sort { $0 > $1 }
+    currentPitch = pts1 >= pts2 ? pitch : pitches[pitches.count - 1]
 
-      if count % 2 == 0 {
-        let value1 = sortedFrequencies[count / 2 - 1]
-        let value2 = sortedFrequencies[count / 2]
-        result = (value1 + value2) / 2
-      } else {
-        result = sortedFrequencies[count / 2]
-      }
-    }
-
-    return result
+    return currentPitch
   }
 }
 

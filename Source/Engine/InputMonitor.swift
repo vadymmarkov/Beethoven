@@ -34,6 +34,7 @@ public class InputMonitor {
     }
 
     let format = inputNode.inputFormatForBus(bus)
+    print(format.channelCount)
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {

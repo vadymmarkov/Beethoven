@@ -49,6 +49,12 @@ public class FrequencyDetector {
 
     vDSP_destroy_fftsetup(fftSetup)
 
+    let st = Spectrum(samples: normalizedMagnitudes, sampleRateInHz: Float(time.sampleRate))
+    let frequency = st.getFrequency(Float(bufferSizePOT))
+    delegate?.frequencyDetector(self, didRetrieveFrequency: frequency)
+
+    return
+
     if let maxMagnitude = magnitudes.maxElement(),
       k = magnitudes.indexOf(maxMagnitude) {
 
@@ -109,3 +115,80 @@ public class FrequencyDetector {
     return results
   }
 }
+
+class Spectrum {
+
+  var spectrum: [Float]
+  //var samples: [Float]
+  var sampleRate: Float
+
+  init(samples: [Float], sampleRateInHz: Float) {
+    self.sampleRate = sampleRateInHz;
+    self.spectrum = samples
+  }
+
+  func getFrequency(bufferSizePOT: Float) -> Float {
+    let harmonics = 5
+    let minIndex = 20, maxIndex = spectrum.count - 1
+
+    // set the maximum index to search for a pitch
+    var i: Int, j: Int
+    var maxHIndex = spectrum.count/harmonics
+    if (maxIndex < maxHIndex) {
+      maxHIndex = maxIndex
+    }
+
+    // generate the Harmonic Product Spectrum values and keep track of the
+    // maximum amplitude value to assign to a pitch.
+
+    var maxLocation = minIndex;
+    for (j=minIndex; j<=maxHIndex; j++) {
+      for (i=1; i<=harmonics; i++) {  // i=1: double the fundamental
+        spectrum[j] *= spectrum[j*i];
+      }
+      if (spectrum[j] > spectrum[maxLocation]) {
+        maxLocation = j;
+      }
+    }
+
+    // Correct for octave too high errors.  If the maximum subharmonic
+    // of the measured maximum is approximately 1/2 of the maximum
+    // measured frequency, AND if the ratio of the sub-harmonic
+    // to the total maximum is greater than 0.2, THEN the pitch value
+    // is assigned to the subharmonic.
+
+    var max2 = minIndex;
+    var maxsearch = maxLocation * 3 / 4;
+    for (i=minIndex+1; i<maxsearch; i++) {
+      if (spectrum[i] > spectrum[max2]) {
+        max2 = i;
+      }
+    }
+    if (abs(max2 * 2 - maxLocation) < 4) {
+      if (spectrum[max2]/spectrum[maxLocation] > 0.2) {
+        maxLocation = max2;
+      }
+    }
+
+
+    //if largest > average * 5 {
+    let freqFraction = Float(maxLocation) / Float(bufferSizePOT)
+    let frequency = sampleRate * freqFraction
+    //}
+
+    //let frequency = Float(r) * Float(time.sampleRate) / Float(bufferSizePOT)
+
+    return frequency
+  }
+
+  private func quadraticPeak(index: Int) -> Float {
+    let alpha = spectrum[index-1]
+    let beta = spectrum[index]
+    let gamma = spectrum[index+1]
+    let p = 0.5 * ((alpha - gamma) / (alpha - 2 * beta + gamma))
+    let k = Float(index) + p
+    
+    return k
+  }
+}
+
