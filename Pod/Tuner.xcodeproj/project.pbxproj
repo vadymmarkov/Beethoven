@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D559C2601C0509C500DB20F1 /* TransformAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C25F1C0509C500DB20F1 /* TransformAware.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2621C0509D100DB20F1 /* SimpleTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2611C0509D100DB20F1 /* SimpleTransformer.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2641C0509DC00DB20F1 /* FFTTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2631C0509DC00DB20F1 /* FFTTransformer.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2701C05125E00DB20F1 /* HPSEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C26F1C05125E00DB20F1 /* HPSEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2721C05126C00DB20F1 /* MaxValueEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2711C05126C00DB20F1 /* MaxValueEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2741C05127900DB20F1 /* QuadradicEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2731C05127900DB20F1 /* QuadradicEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2761C05129700DB20F1 /* BarycentricEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2751C05129700DB20F1 /* BarycentricEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2781C0512CB00DB20F1 /* QuinnsFirstEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2771C0512CB00DB20F1 /* QuinnsFirstEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C27A1C0512DA00DB20F1 /* QuinnsSecondEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C2791C0512DA00DB20F1 /* QuinnsSecondEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C27C1C0512FE00DB20F1 /* JainsEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C27B1C0512FE00DB20F1 /* JainsEstimator.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C27E1C05143400DB20F1 /* EstimationAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C27D1C05143400DB20F1 /* EstimationAware.swift */; settings = {ASSET_TAGS = (); }; };
+		D559C2801C051A1400DB20F1 /* TransformResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C27F1C051A1400DB20F1 /* TransformResult.swift */; settings = {ASSET_TAGS = (); }; };
 		D5A51F151BFAC180008AC277 /* InputMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A51F131BFAC180008AC277 /* InputMonitor.swift */; };
 		D5A51F161BFAC180008AC277 /* FrequencyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A51F141BFAC180008AC277 /* FrequencyDetector.swift */; };
 		D5BE32F21BE815FB00945677 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* Tuner.swift */; };
@@ -22,6 +34,18 @@
 		14C136551AB784B200B7B07A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		716897C2D5B5626C8648DBB1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7BBA2578CC3D0D752EAD4195 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D559C25F1C0509C500DB20F1 /* TransformAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAware.swift; sourceTree = "<group>"; };
+		D559C2611C0509D100DB20F1 /* SimpleTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTransformer.swift; sourceTree = "<group>"; };
+		D559C2631C0509DC00DB20F1 /* FFTTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFTTransformer.swift; sourceTree = "<group>"; };
+		D559C26F1C05125E00DB20F1 /* HPSEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPSEstimator.swift; sourceTree = "<group>"; };
+		D559C2711C05126C00DB20F1 /* MaxValueEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxValueEstimator.swift; sourceTree = "<group>"; };
+		D559C2731C05127900DB20F1 /* QuadradicEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadradicEstimator.swift; sourceTree = "<group>"; };
+		D559C2751C05129700DB20F1 /* BarycentricEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarycentricEstimator.swift; sourceTree = "<group>"; };
+		D559C2771C0512CB00DB20F1 /* QuinnsFirstEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuinnsFirstEstimator.swift; sourceTree = "<group>"; };
+		D559C2791C0512DA00DB20F1 /* QuinnsSecondEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuinnsSecondEstimator.swift; sourceTree = "<group>"; };
+		D559C27B1C0512FE00DB20F1 /* JainsEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JainsEstimator.swift; sourceTree = "<group>"; };
+		D559C27D1C05143400DB20F1 /* EstimationAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationAware.swift; sourceTree = "<group>"; };
+		D559C27F1C051A1400DB20F1 /* TransformResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformResult.swift; sourceTree = "<group>"; };
 		D5A51F131BFAC180008AC277 /* InputMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMonitor.swift; sourceTree = "<group>"; };
 		D5A51F141BFAC180008AC277 /* FrequencyDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDetector.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* Tuner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
@@ -92,6 +116,8 @@
 		14C1365B1AB784BC00B7B07A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D559C26E1C05124200DB20F1 /* Estimators */,
+				D559C25E1C0509AF00DB20F1 /* Transformers */,
 				D5A51F121BFAC180008AC277 /* Engine */,
 				D5BE32F11BE815FB00945677 /* Tuner.swift */,
 			);
@@ -114,6 +140,32 @@
 				7BBA2578CC3D0D752EAD4195 /* Pods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D559C25E1C0509AF00DB20F1 /* Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				D559C25F1C0509C500DB20F1 /* TransformAware.swift */,
+				D559C2611C0509D100DB20F1 /* SimpleTransformer.swift */,
+				D559C2631C0509DC00DB20F1 /* FFTTransformer.swift */,
+				D559C27F1C051A1400DB20F1 /* TransformResult.swift */,
+			);
+			path = Transformers;
+			sourceTree = "<group>";
+		};
+		D559C26E1C05124200DB20F1 /* Estimators */ = {
+			isa = PBXGroup;
+			children = (
+				D559C27D1C05143400DB20F1 /* EstimationAware.swift */,
+				D559C26F1C05125E00DB20F1 /* HPSEstimator.swift */,
+				D559C2711C05126C00DB20F1 /* MaxValueEstimator.swift */,
+				D559C2731C05127900DB20F1 /* QuadradicEstimator.swift */,
+				D559C2751C05129700DB20F1 /* BarycentricEstimator.swift */,
+				D559C2771C0512CB00DB20F1 /* QuinnsFirstEstimator.swift */,
+				D559C2791C0512DA00DB20F1 /* QuinnsSecondEstimator.swift */,
+				D559C27B1C0512FE00DB20F1 /* JainsEstimator.swift */,
+			);
+			path = Estimators;
 			sourceTree = "<group>";
 		};
 		D5A51F121BFAC180008AC277 /* Engine */ = {
@@ -244,9 +296,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D559C27A1C0512DA00DB20F1 /* QuinnsSecondEstimator.swift in Sources */,
 				D5A51F151BFAC180008AC277 /* InputMonitor.swift in Sources */,
 				D5A51F161BFAC180008AC277 /* FrequencyDetector.swift in Sources */,
+				D559C2621C0509D100DB20F1 /* SimpleTransformer.swift in Sources */,
+				D559C2781C0512CB00DB20F1 /* QuinnsFirstEstimator.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* Tuner.swift in Sources */,
+				D559C2601C0509C500DB20F1 /* TransformAware.swift in Sources */,
+				D559C27C1C0512FE00DB20F1 /* JainsEstimator.swift in Sources */,
+				D559C2741C05127900DB20F1 /* QuadradicEstimator.swift in Sources */,
+				D559C2641C0509DC00DB20F1 /* FFTTransformer.swift in Sources */,
+				D559C2801C051A1400DB20F1 /* TransformResult.swift in Sources */,
+				D559C2761C05129700DB20F1 /* BarycentricEstimator.swift in Sources */,
+				D559C27E1C05143400DB20F1 /* EstimationAware.swift in Sources */,
+				D559C2721C05126C00DB20F1 /* MaxValueEstimator.swift in Sources */,
+				D559C2701C05125E00DB20F1 /* HPSEstimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
