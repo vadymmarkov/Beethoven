@@ -20,7 +20,6 @@
 		D559C27E1C05143400DB20F1 /* EstimationAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C27D1C05143400DB20F1 /* EstimationAware.swift */; settings = {ASSET_TAGS = (); }; };
 		D559C2801C051A1400DB20F1 /* TransformResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D559C27F1C051A1400DB20F1 /* TransformResult.swift */; settings = {ASSET_TAGS = (); }; };
 		D5A51F151BFAC180008AC277 /* InputMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A51F131BFAC180008AC277 /* InputMonitor.swift */; };
-		D5A51F161BFAC180008AC277 /* FrequencyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A51F141BFAC180008AC277 /* FrequencyDetector.swift */; };
 		D5BE32F21BE815FB00945677 /* Tuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* Tuner.swift */; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		D559C27D1C05143400DB20F1 /* EstimationAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationAware.swift; sourceTree = "<group>"; };
 		D559C27F1C051A1400DB20F1 /* TransformResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformResult.swift; sourceTree = "<group>"; };
 		D5A51F131BFAC180008AC277 /* InputMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMonitor.swift; sourceTree = "<group>"; };
-		D5A51F141BFAC180008AC277 /* FrequencyDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDetector.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* Tuner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tuner.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				D5A51F131BFAC180008AC277 /* InputMonitor.swift */,
-				D5A51F141BFAC180008AC277 /* FrequencyDetector.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -298,7 +295,6 @@
 			files = (
 				D559C27A1C0512DA00DB20F1 /* QuinnsSecondEstimator.swift in Sources */,
 				D5A51F151BFAC180008AC277 /* InputMonitor.swift in Sources */,
-				D5A51F161BFAC180008AC277 /* FrequencyDetector.swift in Sources */,
 				D559C2621C0509D100DB20F1 /* SimpleTransformer.swift in Sources */,
 				D559C2781C0512CB00DB20F1 /* QuinnsFirstEstimator.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* Tuner.swift in Sources */,

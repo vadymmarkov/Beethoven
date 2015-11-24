@@ -27,10 +27,8 @@ public class Tuner {
     return inputMonitor
     }()
 
-  private lazy var frequencyDetector: FrequencyDetector = { [unowned self] in
-    let frequencyDetector = FrequencyDetector(delegate: self)
-    return frequencyDetector
-    }()
+  private var transformer: TransformAware?
+  private var estimator: EstimationAware?
 
   // MARK: - Initialization
 
@@ -82,17 +80,7 @@ extension Tuner: InputMonitorDelegate {
 
   public func inputMonitor(inputMonitor: InputMonitor,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
-      frequencyDetector.readBuffer(buffer, atTime: time)
-  }
-}
-
-// MARK: - FrequencyDetectorDelegate
-
-extension Tuner: FrequencyDetectorDelegate {
-
-  public func frequencyDetector(frequencyDetector: FrequencyDetector,
-    didRetrieveFrequency frequency: Float) {
-      let pitch = Pitch(frequency: Double(frequency))
-      delegate?.tunerDidRecievePitch(self, pitch: pitch)
+      let transformResult = transformer?.transformBuffer(buffer)
+      estimator?.estimateLocation(transformResult!, sampleRate: Float(time.sampleRate))
   }
 }
