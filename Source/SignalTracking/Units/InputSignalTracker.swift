@@ -1,19 +1,12 @@
 import AVFoundation
 
-public protocol InputMonitorDelegate: class {
-
-  func inputMonitor(inputMonitor: InputMonitor,
-    didReceiveBuffer buffer: AVAudioPCMBuffer,
-    atTime time: AVAudioTime)
-}
-
-public class InputMonitor {
+public class InputSignalTracker: SignalTrackingAware {
 
   enum Error: ErrorType {
     case InputNodeMissing
   }
 
-  public weak var delegate: InputMonitorDelegate?
+  public weak var delegate: SignalTrackingDelegate?
 
   private let audioEngine = AVAudioEngine()
   private let bus = 0
@@ -21,12 +14,12 @@ public class InputMonitor {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 2048, delegate: InputMonitorDelegate? = nil) {
+  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
 
-  // MARK: - Monitoring
+  // MARK: - Tracking
 
   public func start() throws {
     guard let inputNode = audioEngine.inputNode else {
@@ -34,11 +27,10 @@ public class InputMonitor {
     }
 
     let format = inputNode.inputFormatForBus(bus)
-    print(format.channelCount)
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.inputMonitor(self, didReceiveBuffer: buffer, atTime: time)
+        self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }
     }
 

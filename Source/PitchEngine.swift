@@ -2,24 +2,22 @@ import Foundation
 import AVFoundation
 import Pitchy
 
-public protocol TunerDelegate: class {
-  func tunerDidRecievePitch(tuner: Tuner, pitch: Pitch)
+public protocol PitchEngineDelegate: class {
+  func pitchEngineDidRecievePitch(tuner: PitchEngine, pitch: Pitch)
 }
 
-public class Tuner {
+public class PitchEngine {
 
-  public weak var delegate: TunerDelegate?
+  public weak var delegate: PitchEngineDelegate?
   public var active = false
 
   private let bufferSize: AVAudioFrameCount
   private var frequencies = [Float]()
-
-
   public var pitches = [Pitch]()
   public var currentPitch: Pitch!
 
-  private lazy var inputMonitor: InputMonitor = { [unowned self] in
-    let inputMonitor = InputMonitor(
+  private lazy var signalTracker: SignalTrackingAware = { [unowned self] in
+    let inputMonitor = InputSignalTracker(
       bufferSize: self.bufferSize,
       delegate: self
     )
@@ -32,7 +30,7 @@ public class Tuner {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 4096, delegate: TunerDelegate?) {
+  public init(bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -41,13 +39,13 @@ public class Tuner {
 
   public func start() {
     do {
-      try inputMonitor.start()
+      try signalTracker.start()
       active = true
     } catch {}
   }
 
   public func stop() {
-    inputMonitor.stop()
+    signalTracker.stop()
     frequencies = [Float]()
     active = false
   }
@@ -74,11 +72,11 @@ public class Tuner {
   }
 }
 
-// MARK: - InputMonitorDelegate
+// MARK: - SignalTrackingDelegate
 
-extension Tuner: InputMonitorDelegate {
+extension PitchEngine: SignalTrackingDelegate {
 
-  public func inputMonitor(inputMonitor: InputMonitor,
+  public func signalTracker(signalTracker: SignalTrackingAware,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       let transformResult = transformer?.transformBuffer(buffer)
       estimator?.estimateLocation(transformResult!, sampleRate: Float(time.sampleRate))
