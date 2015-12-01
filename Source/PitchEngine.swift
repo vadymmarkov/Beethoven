@@ -1,0 +1,84 @@
+import Foundation
+import AVFoundation
+import Pitchy
+
+public protocol PitchEngineDelegate: class {
+  func pitchEngineDidRecievePitch(tuner: PitchEngine, pitch: Pitch)
+}
+
+public class PitchEngine {
+
+  public weak var delegate: PitchEngineDelegate?
+  public var active = false
+
+  private let bufferSize: AVAudioFrameCount
+  private var frequencies = [Float]()
+  public var pitches = [Pitch]()
+  public var currentPitch: Pitch!
+
+  private lazy var signalTracker: SignalTrackingAware = { [unowned self] in
+    let inputMonitor = InputSignalTracker(
+      bufferSize: self.bufferSize,
+      delegate: self
+    )
+
+    return inputMonitor
+    }()
+
+  private var transformer: TransformAware?
+  private var estimator: EstimationAware?
+
+  // MARK: - Initialization
+
+  public init(bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
+    self.bufferSize = bufferSize
+    self.delegate = delegate
+  }
+
+  // MARK: - Processing
+
+  public func start() {
+    do {
+      try signalTracker.start()
+      active = true
+    } catch {}
+  }
+
+  public func stop() {
+    signalTracker.stop()
+    frequencies = [Float]()
+    active = false
+  }
+
+  // MARK: - Helpers
+
+  private func averagePitch(pitch: Pitch) -> Pitch {
+    if let first = pitches.first where first.note.letter != pitch.note.letter {
+      pitches = []
+    }
+    pitches.append(pitch)
+
+    if pitches.count == 1 {
+      currentPitch = pitch
+      return currentPitch
+    }
+
+    let pts1 = pitches.filter({ $0.note.index == pitch.note.index }).count
+    let pts2 = pitches.filter({ $0.note.index == currentPitch.note.index }).count
+
+    currentPitch = pts1 >= pts2 ? pitch : pitches[pitches.count - 1]
+
+    return currentPitch
+  }
+}
+
+// MARK: - SignalTrackingDelegate
+
+extension PitchEngine: SignalTrackingDelegate {
+
+  public func signalTracker(signalTracker: SignalTrackingAware,
+    didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
+      let transformResult = transformer?.transformBuffer(buffer)
+      estimator?.estimateLocation(transformResult!, sampleRate: Float(time.sampleRate))
+  }
+}

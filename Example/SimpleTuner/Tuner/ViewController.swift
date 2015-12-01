@@ -31,9 +31,9 @@ class ViewController: UIViewController {
     return button
     }()
 
-  lazy var tuner: Tuner = { [unowned self] in
-    let pitchEngine = Tuner(
-      bufferSize: 2048,
+  lazy var tuner: PitchEngine = { [unowned self] in
+    let pitchEngine = PitchEngine(
+      bufferSize: 4096,
       delegate: self
     )
 
@@ -84,9 +84,8 @@ class ViewController: UIViewController {
 
 // MARK: - TunerDelegate
 
-extension ViewController: TunerDelegate {
-
-  func tunerDidRecievePitch(tuner: Tuner, pitch: Pitch) {
+extension ViewController: PitchEngineDelegate {
+  func pitchEngineDidRecievePitch(tuner: PitchEngine, pitch: Pitch) {
     noteLabel.text = pitch.note.string
   }
 }
