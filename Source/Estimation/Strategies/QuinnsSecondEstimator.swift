@@ -41,6 +41,3 @@ public class QuinnsSecondEstimator: EstimationAware {
     return 1/4 * p1 - sqrt(6)/24 * p3
   }
 }
-
-
-
