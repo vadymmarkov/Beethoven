@@ -1,16 +1,22 @@
 import Foundation
 
-/*
-let y1 = abs(normalizedMagnitudes[k-1])
-let y2 = abs(normalizedMagnitudes[k])
-let y3 = abs(normalizedMagnitudes[k+1])
-if y1 > y3 {
-let a = y2  /  y1
-let d = a  /  (1 + a)
-r = k - 1 + Int(round(d))
-} else {
-let a = y3  /  y2
-let d = a  /  (1 + a)
-r = k + Int(round(d))
+public class QuadradicEstimator: EstimationAware {
+
+  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) -> Int {
+    var buffer = transformResult.buffer
+    guard let maxElement = buffer.maxElement(),
+      maxIndex = buffer.indexOf(maxElement) else {
+        return 0
+    }
+
+    let y2  =  abs(buffer[maxIndex])
+    let y1 = maxIndex == 0 ? y2 : abs(buffer[maxIndex - 1])
+    let y3 = maxIndex == buffer.count - 1 ? y2 : abs(buffer[maxIndex + 1])
+    let d = (y3 - y1) / (2 * (2 * y2 - y1 - y3))
+    let location = maxIndex + Int(round(d))
+
+    return location >= 0 && location < buffer.count
+      ? location
+      : maxIndex
+  }
 }
-//let r  =  k + Int(d)*/
