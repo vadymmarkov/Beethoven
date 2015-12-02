@@ -3,7 +3,8 @@ import AVFoundation
 import Pitchy
 
 public protocol PitchEngineDelegate: class {
-  func pitchEngineDidRecievePitch(tuner: PitchEngine, pitch: Pitch)
+  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch)
+  func pitchEngineDidRecieveError(pitchEngine: PitchEngine, error: ErrorType)
 }
 
 public class PitchEngine {
@@ -79,6 +80,10 @@ extension PitchEngine: SignalTrackingDelegate {
   public func signalTracker(signalTracker: SignalTrackingAware,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       let transformResult = transformer?.transformBuffer(buffer)
-      estimator?.estimateLocation(transformResult!, sampleRate: Float(time.sampleRate))
+      do {
+        try estimator?.estimateLocation(transformResult!, sampleRate: Float(time.sampleRate))
+      } catch {
+        delegate?.pitchEngineDidRecieveError(self, error: error)
+      }
   }
 }
