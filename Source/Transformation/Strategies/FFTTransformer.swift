@@ -1,11 +1,11 @@
 import AVFoundation
 import Accelerate
 
-class FFTTransformer: TransformAware {
+public class FFTTransformer: TransformAware {
 
   // MARK: - Buffer Transformation
 
-  func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
+  public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
     let frameCount = buffer.frameCapacity
     let log2n = UInt(round(log2(Double(frameCount))))
     let bufferSizePOT = Int(1 << log2n)
@@ -37,7 +37,7 @@ class FFTTransformer: TransformAware {
 
   // MARK: - Helpers
 
-  private func sqrtq(x: [Float]) -> [Float] {
+  func sqrtq(x: [Float]) -> [Float] {
     var results = [Float](count: x.count, repeatedValue: 0.0)
     vvsqrtf(&results, x, [Int32(x.count)])
 
