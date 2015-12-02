@@ -1,8 +1,11 @@
 import AVFoundation
 
-//class SimpleTransformer: TransformAware {
-//
-//  func transformBuffer(buffer: AVAudioPCMBuffer) -> TransformResult {
-//
-//  }
-//}
+public class SimpleTransformer: TransformAware {
+
+  public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
+    let pointer = UnsafePointer<Float>(buffer.floatChannelData)
+    let elements = Array.fromUnsafePointer(pointer, count: Int(buffer.frameLength))
+
+    return Buffer(elements: elements)
+  }
+}
