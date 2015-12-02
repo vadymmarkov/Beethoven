@@ -3,8 +3,6 @@ import Accelerate
 
 public class FFTTransformer: TransformAware {
 
-  // MARK: - Buffer Transformation
-
   public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
     let frameCount = buffer.frameCapacity
     let log2n = UInt(round(log2(Double(frameCount))))
