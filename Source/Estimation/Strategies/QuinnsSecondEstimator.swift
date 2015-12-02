@@ -2,19 +2,19 @@ import Foundation
 
 public class QuinnsSecondEstimator: EstimationAware {
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int {
-    let buffer = transformResult.buffer
-    let maxIndex = try maxBufferIndex(buffer)
+  public func estimateLocation(buffer: Buffer) throws -> Int {
+    let elements = buffer.elements
+    let maxIndex = try maxBufferIndex(elements)
 
-    guard let complexBuffer = transformResult.complexBuffer else {
+    guard let complexElements = buffer.complexElements else {
       return maxIndex
     }
 
-    let realp = complexBuffer.realp
-    let imagp = complexBuffer.imagp
+    let realp = complexElements.realp
+    let imagp = complexElements.imagp
 
     let prevIndex = maxIndex == 0 ? maxIndex : maxIndex - 1
-    let nextIndex = maxIndex == buffer.count - 1 ? maxIndex : maxIndex + 1
+    let nextIndex = maxIndex == elements.count - 1 ? maxIndex : maxIndex + 1
     let divider = pow(realp[maxIndex], 2.0) + pow(imagp[maxIndex], 2.0)
 
     let ap = (realp[nextIndex] * realp[maxIndex] + imagp[nextIndex] * imagp[maxIndex]) / divider
@@ -24,7 +24,7 @@ public class QuinnsSecondEstimator: EstimationAware {
     let d = (dp + dm) / 2 + tau(dp * dp) - tau(dm * dm)
     let location = maxIndex + Int(round(d))
 
-    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
+    return sanitize(location, reserveLocation: maxIndex, elements: elements)
   }
 
   func tau(x: Float) -> Float {

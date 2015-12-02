@@ -5,7 +5,7 @@ class FFTTransformer: TransformAware {
 
   // MARK: - Buffer Transformation
 
-  func transformBuffer(buffer: AVAudioPCMBuffer) -> TransformResult {
+  func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
     let frameCount = buffer.frameCapacity
     let log2n = UInt(round(log2(Double(frameCount))))
     let bufferSizePOT = Int(1 << log2n)
@@ -32,7 +32,7 @@ class FFTTransformer: TransformAware {
 
     vDSP_destroy_fftsetup(fftSetup)
 
-    return TransformResult(buffer: normalizedMagnitudes, complexBuffer: output)
+    return Buffer(elements: normalizedMagnitudes, complexElements: output)
   }
 
   // MARK: - Helpers

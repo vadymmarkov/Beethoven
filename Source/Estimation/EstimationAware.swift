@@ -7,7 +7,7 @@ enum EstimationError: ErrorType {
 
 protocol EstimationAware {
 
-  func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int
+  func estimateLocation(buffer: Buffer) throws -> Int
 }
 
 extension EstimationAware {
@@ -24,8 +24,8 @@ extension EstimationAware {
     return index
   }
 
-  func sanitize(location: Int, reserveLocation: Int, buffer: [Float]) -> Int {
-    return location >= 0 && location < buffer.count
+  func sanitize(location: Int, reserveLocation: Int, elements: [Float]) -> Int {
+    return location >= 0 && location < elements.count
       ? location
       : reserveLocation
   }

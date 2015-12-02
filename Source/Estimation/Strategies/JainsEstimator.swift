@@ -2,13 +2,13 @@ import Foundation
 
 public class JainsEstimator: EstimationAware {
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int {
-    let buffer = transformResult.buffer
-    let maxIndex = try maxBufferIndex(buffer)
+  public func estimateLocation(buffer: Buffer) throws -> Int {
+    let elements = buffer.elements
+    let maxIndex = try maxBufferIndex(elements)
 
-    let y2 = abs(buffer[maxIndex])
-    let y1 = maxIndex == 0 ? y2 : abs(buffer[maxIndex - 1])
-    let y3 = maxIndex == buffer.count - 1 ? y2 : abs(buffer[maxIndex + 1])
+    let y2 = abs(elements[maxIndex])
+    let y1 = maxIndex == 0 ? y2 : abs(elements[maxIndex - 1])
+    let y3 = maxIndex == elements.count - 1 ? y2 : abs(elements[maxIndex + 1])
     let location: Int
 
     if y1 > y3 {
@@ -21,6 +21,6 @@ public class JainsEstimator: EstimationAware {
       location = maxIndex + Int(round(d))
     }
 
-    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
+    return sanitize(location, reserveLocation: maxIndex, elements: elements)
   }
 }

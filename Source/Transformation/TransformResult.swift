@@ -1,14 +1,14 @@
 import Accelerate
 
-public struct TransformResult {
+public struct Buffer {
 
-  public var buffer: [Float]
-  public var complexBuffer: DSPSplitComplex?
+  public var elements: [Float]
+  public var complexElements: DSPSplitComplex?
 
   // MARK: - Initialization
 
-  public init(buffer: [Float], complexBuffer: DSPSplitComplex? = nil) {
-    self.buffer = buffer
-    self.complexBuffer = complexBuffer
+  public init(elements: [Float], complexElements: DSPSplitComplex? = nil) {
+    self.elements = elements
+    self.complexElements = complexElements
   }
 }
