@@ -5,12 +5,27 @@ enum EstimationError: ErrorType {
   case UnknownMaxIndex
 }
 
-protocol EstimationAware {
+public protocol EstimationAware {
 
   func estimateLocation(buffer: Buffer) throws -> Int
+  func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float
+  func estimateFrequency(sampleRate: Float, location: Int, bufferCount: Int) -> Float
 }
 
 extension EstimationAware {
+
+  // MARK: - Default implementation
+
+  public func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
+    let location = try estimateLocation(buffer)
+    return estimateFrequency(sampleRate, location: location, bufferCount: buffer.count)
+  }
+
+  public func estimateFrequency(sampleRate: Float, location: Int, bufferCount: Int) -> Float {
+    return Float(location) * sampleRate / (Float(bufferCount) * 2)
+  }
+
+  // MARK: - Helpers
 
   func maxBufferIndex(buffer: [Float]) throws -> Int {
     guard buffer.count > 0 else {

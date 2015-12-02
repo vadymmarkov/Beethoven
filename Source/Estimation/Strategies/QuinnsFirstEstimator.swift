@@ -14,7 +14,7 @@ public class QuinnsFirstEstimator: EstimationAware {
     let imagp = complexElements.imagp
 
     let prevIndex = maxIndex == 0 ? maxIndex : maxIndex - 1
-    let nextIndex = maxIndex == elements.count - 1 ? maxIndex : maxIndex + 1
+    let nextIndex = maxIndex == buffer.count - 1 ? maxIndex : maxIndex + 1
     let divider = pow(realp[maxIndex], 2.0) + pow(imagp[maxIndex], 2.0)
 
     let ap = (realp[nextIndex] * realp[maxIndex] + imagp[nextIndex] * imagp[maxIndex]) / divider
