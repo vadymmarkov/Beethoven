@@ -12,6 +12,7 @@ public class OutputSignalTracker: SignalTrackingAware {
   let audioURL: NSURL
 
   private let audioEngine = AVAudioEngine()
+  private var player = AVAudioPlayerNode()
   private let bus = 0
 
   // MARK: - Initialization
@@ -25,13 +26,15 @@ public class OutputSignalTracker: SignalTrackingAware {
   // MARK: - Tracking
 
   public func start() throws {
-    guard let inputNode = audioEngine.inputNode else {
-      throw Error.InputNodeMissing
-    }
+    let audioFile = try AVAudioFile(forReading: audioURL)
+    let audioFormat = audioFile.processingFormat
+    let outputFormat = audioEngine.outputNode.outputFormatForBus(bus)
 
-    let format = inputNode.inputFormatForBus(bus)
+    audioEngine.attachNode(player)
+    audioEngine.connect(player, to: audioEngine.mainMixerNode, format: audioFormat)
+    player.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
 
-    inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
+    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: outputFormat) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }
@@ -39,9 +42,11 @@ public class OutputSignalTracker: SignalTrackingAware {
 
     audioEngine.prepare()
     try audioEngine.start()
+    player.play()
   }
 
   public func stop() {
     audioEngine.stop()
+    audioEngine.reset()
   }
 }
