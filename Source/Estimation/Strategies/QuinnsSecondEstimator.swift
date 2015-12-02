@@ -2,13 +2,9 @@ import Foundation
 
 public class QuinnsSecondEstimator: EstimationAware {
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) -> Int {
+  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int {
     let buffer = transformResult.buffer
-
-    guard let maxElement = buffer.maxElement(),
-      maxIndex = buffer.indexOf(maxElement) else {
-        return 0
-    }
+    let maxIndex = try maxBufferIndex(buffer)
 
     guard let complexBuffer = transformResult.complexBuffer else {
       return maxIndex

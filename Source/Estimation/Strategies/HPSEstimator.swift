@@ -5,7 +5,7 @@ public class HPSEstimator: EstimationAware {
   public var harmonics = 5
   public var minIndex = 20
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) -> Int {
+  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int {
     var spectrum = transformResult.buffer
     let maxIndex = spectrum.count - 1
     var maxHIndex = spectrum.count / harmonics

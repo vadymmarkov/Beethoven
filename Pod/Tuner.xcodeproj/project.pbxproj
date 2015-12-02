@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D50800FF1C0E70F600168040 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50800FE1C0E70F600168040 /* Array+Extensions.swift */; };
 		D55F5BAD1C066FF800B36AE5 /* EstimationAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5B9E1C066FF800B36AE5 /* EstimationAware.swift */; };
 		D55F5BB61C066FF800B36AE5 /* TransformAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BA81C066FF800B36AE5 /* TransformAware.swift */; };
 		D55F5BB71C066FF800B36AE5 /* TransformResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BA91C066FF800B36AE5 /* TransformResult.swift */; };
@@ -35,6 +36,7 @@
 		14C136551AB784B200B7B07A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		716897C2D5B5626C8648DBB1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7BBA2578CC3D0D752EAD4195 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D50800FE1C0E70F600168040 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D55F5B9E1C066FF800B36AE5 /* EstimationAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationAware.swift; sourceTree = "<group>"; };
 		D55F5BA81C066FF800B36AE5 /* TransformAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAware.swift; sourceTree = "<group>"; };
 		D55F5BA91C066FF800B36AE5 /* TransformResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformResult.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		14C1365B1AB784BC00B7B07A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D50800FD1C0E70E800168040 /* Extensions */,
 				D55F5BD01C06793400B36AE5 /* SignalTracking */,
 				D55F5B9C1C066FF800B36AE5 /* Estimation */,
 				D55F5BA51C066FF800B36AE5 /* Transformation */,
@@ -142,6 +145,14 @@
 				7BBA2578CC3D0D752EAD4195 /* Pods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D50800FD1C0E70E800168040 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D50800FE1C0E70F600168040 /* Array+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D55F5B9C1C066FF800B36AE5 /* Estimation */ = {
@@ -331,6 +342,7 @@
 				D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */,
 				D55F5BC51C0675D900B36AE5 /* BarycentricEstimator.swift in Sources */,
 				D55F5BC31C0675D900B36AE5 /* JainsEstimator.swift in Sources */,
+				D50800FF1C0E70F600168040 /* Array+Extensions.swift in Sources */,
 				D55F5BC41C0675D900B36AE5 /* QuinnsFirstEstimator.swift in Sources */,
 				D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */,
 				D55F5BB61C066FF800B36AE5 /* TransformAware.swift in Sources */,

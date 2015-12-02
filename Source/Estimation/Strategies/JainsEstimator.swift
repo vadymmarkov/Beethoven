@@ -2,13 +2,9 @@ import Foundation
 
 public class JainsEstimator: EstimationAware {
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) -> Int {
+  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) throws -> Int {
     let buffer = transformResult.buffer
-
-    guard let maxElement = buffer.maxElement(),
-      maxIndex = buffer.indexOf(maxElement) else {
-        return 0
-    }
+    let maxIndex = try maxBufferIndex(buffer)
 
     let y2 = abs(buffer[maxIndex])
     let y1 = maxIndex == 0 ? y2 : abs(buffer[maxIndex - 1])
