@@ -8,13 +8,16 @@ public class OutputSignalTracker: SignalTrackingAware {
 
   public weak var delegate: SignalTrackingDelegate?
 
+  let bufferSize: AVAudioFrameCount
+  let audioURL: NSURL
+
   private let audioEngine = AVAudioEngine()
   private let bus = 0
-  private let bufferSize: AVAudioFrameCount
 
   // MARK: - Initialization
 
-  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+    self.audioURL = audioURL
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
