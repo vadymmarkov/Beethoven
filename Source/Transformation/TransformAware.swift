@@ -3,5 +3,5 @@ import AVFoundation
 
 public protocol TransformAware {
 
-  func transformBuffer(buffer: AVAudioPCMBuffer) -> TransformResult
+  func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer
 }

@@ -5,43 +5,42 @@ public class HPSEstimator: EstimationAware {
   public var harmonics = 5
   public var minIndex = 20
 
-  public func estimateLocation(transformResult: TransformResult, sampleRate: Float) -> Int {
-    var spectrum = transformResult.buffer
+  public func estimateLocation(buffer: Buffer) throws -> Int {
+    var spectrum = buffer.elements
     let maxIndex = spectrum.count - 1
-    var i: Int, j: Int
     var maxHIndex = spectrum.count / harmonics
 
     if maxIndex < maxHIndex {
       maxHIndex = maxIndex
     }
 
-    var maxLocation = minIndex
+    var location = minIndex
 
-    for j = minIndex; j <= maxHIndex; j++ {
-      for i = 1; i <= harmonics; i++ {
+    for var j = minIndex; j <= maxHIndex; j++ {
+      for var i = 1; i <= harmonics; i++ {
         spectrum[j] *= spectrum[j * i]
       }
 
-      if spectrum[j] > spectrum[maxLocation] {
-        maxLocation = j
+      if spectrum[j] > spectrum[location] {
+        location = j
       }
     }
 
     var max2 = minIndex
-    let maxsearch = maxLocation * 3 / 4
+    let maxsearch = location * 3 / 4
 
-    for i = minIndex + 1; i < maxsearch; i++ {
+    for var i = minIndex + 1; i < maxsearch; i++ {
       if spectrum[i] > spectrum[max2] {
         max2 = i
       }
     }
 
-    if abs(max2 * 2 - maxLocation) < 4 {
-      if spectrum[max2] / spectrum[maxLocation] > 0.2 {
-        maxLocation = max2
+    if abs(max2 * 2 - location) < 4 {
+      if spectrum[max2] / spectrum[location] > 0.2 {
+        location = max2
       }
     }
 
-    return maxLocation
+    return sanitize(location, reserveLocation: maxIndex, elements: spectrum)
   }
 }
