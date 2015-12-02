@@ -12,7 +12,7 @@ public class OutputSignalTracker: SignalTrackingAware {
   let audioURL: NSURL
 
   private let audioEngine = AVAudioEngine()
-  private var player = AVAudioPlayerNode()
+  private var audioPlayer = AVAudioPlayerNode()
   private let bus = 0
 
   // MARK: - Initialization
@@ -26,13 +26,17 @@ public class OutputSignalTracker: SignalTrackingAware {
   // MARK: - Tracking
 
   public func start() throws {
+    let session = AVAudioSession.sharedInstance()
+
+    try session.setCategory(AVAudioSessionCategoryPlayback)
+    try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+
     let audioFile = try AVAudioFile(forReading: audioURL)
-    let audioFormat = audioFile.processingFormat
     let outputFormat = audioEngine.outputNode.outputFormatForBus(bus)
 
-    audioEngine.attachNode(player)
-    audioEngine.connect(player, to: audioEngine.mainMixerNode, format: audioFormat)
-    player.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+    audioEngine.attachNode(audioPlayer)
+    audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: nil)
+    audioPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
 
     audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: outputFormat) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
@@ -42,10 +46,12 @@ public class OutputSignalTracker: SignalTrackingAware {
 
     audioEngine.prepare()
     try audioEngine.start()
-    player.play()
+
+    audioPlayer.play()
   }
 
   public func stop() {
+    audioPlayer.stop()
     audioEngine.stop()
     audioEngine.reset()
   }
