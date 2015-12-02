@@ -28,9 +28,7 @@ public class QuinnsSecondEstimator: EstimationAware {
     let d = (dp + dm) / 2 + tau(dp * dp) - tau(dm * dm)
     let location = maxIndex + Int(round(d))
 
-    return location >= 0 && location < buffer.count
-      ? location
-      : maxIndex
+    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
   }
 
   func tau(x: Float) -> Float {

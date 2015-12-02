@@ -25,8 +25,6 @@ public class JainsEstimator: EstimationAware {
       location = maxIndex + Int(round(d))
     }
 
-    return location >= 0 && location < buffer.count
-      ? location
-      : maxIndex
+    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
   }
 }

@@ -16,8 +16,6 @@ public class BarycentricEstimator: EstimationAware {
     let d = (y3 - y1) / (y1 + y2 + y3)
     let location = maxIndex + Int(round(d))
 
-    return location >= 0 && location < buffer.count
-      ? location
-      : maxIndex
+    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
   }
 }

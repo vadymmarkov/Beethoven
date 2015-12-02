@@ -28,14 +28,6 @@ public class QuinnsFirstEstimator: EstimationAware {
     let d = dp > 0 && dm > 0 ? dp : dm
     let location = maxIndex + Int(round(d))
 
-    return location >= 0 && location < buffer.count
-      ? location
-      : maxIndex
+    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
   }
 }
-
-
-
-
-
-

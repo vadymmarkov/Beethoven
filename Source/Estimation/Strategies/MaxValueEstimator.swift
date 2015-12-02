@@ -13,4 +13,3 @@ public class MaxValueEstimator: EstimationAware {
     return maxIndex
   }
 }
-

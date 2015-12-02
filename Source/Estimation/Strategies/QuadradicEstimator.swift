@@ -16,8 +16,6 @@ public class QuadradicEstimator: EstimationAware {
     let d = (y3 - y1) / (2 * (2 * y2 - y1 - y3))
     let location = maxIndex + Int(round(d))
 
-    return location >= 0 && location < buffer.count
-      ? location
-      : maxIndex
+    return sanitize(location, reserveLocation: maxIndex, buffer: buffer)
   }
 }
