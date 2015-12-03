@@ -9,13 +9,18 @@ public protocol PitchEngineDelegate: class {
 
 public class PitchEngine {
 
-  public weak var delegate: PitchEngineDelegate?
-  public var active = false
+  public enum Error: ErrorType {
+    case RecordPermissionDenied
+  }
 
-  private let bufferSize: AVAudioFrameCount
-  private var frequencies = [Float]()
-  public var pitches = [Pitch]()
-  public var currentPitch: Pitch!
+  public enum Mode {
+    case Record, Play
+  }
+
+  public let mode: Mode
+  public let bufferSize: AVAudioFrameCount
+  public var active = false
+  public weak var delegate: PitchEngineDelegate?
 
   private lazy var signalTracker: SignalTrackingAware = { [unowned self] in
     let inputMonitor = InputSignalTracker(
@@ -31,7 +36,8 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
+  public init(mode: Mode, bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
+    self.mode = mode
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -39,37 +45,38 @@ public class PitchEngine {
   // MARK: - Processing
 
   public func start() {
-    do {
-      try signalTracker.start()
-      active = true
-    } catch {}
+    guard mode == .Play else {
+      activate()
+      return
+    }
+
+    AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted  in
+      guard let weakSelf = self else { return }
+
+      guard granted else {
+        weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf,
+          error: Error.RecordPermissionDenied)
+        return
+      }
+
+      dispatch_async(dispatch_get_main_queue()) {
+        weakSelf.activate()
+      }
+    }
   }
 
   public func stop() {
     signalTracker.stop()
-    frequencies = [Float]()
     active = false
   }
 
-  // MARK: - Helpers
-
-  private func averagePitch(pitch: Pitch) -> Pitch {
-    if let first = pitches.first where first.note.letter != pitch.note.letter {
-      pitches = []
+  private func activate() {
+    do {
+      try signalTracker.start()
+      active = true
+    } catch {
+      delegate?.pitchEngineDidRecieveError(self, error: error)
     }
-    pitches.append(pitch)
-
-    if pitches.count == 1 {
-      currentPitch = pitch
-      return currentPitch
-    }
-
-    let pts1 = pitches.filter({ $0.note.index == pitch.note.index }).count
-    let pts2 = pitches.filter({ $0.note.index == currentPitch.note.index }).count
-
-    currentPitch = pts1 >= pts2 ? pitch : pitches[pitches.count - 1]
-
-    return currentPitch
   }
 }
 
