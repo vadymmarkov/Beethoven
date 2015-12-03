@@ -14,38 +14,41 @@ public class PitchEngine {
   }
 
   public enum Mode {
-    case Record, Play
+    case Record, Playback
   }
 
-  public let mode: Mode
   public let bufferSize: AVAudioFrameCount
   public var active = false
   public weak var delegate: PitchEngineDelegate?
 
-  private lazy var signalTracker: SignalTrackingAware = { [unowned self] in
-    let inputMonitor = InputSignalTracker(
-      bufferSize: self.bufferSize,
-      delegate: self
-    )
+  private var transformer: TransformAware
+  private var estimator: EstimationAware
+  private var signalTracker: SignalTrackingAware
 
-    return inputMonitor
-    }()
-
-  private var transformer: TransformAware = FFTTransformer()
-  private var estimator: EstimationAware = HPSEstimator()
+  public var mode: Mode {
+    return signalTracker is InputSignalTracker ? .Record : .Playback
+  }
 
   // MARK: - Initialization
 
-  public init(mode: Mode, bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
-    self.mode = mode
-    self.bufferSize = bufferSize
+  public init(config: Config, delegate: PitchEngineDelegate? = nil) {
+    bufferSize = config.bufferSize
+    transformer = TransformFactory.create(config.transformStrategy)
+    estimator = EstimationFactory.create(config.estimationStrategy)
+
+    if let audioURL = config.audioURL {
+      signalTracker = OutputSignalTracker(audioURL: audioURL, bufferSize: bufferSize)
+    } else {
+      signalTracker = InputSignalTracker(bufferSize: bufferSize)
+    }
+
     self.delegate = delegate
   }
 
   // MARK: - Processing
 
   public func start() {
-    guard mode == .Play else {
+    guard mode == .Playback else {
       activate()
       return
     }
