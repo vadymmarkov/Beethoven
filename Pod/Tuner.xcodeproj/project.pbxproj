@@ -24,6 +24,8 @@
 		D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */; };
 		D55F5BD71C06793400B36AE5 /* OutputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */; };
 		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; };
+		D5C175131C0FC80300E1BE4E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175121C0FC80300E1BE4E /* Config.swift */; };
+		D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSignalTracker.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* PitchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
+		D5C175121C0FC80300E1BE4E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,7 @@
 				D55F5B9C1C066FF800B36AE5 /* Estimation */,
 				D55F5BA51C066FF800B36AE5 /* Transformation */,
 				D5BE32F11BE815FB00945677 /* PitchEngine.swift */,
+				D5C175121C0FC80300E1BE4E /* Config.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -160,6 +165,7 @@
 			children = (
 				D55F5BB81C06750200B36AE5 /* Strategies */,
 				D55F5B9E1C066FF800B36AE5 /* EstimationAware.swift */,
+				D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */,
 			);
 			path = Estimation;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				D55F5BC01C0675D900B36AE5 /* QuadradicEstimator.swift in Sources */,
 				D55F5BCB1C06760700B36AE5 /* SimpleTransformer.swift in Sources */,
 				D55F5BC11C0675D900B36AE5 /* QuinnsSecondEstimator.swift in Sources */,
+				D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */,
 				D55F5BAD1C066FF800B36AE5 /* EstimationAware.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
 				D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */,
@@ -345,6 +352,7 @@
 				D50800FF1C0E70F600168040 /* Array+Extensions.swift in Sources */,
 				D55F5BC41C0675D900B36AE5 /* QuinnsFirstEstimator.swift in Sources */,
 				D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */,
+				D5C175131C0FC80300E1BE4E /* Config.swift in Sources */,
 				D55F5BB61C066FF800B36AE5 /* TransformAware.swift in Sources */,
 				D55F5BC21C0675D900B36AE5 /* HPSEstimator.swift in Sources */,
 				D55F5BB71C066FF800B36AE5 /* Buffer.swift in Sources */,
