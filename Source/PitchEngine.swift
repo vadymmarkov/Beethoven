@@ -55,18 +55,33 @@ public class PitchEngine {
       return
     }
 
-    AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted  in
-      guard let weakSelf = self else { return }
+    let audioSession = AVAudioSession.sharedInstance()
 
-      guard granted else {
-        weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf,
-          error: Error.RecordPermissionDenied)
-        return
-      }
-
+    switch audioSession.recordPermission() {
+    case AVAudioSessionRecordPermission.Granted:
+      activate()
+    case AVAudioSessionRecordPermission.Denied:
       dispatch_async(dispatch_get_main_queue()) {
-        weakSelf.activate()
+        if let settingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
+          UIApplication.sharedApplication().openURL(settingsURL)
+        }
       }
+    case AVAudioSessionRecordPermission.Undetermined:
+      AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted  in
+        guard let weakSelf = self else { return }
+
+        guard granted else {
+          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf,
+            error: Error.RecordPermissionDenied)
+          return
+        }
+
+        dispatch_async(dispatch_get_main_queue()) {
+          weakSelf.activate()
+        }
+      }
+    default:
+      break
     }
   }
 
