@@ -1,6 +1,6 @@
 import Foundation
 
-public class QuinnsFirstEstimator: EstimationAware {
+public struct QuinnsFirstEstimator: EstimationAware {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements

@@ -1,6 +1,6 @@
 import Foundation
 
-public class JainsEstimator: EstimationAware {
+public struct JainsEstimator: EstimationAware {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
