@@ -2,14 +2,9 @@ import AVFoundation
 
 public class OutputSignalTracker: SignalTrackingAware {
 
-  enum Error: ErrorType {
-    case InputNodeMissing
-  }
-
+  public let bufferSize: AVAudioFrameCount
+  public let audioURL: NSURL
   public weak var delegate: SignalTrackingDelegate?
-
-  let bufferSize: AVAudioFrameCount
-  let audioURL: NSURL
 
   private let audioEngine = AVAudioEngine()
   private var audioPlayer = AVAudioPlayerNode()

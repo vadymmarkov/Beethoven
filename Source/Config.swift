@@ -1,10 +1,12 @@
 import AVFoundation
 
 public struct Config {
-  var bufferSize: AVAudioFrameCount
-  var transformStrategy: TransformStrategy
-  var estimationStrategy: EstimationStrategy
-  var audioURL: NSURL?
+  public var bufferSize: AVAudioFrameCount
+  public var transformStrategy: TransformStrategy
+  public var estimationStrategy: EstimationStrategy
+  public var audioURL: NSURL?
+
+  // MARK: - Initialization
 
   public init(bufferSize: AVAudioFrameCount = 4096, transformStrategy: TransformStrategy,
     estimationStrategy: EstimationStrategy, audioURL: NSURL? = nil) {

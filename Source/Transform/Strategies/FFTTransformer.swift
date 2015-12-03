@@ -1,7 +1,7 @@
 import AVFoundation
 import Accelerate
 
-public class FFTTransformer: TransformAware {
+public struct FFTTransformer: TransformAware {
 
   public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
     let frameCount = buffer.frameCapacity

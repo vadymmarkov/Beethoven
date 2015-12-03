@@ -41,6 +41,8 @@ public class PitchEngine {
     } else {
       signalTracker = InputSignalTracker(bufferSize: bufferSize)
     }
+    
+    signalTracker.delegate = self
 
     self.delegate = delegate
   }
