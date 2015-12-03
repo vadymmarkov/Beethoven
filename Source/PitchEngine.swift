@@ -86,14 +86,20 @@ extension PitchEngine: SignalTrackingDelegate {
 
   public func signalTracker(signalTracker: SignalTrackingAware,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
-      let transformedBuffer = transformer.transformBuffer(buffer)
-      do {
-        let frequency = try estimator.estimateFrequency(Float(time.sampleRate),
-          buffer: transformedBuffer)
-        let pitch = Pitch(frequency: Double(frequency))
-        delegate?.pitchEngineDidRecievePitch(self, pitch: pitch)
-      } catch {
-        delegate?.pitchEngineDidRecieveError(self, error: error)
-      }
+      dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [weak self] in
+        guard let weakSelf = self else { return }
+
+        let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
+
+        do {
+          let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
+            buffer: transformedBuffer)
+          let pitch = Pitch(frequency: Double(frequency))
+          
+          weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+        } catch {
+          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+        }
+    }
   }
 }
