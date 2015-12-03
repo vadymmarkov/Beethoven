@@ -28,6 +28,7 @@
 		D5C175231C0FC9F500E1BE4E /* TransformStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C1751E1C0FC9F500E1BE4E /* TransformStrategy.swift */; };
 		D5C175251C0FCA3800E1BE4E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175241C0FCA3800E1BE4E /* Buffer.swift */; };
 		D5C175271C0FCA6E00E1BE4E /* EstimationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175261C0FCA6E00E1BE4E /* EstimationFactory.swift */; };
+		D5C175291C0FD15900E1BE4E /* TransformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175281C0FD15900E1BE4E /* TransformFactory.swift */; };
 		ED55ACED4108BAAD20C2F684 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBA2578CC3D0D752EAD4195 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		D5C1751E1C0FC9F500E1BE4E /* TransformStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformStrategy.swift; sourceTree = "<group>"; };
 		D5C175241C0FCA3800E1BE4E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		D5C175261C0FCA6E00E1BE4E /* EstimationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationFactory.swift; sourceTree = "<group>"; };
+		D5C175281C0FD15900E1BE4E /* TransformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformFactory.swift; sourceTree = "<group>"; };
 		FDF848418969FFB5A7D6A669 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,6 +216,7 @@
 				D5C1751A1C0FC9F500E1BE4E /* Strategies */,
 				D5C1751D1C0FC9F500E1BE4E /* TransformAware.swift */,
 				D5C1751E1C0FC9F500E1BE4E /* TransformStrategy.swift */,
+				D5C175281C0FD15900E1BE4E /* TransformFactory.swift */,
 			);
 			path = Transform;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				D5C175271C0FCA6E00E1BE4E /* EstimationFactory.swift in Sources */,
 				D5C175201C0FC9F500E1BE4E /* FFTTransformer.swift in Sources */,
 				D50800FF1C0E70F600168040 /* Array+Extensions.swift in Sources */,
+				D5C175291C0FD15900E1BE4E /* TransformFactory.swift in Sources */,
 				D55F5BC41C0675D900B36AE5 /* QuinnsFirstEstimator.swift in Sources */,
 				D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */,
 				D5C175231C0FC9F500E1BE4E /* TransformStrategy.swift in Sources */,
