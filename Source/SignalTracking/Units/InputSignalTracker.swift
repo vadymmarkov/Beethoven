@@ -2,15 +2,16 @@ import AVFoundation
 
 public class InputSignalTracker: SignalTrackingAware {
 
-  enum Error: ErrorType {
+  public enum Error: ErrorType {
     case InputNodeMissing
   }
 
+  public let bufferSize: AVAudioFrameCount
   public weak var delegate: SignalTrackingDelegate?
 
   private let audioEngine = AVAudioEngine()
+  private let session = AVAudioSession.sharedInstance()
   private let bus = 0
-  private let bufferSize: AVAudioFrameCount
 
   // MARK: - Initialization
 
@@ -22,6 +23,9 @@ public class InputSignalTracker: SignalTrackingAware {
   // MARK: - Tracking
 
   public func start() throws {
+    try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+    try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+
     guard let inputNode = audioEngine.inputNode else {
       throw Error.InputNodeMissing
     }
@@ -40,5 +44,6 @@ public class InputSignalTracker: SignalTrackingAware {
 
   public func stop() {
     audioEngine.stop()
+    audioEngine.reset()
   }
 }

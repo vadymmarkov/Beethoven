@@ -9,67 +9,79 @@ public protocol PitchEngineDelegate: class {
 
 public class PitchEngine {
 
-  public weak var delegate: PitchEngineDelegate?
+  public enum Error: ErrorType {
+    case RecordPermissionDenied
+  }
+
+  public enum Mode {
+    case Record, Playback
+  }
+
+  public let bufferSize: AVAudioFrameCount
   public var active = false
+  public weak var delegate: PitchEngineDelegate?
 
-  private let bufferSize: AVAudioFrameCount
-  private var frequencies = [Float]()
-  public var pitches = [Pitch]()
-  public var currentPitch: Pitch!
+  private var transformer: TransformAware
+  private var estimator: EstimationAware
+  private var signalTracker: SignalTrackingAware
 
-  private lazy var signalTracker: SignalTrackingAware = { [unowned self] in
-    let inputMonitor = InputSignalTracker(
-      bufferSize: self.bufferSize,
-      delegate: self
-    )
-
-    return inputMonitor
-    }()
-
-  private var transformer: TransformAware = FFTTransformer()
-  private var estimator: EstimationAware = HPSEstimator()
+  public var mode: Mode {
+    return signalTracker is InputSignalTracker ? .Record : .Playback
+  }
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 4096, delegate: PitchEngineDelegate?) {
-    self.bufferSize = bufferSize
+  public init(config: Config, delegate: PitchEngineDelegate? = nil) {
+    bufferSize = config.bufferSize
+    transformer = TransformFactory.create(config.transformStrategy)
+    estimator = EstimationFactory.create(config.estimationStrategy)
+
+    if let audioURL = config.audioURL {
+      signalTracker = OutputSignalTracker(audioURL: audioURL, bufferSize: bufferSize)
+    } else {
+      signalTracker = InputSignalTracker(bufferSize: bufferSize)
+    }
+    
+    signalTracker.delegate = self
+
     self.delegate = delegate
   }
 
   // MARK: - Processing
 
   public func start() {
-    do {
-      try signalTracker.start()
-      active = true
-    } catch {}
+    guard mode == .Playback else {
+      activate()
+      return
+    }
+
+    AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted  in
+      guard let weakSelf = self else { return }
+
+      guard granted else {
+        weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf,
+          error: Error.RecordPermissionDenied)
+        return
+      }
+
+      dispatch_async(dispatch_get_main_queue()) {
+        weakSelf.activate()
+      }
+    }
   }
 
   public func stop() {
     signalTracker.stop()
-    frequencies = [Float]()
     active = false
   }
 
-  // MARK: - Helpers
-
-  private func averagePitch(pitch: Pitch) -> Pitch {
-    if let first = pitches.first where first.note.letter != pitch.note.letter {
-      pitches = []
+  private func activate() {
+    do {
+      try signalTracker.start()
+      active = true
+    } catch {
+      delegate?.pitchEngineDidRecieveError(self, error: error)
     }
-    pitches.append(pitch)
-
-    if pitches.count == 1 {
-      currentPitch = pitch
-      return currentPitch
-    }
-
-    let pts1 = pitches.filter({ $0.note.index == pitch.note.index }).count
-    let pts2 = pitches.filter({ $0.note.index == currentPitch.note.index }).count
-
-    currentPitch = pts1 >= pts2 ? pitch : pitches[pitches.count - 1]
-
-    return currentPitch
   }
 }
 
@@ -79,14 +91,20 @@ extension PitchEngine: SignalTrackingDelegate {
 
   public func signalTracker(signalTracker: SignalTrackingAware,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
-      let transformedBuffer = transformer.transformBuffer(buffer)
-      do {
-        let frequency = try estimator.estimateFrequency(Float(time.sampleRate),
-          buffer: transformedBuffer)
-        let pitch = Pitch(frequency: Double(frequency))
-        delegate?.pitchEngineDidRecievePitch(self, pitch: pitch)
-      } catch {
-        delegate?.pitchEngineDidRecieveError(self, error: error)
-      }
+      dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [weak self] in
+        guard let weakSelf = self else { return }
+
+        let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
+
+        do {
+          let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
+            buffer: transformedBuffer)
+          let pitch = Pitch(frequency: Double(frequency))
+
+          weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+        } catch {
+          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+        }
+    }
   }
 }

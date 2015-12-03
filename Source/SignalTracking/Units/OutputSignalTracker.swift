@@ -2,19 +2,18 @@ import AVFoundation
 
 public class OutputSignalTracker: SignalTrackingAware {
 
-  enum Error: ErrorType {
-    case InputNodeMissing
-  }
-
+  public let bufferSize: AVAudioFrameCount
+  public let audioURL: NSURL
   public weak var delegate: SignalTrackingDelegate?
 
   private let audioEngine = AVAudioEngine()
+  private var audioPlayer = AVAudioPlayerNode()
   private let bus = 0
-  private let bufferSize: AVAudioFrameCount
 
   // MARK: - Initialization
 
-  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+    self.audioURL = audioURL
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -22,13 +21,19 @@ public class OutputSignalTracker: SignalTrackingAware {
   // MARK: - Tracking
 
   public func start() throws {
-    guard let inputNode = audioEngine.inputNode else {
-      throw Error.InputNodeMissing
-    }
+    let session = AVAudioSession.sharedInstance()
 
-    let format = inputNode.inputFormatForBus(bus)
+    try session.setCategory(AVAudioSessionCategoryPlayback)
+    try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
 
-    inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
+    let audioFile = try AVAudioFile(forReading: audioURL)
+    let outputFormat = audioEngine.outputNode.outputFormatForBus(bus)
+
+    audioEngine.attachNode(audioPlayer)
+    audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: nil)
+    audioPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+
+    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: outputFormat) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }
@@ -36,9 +41,13 @@ public class OutputSignalTracker: SignalTrackingAware {
 
     audioEngine.prepare()
     try audioEngine.start()
+
+    audioPlayer.play()
   }
 
   public func stop() {
+    audioPlayer.stop()
     audioEngine.stop()
+    audioEngine.reset()
   }
 }

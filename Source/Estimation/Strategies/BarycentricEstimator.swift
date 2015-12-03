@@ -1,6 +1,6 @@
 import Foundation
 
-public class BarycentricEstimator: EstimationAware {
+public struct BarycentricEstimator: EstimationAware {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements

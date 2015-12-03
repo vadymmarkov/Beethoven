@@ -11,7 +11,6 @@ public protocol SignalTrackingAware: class {
   
   weak var delegate: SignalTrackingDelegate? { get set }
 
-  init(bufferSize: AVAudioFrameCount, delegate: SignalTrackingDelegate?)
   func start() throws
   func stop()
 }

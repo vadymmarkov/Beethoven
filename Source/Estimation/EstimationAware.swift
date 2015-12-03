@@ -1,6 +1,6 @@
 import Foundation
 
-enum EstimationError: ErrorType {
+public enum EstimationError: ErrorType {
   case EmptyBuffer
   case UnknownMaxIndex
 }
