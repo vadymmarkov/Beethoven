@@ -8,8 +8,10 @@ public struct Config {
 
   // MARK: - Initialization
 
-  public init(bufferSize: AVAudioFrameCount = 4096, transformStrategy: TransformStrategy,
-    estimationStrategy: EstimationStrategy, audioURL: NSURL? = nil) {
+  public init(bufferSize: AVAudioFrameCount = 4096,
+    transformStrategy: TransformStrategy = .Simple,
+    estimationStrategy: EstimationStrategy = .MPM,
+    audioURL: NSURL? = nil) {
       self.bufferSize = bufferSize
       self.transformStrategy = transformStrategy
       self.estimationStrategy = estimationStrategy

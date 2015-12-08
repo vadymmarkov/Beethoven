@@ -31,7 +31,7 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(config: Config, delegate: PitchEngineDelegate? = nil) {
+  public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
     transformer = TransformFactory.create(config.transformStrategy)
     estimator = EstimationFactory.create(config.estimationStrategy)
