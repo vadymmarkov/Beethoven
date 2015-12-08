@@ -17,7 +17,7 @@
 		D55F5BC41C0675D900B36AE5 /* QuinnsFirstEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BBD1C0675D900B36AE5 /* QuinnsFirstEstimator.swift */; };
 		D55F5BC51C0675D900B36AE5 /* BarycentricEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BBE1C0675D900B36AE5 /* BarycentricEstimator.swift */; };
 		D55F5BC61C0675D900B36AE5 /* MaxValueEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BBF1C0675D900B36AE5 /* MaxValueEstimator.swift */; };
-		D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD11C06793400B36AE5 /* SignalTrackingAware.swift */; };
+		D55F5BD51C06793400B36AE5 /* SignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD11C06793400B36AE5 /* SignalTracker.swift */; };
 		D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */; };
 		D55F5BD71C06793400B36AE5 /* OutputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */; };
 		D5B634821C121CC600F253A0 /* MPMEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B634811C121CC600F253A0 /* MPMEstimator.swift */; };
@@ -53,7 +53,7 @@
 		D55F5BBD1C0675D900B36AE5 /* QuinnsFirstEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuinnsFirstEstimator.swift; sourceTree = "<group>"; };
 		D55F5BBE1C0675D900B36AE5 /* BarycentricEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarycentricEstimator.swift; sourceTree = "<group>"; };
 		D55F5BBF1C0675D900B36AE5 /* MaxValueEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxValueEstimator.swift; sourceTree = "<group>"; };
-		D55F5BD11C06793400B36AE5 /* SignalTrackingAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTrackingAware.swift; sourceTree = "<group>"; };
+		D55F5BD11C06793400B36AE5 /* SignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSignalTracker.swift; sourceTree = "<group>"; };
 		D5B634811C121CC600F253A0 /* MPMEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPMEstimator.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				D55F5BD21C06793400B36AE5 /* Units */,
-				D55F5BD11C06793400B36AE5 /* SignalTrackingAware.swift */,
+				D55F5BD11C06793400B36AE5 /* SignalTracker.swift */,
 			);
 			path = SignalTracking;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 				D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */,
 				D55F5BAD1C066FF800B36AE5 /* EstimationAware.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
-				D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */,
+				D55F5BD51C06793400B36AE5 /* SignalTracker.swift in Sources */,
 				D55F5BC51C0675D900B36AE5 /* BarycentricEstimator.swift in Sources */,
 				D5B634821C121CC600F253A0 /* MPMEstimator.swift in Sources */,
 				D55F5BC31C0675D900B36AE5 /* JainsEstimator.swift in Sources */,

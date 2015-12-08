@@ -23,7 +23,7 @@ public class PitchEngine {
 
   private var transformer: TransformAware
   private var estimator: EstimationAware
-  private var signalTracker: SignalTrackingAware
+  private var signalTracker: SignalTracker
 
   public var mode: Mode {
     return signalTracker is InputSignalTracker ? .Record : .Playback
@@ -102,9 +102,9 @@ public class PitchEngine {
 
 // MARK: - SignalTrackingDelegate
 
-extension PitchEngine: SignalTrackingDelegate {
+extension PitchEngine: SignalTrackerDelegate {
 
-  public func signalTracker(signalTracker: SignalTrackingAware,
+  public func signalTracker(signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [weak self] in
         guard let weakSelf = self else { return }

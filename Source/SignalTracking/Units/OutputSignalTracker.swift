@@ -1,10 +1,10 @@
 import AVFoundation
 
-public class OutputSignalTracker: SignalTrackingAware {
+public class OutputSignalTracker: SignalTracker {
 
   public let bufferSize: AVAudioFrameCount
   public let audioURL: NSURL
-  public weak var delegate: SignalTrackingDelegate?
+  public weak var delegate: SignalTrackerDelegate?
 
   private let audioEngine = AVAudioEngine()
   private var audioPlayer = AVAudioPlayerNode()
@@ -12,7 +12,7 @@ public class OutputSignalTracker: SignalTrackingAware {
 
   // MARK: - Initialization
 
-  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
     self.audioURL = audioURL
     self.bufferSize = bufferSize
     self.delegate = delegate

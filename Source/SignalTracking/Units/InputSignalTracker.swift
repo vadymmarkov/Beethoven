@@ -1,13 +1,13 @@
 import AVFoundation
 
-public class InputSignalTracker: SignalTrackingAware {
+public class InputSignalTracker: SignalTracker {
 
   public enum Error: ErrorType {
     case InputNodeMissing
   }
 
   public let bufferSize: AVAudioFrameCount
-  public weak var delegate: SignalTrackingDelegate?
+  public weak var delegate: SignalTrackerDelegate?
 
   private let audioEngine = AVAudioEngine()
   private let session = AVAudioSession.sharedInstance()
@@ -15,7 +15,7 @@ public class InputSignalTracker: SignalTrackingAware {
 
   // MARK: - Initialization
 
-  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
