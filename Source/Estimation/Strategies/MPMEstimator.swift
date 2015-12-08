@@ -1,6 +1,6 @@
 import Foundation
 
-public class MPMEstimator: EstimationAware {
+public class MPMEstimator: Estimator {
 
   public struct Defaults {
     static let bufferSize = 1024

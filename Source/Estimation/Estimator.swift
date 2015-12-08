@@ -6,13 +6,13 @@ public enum EstimationError: ErrorType {
   case UnknownFrequency
 }
 
-public protocol EstimationAware {
+public protocol Estimator {
 
   func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float
   func estimateFrequency(sampleRate: Float, location: Int, bufferCount: Int) -> Float
 }
 
-extension EstimationAware {
+extension Estimator {
 
   // MARK: - Default implementation
 
@@ -41,7 +41,7 @@ extension EstimationAware {
   }
 }
 
-public protocol LocationEstimator: EstimationAware {
+public protocol LocationEstimator: Estimator {
 
   func estimateLocation(buffer: Buffer) throws -> Int
 }

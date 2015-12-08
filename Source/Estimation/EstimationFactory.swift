@@ -1,7 +1,7 @@
 struct EstimationFactory {
 
-  static func create(strategy: EstimationStrategy) -> EstimationAware {
-    let estimator: EstimationAware
+  static func create(strategy: EstimationStrategy) -> Estimator {
+    let estimator: Estimator
 
     switch strategy {
     case .Quadradic:
