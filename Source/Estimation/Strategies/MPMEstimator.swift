@@ -5,13 +5,12 @@ public class MPMEstimator: EstimationAware {
   public struct Defaults {
     static let bufferSize = 1024
     static let overlap = 768
-    static let cutoff: Double = 0.97
-    static let smallCutoff: Double = 0.5
-    static let lowerPitchCutoff: Double = 80.0
+    static let cutoff: Float = 0.97
+    static let smallCutoff: Float = 0.5
+    static let lowerPitchCutoff: Float = 80.0
   }
 
-  let cutoff: Double
-  let sampleRate: Float
+  let cutoff: Float
   var nsdf: [Float]
   var turningPointX: Float = 0.0
   var turningPointY: Float = 0.0
@@ -21,20 +20,60 @@ public class MPMEstimator: EstimationAware {
 
   // MARK: - Initialization
 
-  public init(sampleRate: Float, bufferSize: Int = Defaults.bufferSize, cutoff: Double = Defaults.cutoff) {
-    self.sampleRate = sampleRate
+  public init(bufferSize: Int = Defaults.bufferSize, cutoff: Float = Defaults.cutoff) {
     self.cutoff = cutoff
 
     nsdf = [Float](count: bufferSize, repeatedValue: 0)
   }
 
-  public func estimateLocation(buffer: Buffer) throws -> Int {
+  public func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
     let elements = buffer.elements
-    let maxIndex = try maxBufferIndex(elements)
+    var frequency: Float?
 
-    
+    maxPositions = []
+    periodEstimates = []
+    ampEstimates = []
 
-    return sanitize(location, reserveLocation: maxIndex, elements: elements)
+    normalizedSquareDifference(elements)
+    peakPicking()
+
+    var highestAmplitude = -Float.infinity
+
+    for tau in maxPositions {
+      highestAmplitude = max(highestAmplitude, nsdf[tau])
+
+      if nsdf[tau] > Defaults.smallCutoff {
+        parabolicInterpolation(tau)
+        ampEstimates.append(turningPointY)
+        periodEstimates.append(turningPointX)
+        highestAmplitude = max(highestAmplitude, turningPointY)
+      }
+    }
+
+    if !periodEstimates.isEmpty {
+      let actualCutoff = cutoff * highestAmplitude;
+      var periodIndex = 0
+
+      for var i = 0; i < ampEstimates.count; i++ {
+        if ampEstimates[i] >= actualCutoff {
+          periodIndex = i
+          break
+        }
+      }
+
+      let period = periodEstimates[periodIndex]
+      let pitchEstimate = sampleRate / period
+
+      if pitchEstimate > Defaults.lowerPitchCutoff {
+        frequency = pitchEstimate
+      }
+    }
+
+    guard let estimatedFrequency = frequency else {
+      throw EstimationError.UnknownFrequency
+    }
+
+    return estimatedFrequency
   }
 
   // MARK: - Helpers

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HPSEstimator: EstimationAware {
+public struct HPSEstimator: LocationEstimator {
 
   public var harmonics = 5
   public var minIndex = 20

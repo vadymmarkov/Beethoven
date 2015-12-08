@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ZeroCrossingEstimator: EstimationAware {
+public struct ZeroCrossingEstimator: LocationEstimator {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
