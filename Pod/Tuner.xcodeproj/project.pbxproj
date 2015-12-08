@@ -20,6 +20,7 @@
 		D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD11C06793400B36AE5 /* SignalTrackingAware.swift */; };
 		D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */; };
 		D55F5BD71C06793400B36AE5 /* OutputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */; };
+		D5B634821C121CC600F253A0 /* MPMEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B634811C121CC600F253A0 /* MPMEstimator.swift */; };
 		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; };
 		D5C175131C0FC80300E1BE4E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175121C0FC80300E1BE4E /* Config.swift */; };
 		D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */; };
@@ -55,6 +56,7 @@
 		D55F5BD11C06793400B36AE5 /* SignalTrackingAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTrackingAware.swift; sourceTree = "<group>"; };
 		D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSignalTracker.swift; sourceTree = "<group>"; };
+		D5B634811C121CC600F253A0 /* MPMEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPMEstimator.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* PitchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
 		D5C175121C0FC80300E1BE4E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				D52EBF311C11022400ED8DE9 /* ZeroCrossingEstimator.swift */,
 				D55F5BBC1C0675D900B36AE5 /* JainsEstimator.swift */,
 				D55F5BBB1C0675D900B36AE5 /* HPSEstimator.swift */,
+				D5B634811C121CC600F253A0 /* MPMEstimator.swift */,
 			);
 			path = Strategies;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
 				D55F5BD51C06793400B36AE5 /* SignalTrackingAware.swift in Sources */,
 				D55F5BC51C0675D900B36AE5 /* BarycentricEstimator.swift in Sources */,
+				D5B634821C121CC600F253A0 /* MPMEstimator.swift in Sources */,
 				D55F5BC31C0675D900B36AE5 /* JainsEstimator.swift in Sources */,
 				D5C175271C0FCA6E00E1BE4E /* EstimationFactory.swift in Sources */,
 				D5C175201C0FC9F500E1BE4E /* FFTTransformer.swift in Sources */,
