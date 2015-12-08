@@ -190,9 +190,9 @@
 				D55F5BBE1C0675D900B36AE5 /* BarycentricEstimator.swift */,
 				D55F5BBD1C0675D900B36AE5 /* QuinnsFirstEstimator.swift */,
 				D55F5BBA1C0675D900B36AE5 /* QuinnsSecondEstimator.swift */,
-				D52EBF311C11022400ED8DE9 /* ZeroCrossingEstimator.swift */,
 				D55F5BBC1C0675D900B36AE5 /* JainsEstimator.swift */,
 				D55F5BBB1C0675D900B36AE5 /* HPSEstimator.swift */,
+				D52EBF311C11022400ED8DE9 /* ZeroCrossingEstimator.swift */,
 				D5B634811C121CC600F253A0 /* MPMEstimator.swift */,
 			);
 			path = Strategies;
