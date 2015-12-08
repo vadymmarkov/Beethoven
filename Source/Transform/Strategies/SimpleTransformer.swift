@@ -1,6 +1,6 @@
 import AVFoundation
 
-public struct SimpleTransformer: TransformAware {
+public struct SimpleTransformer: Transformer {
 
   public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
     let pointer = UnsafePointer<Float>(buffer.floatChannelData)

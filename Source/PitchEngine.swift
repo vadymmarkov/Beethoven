@@ -21,7 +21,7 @@ public class PitchEngine {
   public var active = false
   public weak var delegate: PitchEngineDelegate?
 
-  private var transformer: TransformAware
+  private var transformer: Transformer
   private var estimator: Estimator
   private var signalTracker: SignalTracker
 

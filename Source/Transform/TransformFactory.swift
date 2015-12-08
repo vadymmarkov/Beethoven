@@ -1,7 +1,7 @@
 struct TransformFactory {
 
-  static func create(strategy: TransformStrategy) -> TransformAware {
-    let estimator: TransformAware
+  static func create(strategy: TransformStrategy) -> Transformer {
+    let estimator: Transformer
 
     switch strategy {
     case .FFT:
