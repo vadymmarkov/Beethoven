@@ -3,77 +3,190 @@ import Foundation
 public class DynamicWaveletEstimator: Estimator {
 
   public struct Defaults {
-    static let bufferSize = 1024
-    static let overlap = 768
-    static let cutoff: Double = 0.97
-    static let smallCutoff: Double = 0.5
-    static let lowerPitchCutoff: Double = 80.0
+    static let maxFLWTlevels = 6;
+    static let maxF = 3000.0
+    static let differenceLevelsN = 3
+    static let maximaThresholdRatio = 0.75;
   }
 
-  let cutoff: Double
-  var nsdf: [Float]
-  var turningPointX: Float = 0.0
-  var turningPointY: Float = 0.0
-  var maxPositions = [Int]()
-  var periodEstimates = [Float]()
-  var ampEstimates = [Float]()
-
-  // MARK: - Initialization
-
-  public init(bufferSize: Int = Defaults.bufferSize, cutoff: Double = Defaults.cutoff) {
-    self.cutoff = cutoff
-
-    nsdf = [Float](count: bufferSize, repeatedValue: 0)
-  }
+  var distances = [Int]()
+  var mins = [Int]()
+  var maxs = [Int]()
 
   public func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
-    print(buffer.elements.count)
+    var audioBuffer = buffer.elements
 
-    let elements = buffer.elements
-    var frequency: Float?
+    var pitchF: Float?
+    var curSamNb = audioBuffer.count
+    var nbMins = 0
+    var nbMaxs = 0
 
-    maxPositions = []
-    periodEstimates = []
-    ampEstimates = []
+    distances = [Int](count: audioBuffer.count, repeatedValue: 0)
+    mins = [Int](count: audioBuffer.count, repeatedValue: 0)
+    maxs = [Int](count: audioBuffer.count, repeatedValue: 0)
 
-    normalizedSquareDifference(elements)
-    peakPicking()
+    var ampltitudeThreshold = 0.0
+    var theDC = 0.0
 
-    var highestAmplitude = -Double.infinity
+    var maxValue = 0.0
+    var minValue = 0.0
 
-    for tau in maxPositions {
-      highestAmplitude = max(highestAmplitude, Double(nsdf[tau]))
-
-      if Double(nsdf[tau]) > Defaults.smallCutoff {
-        parabolicInterpolation(tau)
-        ampEstimates.append(turningPointY)
-        periodEstimates.append(turningPointX)
-        highestAmplitude = max(highestAmplitude, Double(turningPointY))
-      }
+    for var i = 0; i < audioBuffer.count; i++ {
+      let sample = Double(audioBuffer[i])
+      theDC = theDC + sample
+      maxValue = max(maxValue, sample)
+      minValue = min(sample, minValue)
     }
 
-    if !periodEstimates.isEmpty {
-      let actualCutoff = cutoff * highestAmplitude;
-      var periodIndex = 0
+    theDC = theDC / Double(audioBuffer.count)
+    maxValue = maxValue - theDC
+    minValue = minValue - theDC
+    let amplitudeMax = maxValue > -minValue ? maxValue : -minValue
 
-      for var i = 0; i < ampEstimates.count; i++ {
-        if Double(ampEstimates[i]) >= actualCutoff {
-          periodIndex = i
-          break
+    ampltitudeThreshold = amplitudeMax * Defaults.maximaThresholdRatio;
+
+    var curLevel = 0
+    var curModeDistance = -1.0
+    var delta: Int
+
+    search: while(true) {
+      delta = Int(Double(sampleRate) / (pow(2.0, Double(curLevel)) * Double(Defaults.maxF)))
+      if curSamNb < 2 {
+        break search
+      }
+
+      var dv: Double
+      var previousDV: Double = -1000
+
+      nbMins = 0
+      nbMaxs = 0
+      var lastMinIndex = -1000000
+      var lastmaxIndex = -1000000
+      var findMax = false
+      var findMin = false
+
+      for var i = 2; i < curSamNb; i++ {
+        let si = Double(audioBuffer[i]) - theDC
+        let si1 = Double(audioBuffer[i-1]) - theDC
+
+        if si1 <= 0 && si > 0 { findMax = true }
+        if si1 >= 0 && si < 0 { findMin = true }
+
+        dv = si - si1
+
+        if previousDV > -1000 {
+          if findMin && previousDV < 0 && dv >= 0 {
+            if abs(si) >= ampltitudeThreshold {
+              if i > lastMinIndex + delta {
+                mins[nbMins++] = i
+                lastMinIndex = i
+                findMin = false
+              }
+            }
+          }
+
+          if findMax  && previousDV > 0 && dv <= 0 {
+            if abs(si) >= ampltitudeThreshold {
+              if i > lastmaxIndex + delta {
+                maxs[nbMaxs++] = i
+                lastmaxIndex = i
+                findMax = false
+              }
+            }
+          }
+        }
+
+        previousDV = dv
+      }
+
+      if nbMins == 0 && nbMaxs == 0 {
+        break search
+      }
+
+      var d: Int
+      distances = [Int](count: audioBuffer.count, repeatedValue: 0)
+
+      for var i = 0 ; i < nbMins ; i++ {
+        for var j = 1; j < Defaults.differenceLevelsN; j++ {
+          if i + j < nbMins {
+            d = abs(mins[i] - mins[i+j])
+            distances[d] = distances[d] + 1
+          }
         }
       }
 
-      let period = periodEstimates[periodIndex]
-      let pitchEstimate = Float(sampleRate / period)
+      var bestDistance = -1
+      var bestValue = -1
 
-      print("Estimate: \(pitchEstimate)")
+      for var i = 0; i < curSamNb; i++ {
+        var summed = 0
 
-      if Double(pitchEstimate) > Defaults.lowerPitchCutoff {
-        frequency = pitchEstimate
+        for var j = -delta ; j <= delta ; j++ {
+          if i + j >= 0 && i + j < curSamNb {
+            summed += distances[i+j]
+          }
+        }
+
+        if summed == bestValue {
+          if i == 2 * bestDistance {
+            bestDistance = i
+          }
+        } else if summed > bestValue {
+          bestValue = summed
+          bestDistance = i
+        }
       }
+
+      var distAvg = 0.0
+      var nbDists = 0.0;
+
+      for var j = -delta ; j <= delta; j++ {
+        if bestDistance + j >= 0 && bestDistance + j < audioBuffer.count {
+          let nbDist = distances[bestDistance + j]
+          if nbDist > 0 {
+            nbDists += Double(nbDist)
+            distAvg += Double((bestDistance + j) * nbDist)
+          }
+        }
+      }
+
+      distAvg /= nbDists
+
+      if curModeDistance > -1.0 {
+        let similarity = abs(distAvg * 2 - curModeDistance)
+        print(similarity)
+        if similarity <= 2.0 * Double(delta) {
+          pitchF = Float((Double(sampleRate) / (pow(2.0 , Double(curLevel - 1)) * curModeDistance)))
+          break search
+        }
+      }
+
+      curModeDistance = distAvg
+
+
+      curLevel = curLevel + 1
+      if curLevel >= Defaults.maxFLWTlevels {
+        break search
+      }
+
+      if curSamNb < 2 {
+        break search
+      }
+
+      var newAudioBuffer = audioBuffer
+
+      if curSamNb == distances.count {
+        newAudioBuffer = [Float](count: curSamNb/2, repeatedValue: 0)
+      }
+
+      for var i = 0; i < curSamNb / 2; i++ {
+        newAudioBuffer[i] = (audioBuffer[2 * i] + audioBuffer[2 * i + 1]) / 2.0
+      }
+      audioBuffer = newAudioBuffer
+      curSamNb /= 2
     }
 
-    guard let estimatedFrequency = frequency else {
+    guard let estimatedFrequency = pitchF else {
       throw EstimationError.UnknownFrequency
     }
 
@@ -81,84 +194,4 @@ public class DynamicWaveletEstimator: Estimator {
   }
 
   // MARK: - Helpers
-
-  private func normalizedSquareDifference(audioBuffer: [Float]) {
-    nsdf = [Float](count: audioBuffer.count, repeatedValue: 0)
-
-		for var tau = 0; tau < nsdf.count; tau++ {
-      var acf: Float = 0.0
-      var divisorM: Float = 0.0
-
-      for var i = 0; i < audioBuffer.count - tau; i++ {
-        acf += audioBuffer[i] * audioBuffer[i + tau]
-        divisorM += audioBuffer[i] * audioBuffer[i]
-          + audioBuffer[i + tau] * audioBuffer[i + tau]
-      }
-
-      nsdf[tau] = 2 * acf / divisorM
-		}
-  }
-
-  private func parabolicInterpolation(tau: Int) {
-		let nsdfa = nsdf[tau - 1]
-		let nsdfb = nsdf[tau]
-		let nsdfc = nsdf[tau + 1]
-		let bValue = Float(tau)
-		let bottom = nsdfc + nsdfa - 2.0 * nsdfb
-
-    if bottom == 0.0 {
-      turningPointX = bValue
-      turningPointY = nsdfb
-		} else {
-      let delta = nsdfa - nsdfc
-      turningPointX = bValue + delta / (2 * bottom)
-      turningPointY = nsdfb - delta * delta / (8 * bottom)
-		}
-  }
-
-  private func peakPicking() {
-    var pos = 0
-    var curMaxPos = 0
-
-    while (pos < (nsdf.count - 1) / 3 && nsdf[pos] > 0) {
-      pos++
-    }
-
-    while (pos < nsdf.count - 1 && nsdf[pos] <= 0.0) {
-      pos++
-    }
-
-    if pos == 0 {
-      pos = 1
-    }
-
-    while pos < nsdf.count - 1 {
-      //guard nsdf[pos] >= 0 else { continue }
-
-      if nsdf[pos] > nsdf[pos - 1] && nsdf[pos] >= nsdf[pos + 1] {
-        if curMaxPos == 0 {
-          curMaxPos = pos
-        } else if nsdf[pos] > nsdf[curMaxPos] {
-          curMaxPos = pos
-        }
-      }
-
-      pos++
-
-      if pos < nsdf.count - 1 && nsdf[pos] <= 0 {
-        if curMaxPos > 0 {
-          maxPositions.append(curMaxPos)
-          curMaxPos = 0
-        }
-
-        while pos < nsdf.count - 1 && nsdf[pos] <= 0.0 {
-          pos++
-        }
-      }
-    }
-
-    if curMaxPos > 0 {
-      maxPositions.append(curMaxPos)
-    }
-  }
 }

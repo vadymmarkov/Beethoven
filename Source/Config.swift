@@ -10,7 +10,7 @@ public struct Config {
 
   public init(bufferSize: AVAudioFrameCount = 4096,
     transformStrategy: TransformStrategy = .FFT,
-    estimationStrategy: EstimationStrategy = .HPS,
+    estimationStrategy: EstimationStrategy = .DynamicWavelet,
     audioURL: NSURL? = nil) {
       self.bufferSize = bufferSize
       self.transformStrategy = transformStrategy
