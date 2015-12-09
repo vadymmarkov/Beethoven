@@ -63,6 +63,7 @@ class ViewController: UIViewController {
   // MARK: - Action methods
 
   func actionButtonDidPress(button: UIButton) {
+    noteLabel.text = "--"
     tuner.active ? tuner.stop() : tuner.start()
     tuner.active
       ? button.setTitle("Stop".uppercaseString, forState: .Normal)
@@ -86,7 +87,6 @@ class ViewController: UIViewController {
 extension ViewController: PitchEngineDelegate {
 
   func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch) {
-    //print("Yay")
     noteLabel.text = pitch.note.string
   }
 

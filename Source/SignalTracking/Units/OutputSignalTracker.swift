@@ -6,8 +6,8 @@ public class OutputSignalTracker: SignalTracker {
   public let audioURL: NSURL
   public weak var delegate: SignalTrackerDelegate?
 
-  private let audioEngine = AVAudioEngine()
-  private var audioPlayer = AVAudioPlayerNode()
+  private var audioEngine: AVAudioEngine!
+  private var audioPlayer: AVAudioPlayerNode!
   private let bus = 0
 
   // MARK: - Initialization
@@ -25,6 +25,9 @@ public class OutputSignalTracker: SignalTracker {
 
     try session.setCategory(AVAudioSessionCategoryPlayback)
     try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+
+    audioEngine = AVAudioEngine()
+    audioPlayer = AVAudioPlayerNode()
 
     let audioFile = try AVAudioFile(forReading: audioURL)
     let outputFormat = audioEngine.outputNode.outputFormatForBus(bus)
@@ -49,5 +52,7 @@ public class OutputSignalTracker: SignalTracker {
     audioPlayer.stop()
     audioEngine.stop()
     audioEngine.reset()
+    audioEngine = nil
+    audioPlayer = nil
   }
 }
