@@ -6,6 +6,5 @@ public enum EstimationStrategy {
   case QuinnsSecond
   case Jains
   case HPS
-  case ZeroCrossing
   case MPM
 }

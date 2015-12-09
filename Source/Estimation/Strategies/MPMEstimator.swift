@@ -5,12 +5,12 @@ public class MPMEstimator: Estimator {
   public struct Defaults {
     static let bufferSize = 1024
     static let overlap = 768
-    static let cutoff: Float = 0.97
-    static let smallCutoff: Float = 0.5
-    static let lowerPitchCutoff: Float = 80.0
+    static let cutoff: Double = 0.97
+    static let smallCutoff: Double = 0.5
+    static let lowerPitchCutoff: Double = 80.0
   }
 
-  let cutoff: Float
+  let cutoff: Double
   var nsdf: [Float]
   var turningPointX: Float = 0.0
   var turningPointY: Float = 0.0
@@ -20,13 +20,15 @@ public class MPMEstimator: Estimator {
 
   // MARK: - Initialization
 
-  public init(bufferSize: Int = Defaults.bufferSize, cutoff: Float = Defaults.cutoff) {
+  public init(bufferSize: Int = Defaults.bufferSize, cutoff: Double = Defaults.cutoff) {
     self.cutoff = cutoff
 
     nsdf = [Float](count: bufferSize, repeatedValue: 0)
   }
 
   public func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
+    print(buffer.elements.count)
+
     let elements = buffer.elements
     var frequency: Float?
 
@@ -37,16 +39,16 @@ public class MPMEstimator: Estimator {
     normalizedSquareDifference(elements)
     peakPicking()
 
-    var highestAmplitude = -Float.infinity
+    var highestAmplitude = -Double.infinity
 
     for tau in maxPositions {
-      highestAmplitude = max(highestAmplitude, nsdf[tau])
+      highestAmplitude = max(highestAmplitude, Double(nsdf[tau]))
 
-      if nsdf[tau] > Defaults.smallCutoff {
+      if Double(nsdf[tau]) > Defaults.smallCutoff {
         parabolicInterpolation(tau)
         ampEstimates.append(turningPointY)
         periodEstimates.append(turningPointX)
-        highestAmplitude = max(highestAmplitude, turningPointY)
+        highestAmplitude = max(highestAmplitude, Double(turningPointY))
       }
     }
 
@@ -55,16 +57,18 @@ public class MPMEstimator: Estimator {
       var periodIndex = 0
 
       for var i = 0; i < ampEstimates.count; i++ {
-        if ampEstimates[i] >= actualCutoff {
+        if Double(ampEstimates[i]) >= actualCutoff {
           periodIndex = i
           break
         }
       }
 
       let period = periodEstimates[periodIndex]
-      let pitchEstimate = sampleRate / period
+      let pitchEstimate = Float(sampleRate / period)
 
-      if pitchEstimate > Defaults.lowerPitchCutoff {
+      print("Estimate: \(pitchEstimate)")
+
+      if Double(pitchEstimate) > Defaults.lowerPitchCutoff {
         frequency = pitchEstimate
       }
     }
@@ -79,7 +83,9 @@ public class MPMEstimator: Estimator {
   // MARK: - Helpers
 
   private func normalizedSquareDifference(audioBuffer: [Float]) {
-		for var tau = 0; tau < audioBuffer.count; tau++ {
+    nsdf = [Float](count: audioBuffer.count, repeatedValue: 0)
+
+		for var tau = 0; tau < nsdf.count; tau++ {
       var acf: Float = 0.0
       var divisorM: Float = 0.0
 
@@ -89,7 +95,7 @@ public class MPMEstimator: Estimator {
           + audioBuffer[i + tau] * audioBuffer[i + tau]
       }
 
-      nsdf[tau] = 2 * acf / divisorM;
+      nsdf[tau] = 2 * acf / divisorM
 		}
   }
 
@@ -114,11 +120,11 @@ public class MPMEstimator: Estimator {
     var pos = 0
     var curMaxPos = 0
 
-    while pos < (nsdf.count - 1) / 3 && nsdf[pos] > 0 {
+    while (pos < (nsdf.count - 1) / 3 && nsdf[pos] > 0) {
       pos++
     }
 
-    while pos < nsdf.count - 1 && nsdf[pos] <= 0.0 {
+    while (pos < nsdf.count - 1 && nsdf[pos] <= 0.0) {
       pos++
     }
 
@@ -127,7 +133,7 @@ public class MPMEstimator: Estimator {
     }
 
     while pos < nsdf.count - 1 {
-      guard nsdf[pos] >= 0 else { continue }
+      //guard nsdf[pos] >= 0 else { continue }
 
       if nsdf[pos] > nsdf[pos - 1] && nsdf[pos] >= nsdf[pos + 1] {
         if curMaxPos == 0 {

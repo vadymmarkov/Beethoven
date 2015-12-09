@@ -116,9 +116,13 @@ extension PitchEngine: SignalTrackerDelegate {
             buffer: transformedBuffer)
           let pitch = Pitch(frequency: Double(frequency))
 
-          weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+          dispatch_async(dispatch_get_main_queue()) {
+            weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+          }
         } catch {
-          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+          dispatch_async(dispatch_get_main_queue()) {
+            weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+          }
         }
     }
   }
