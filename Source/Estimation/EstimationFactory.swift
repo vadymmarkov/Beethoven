@@ -16,8 +16,8 @@ struct EstimationFactory {
       estimator = JainsEstimator()
     case .HPS:
       estimator = HPSEstimator()
-    case .DynamicWavelet:
-      estimator = DynamicWaveletEstimator()
+    case .YIN:
+      estimator = YINEstimator()
     default:
       estimator = MaxValueEstimator()
     }

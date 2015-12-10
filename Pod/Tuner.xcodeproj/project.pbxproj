@@ -19,7 +19,7 @@
 		D55F5BD51C06793400B36AE5 /* SignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD11C06793400B36AE5 /* SignalTracker.swift */; };
 		D55F5BD61C06793400B36AE5 /* InputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */; };
 		D55F5BD71C06793400B36AE5 /* OutputSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */; };
-		D58506131C18FBC1003C5DAB /* DynamicWaveletEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58506121C18FBC1003C5DAB /* DynamicWaveletEstimator.swift */; };
+		D58506131C18FBC1003C5DAB /* YINEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58506121C18FBC1003C5DAB /* YINEstimator.swift */; };
 		D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BE32F11BE815FB00945677 /* PitchEngine.swift */; };
 		D5C175131C0FC80300E1BE4E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175121C0FC80300E1BE4E /* Config.swift */; };
 		D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */; };
@@ -54,7 +54,7 @@
 		D55F5BD11C06793400B36AE5 /* SignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD31C06793400B36AE5 /* InputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSignalTracker.swift; sourceTree = "<group>"; };
 		D55F5BD41C06793400B36AE5 /* OutputSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSignalTracker.swift; sourceTree = "<group>"; };
-		D58506121C18FBC1003C5DAB /* DynamicWaveletEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicWaveletEstimator.swift; sourceTree = "<group>"; };
+		D58506121C18FBC1003C5DAB /* YINEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINEstimator.swift; sourceTree = "<group>"; };
 		D5BE32F11BE815FB00945677 /* PitchEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
 		D5C175121C0FC80300E1BE4E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D5C175141C0FC8BE00E1BE4E /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		D55F5BB81C06750200B36AE5 /* Strategies */ = {
 			isa = PBXGroup;
 			children = (
-				D58506121C18FBC1003C5DAB /* DynamicWaveletEstimator.swift */,
+				D58506121C18FBC1003C5DAB /* YINEstimator.swift */,
 				D55F5BBF1C0675D900B36AE5 /* MaxValueEstimator.swift */,
 				D55F5BB91C0675D900B36AE5 /* QuadradicEstimator.swift */,
 				D55F5BBE1C0675D900B36AE5 /* BarycentricEstimator.swift */,
@@ -355,7 +355,7 @@
 				D55F5BC01C0675D900B36AE5 /* QuadradicEstimator.swift in Sources */,
 				D55F5BC11C0675D900B36AE5 /* QuinnsSecondEstimator.swift in Sources */,
 				D5C175151C0FC8BE00E1BE4E /* EstimationStrategy.swift in Sources */,
-				D58506131C18FBC1003C5DAB /* DynamicWaveletEstimator.swift in Sources */,
+				D58506131C18FBC1003C5DAB /* YINEstimator.swift in Sources */,
 				D55F5BAD1C066FF800B36AE5 /* Estimator.swift in Sources */,
 				D5BE32F21BE815FB00945677 /* PitchEngine.swift in Sources */,
 				D55F5BD51C06793400B36AE5 /* SignalTracker.swift in Sources */,

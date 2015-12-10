@@ -24,6 +24,7 @@ public class PitchEngine {
   private var transformer: Transformer
   private var estimator: Estimator
   private var signalTracker: SignalTracker
+  private var queue: dispatch_queue_t
 
   public var mode: Mode {
     return signalTracker is InputSignalTracker ? .Record : .Playback
@@ -41,7 +42,9 @@ public class PitchEngine {
     } else {
       signalTracker = InputSignalTracker(bufferSize: bufferSize)
     }
-    
+
+    queue = dispatch_queue_create("BeethovenQueue", DISPATCH_QUEUE_SERIAL)
+
     signalTracker.delegate = self
 
     self.delegate = delegate
@@ -106,7 +109,7 @@ extension PitchEngine: SignalTrackerDelegate {
 
   public func signalTracker(signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
-      dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [weak self] in
+      dispatch_async(queue) { [weak self] in
         guard let weakSelf = self else { return }
 
         let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
