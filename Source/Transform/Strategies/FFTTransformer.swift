@@ -4,91 +4,53 @@ import Accelerate
 public struct FFTTransformer: Transformer {
 
   public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
-//    let frameCount = buffer.frameCapacity
-//    let log2n = UInt(round(log2(Double(frameCount))))
-//    let bufferSizePOT = Int(1 << log2n)
-//    let inputCount = bufferSizePOT / 2
-//    let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
-//
-//    var realp = [Float](count: inputCount, repeatedValue: 0)
-//    var imagp = [Float](count: inputCount, repeatedValue: 0)
-//    var output = DSPSplitComplex(realp: &realp, imagp: &imagp)
-//
-//    let windowSize = bufferSizePOT
-//    var transferBuffer = [Float](count: windowSize, repeatedValue: 0)
-//    var window = [Float](count: windowSize, repeatedValue: 0)
-//    vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))//0
-//    vDSP_vmul(buffer.floatChannelData.memory, 1, window, 1, &transferBuffer, 1, vDSP_Length(windowSize))
-//
-//    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
-//      &output, 1, vDSP_Length(inputCount))
-//
-//    //    vDSP_ctoz(UnsafePointer<DSPComplex>(buffer.floatChannelData.memory), 2,
-//    //      &output, 1, vDSP_Length(inputCount))
-//    vDSP_fft_zrip(fftSetup, &output, 1, log2n, FFTDirection(FFT_FORWARD))
-//
-//    var magnitudes = [Float](count:inputCount, repeatedValue:0.0)
-//    vDSP_zvmags(&output, 1, &magnitudes, 1, vDSP_Length(inputCount))
-//
-//    var normalizedMagnitudes = [Float](count: inputCount, repeatedValue: 0.0)
-//    vDSP_vsmul(sqrtq(magnitudes), 1, [2.0 / Float(inputCount)],
-//      &normalizedMagnitudes, 1, vDSP_Length(inputCount))
-//
-//    vDSP_destroy_fftsetup(fftSetup)
-
     let frameCount = buffer.frameLength
     let log2n = UInt(round(log2(Double(frameCount))))
-
     let bufferSizePOT = Int(1 << log2n)
-
-    // Set up the transform
+    let inputCount = bufferSizePOT / 2
     let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
 
-    // create packed real input
-    var realp = [Float](count: bufferSizePOT/2, repeatedValue: 0)
-    var imagp = [Float](count: bufferSizePOT/2, repeatedValue: 0)
+    var realp = [Float](count: inputCount, repeatedValue: 0)
+    var imagp = [Float](count: inputCount, repeatedValue: 0)
     var output = DSPSplitComplex(realp: &realp, imagp: &imagp)
 
     let windowSize = bufferSizePOT
-        var transferBuffer = [Float](count: windowSize, repeatedValue: 0)
-        var window = [Float](count: windowSize, repeatedValue: 0)
-        vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))//0
-        vDSP_vmul(buffer.floatChannelData.memory, 1, window, 1, &transferBuffer, 1, vDSP_Length(windowSize))
+    var transferBuffer = [Float](count: windowSize, repeatedValue: 0)
+    var window = [Float](count: windowSize, repeatedValue: 0)
+
+    vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))//0
+    vDSP_vmul(buffer.floatChannelData.memory, 1, window, 1, &transferBuffer, 1, vDSP_Length(windowSize))
     
-        vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
-          &output, 1, vDSP_Length(UInt(bufferSizePOT / 2)))
+    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
+      &output, 1, vDSP_Length(inputCount))
 
+    vDSP_fft_zrip(fftSetup, &output, 1, log2n, FFTDirection(FFT_FORWARD))
 
-    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2, &output, 1, UInt(bufferSizePOT / 2))
+    var magnitudes = [Float](count:inputCount, repeatedValue:0.0)
+    vDSP_zvmags(&output, 1, &magnitudes, 1, vDSP_Length(inputCount))
 
-    // Do the fast Fourier forward transform, packed input to packed output
-    vDSP_fft_zrip(fftSetup, &output, 1, log2n, Int32(FFT_FORWARD))
+    var normalizedMagnitudes = [Float](count: inputCount, repeatedValue: 0.0)
+    vDSP_vsmul(sqrtq(magnitudes), 1, [2.0 / Float(inputCount)],
+    &normalizedMagnitudes, 1, vDSP_Length(inputCount))
 
+//    var spectrum = [Float]()
+//    var maxPart = 0;
+//    var maxPartMagnitude:Float = 0;
+//    var frequencies:[Float] = []
+//    for var i=1; i<bufferSizePOT/2; ++i {
+//      let imag = output.imagp[i]
+//      let real = output.realp[i]
+//      frequencies.append(real)
+//      let magnitude = sqrt(pow(real,2)+pow(imag,2))
+//      if (magnitude > maxPartMagnitude) {
+//        maxPartMagnitude = magnitude
+//        maxPart = i;
+//      }
+//      spectrum.append(magnitude) }
 
-    // calculate magnitude squared here, with care
-    var fft = [Float](count:Int(bufferSizePOT / 2), repeatedValue:0.0)
-    let bufferOver2: vDSP_Length = vDSP_Length(bufferSizePOT / 2)
-    vDSP_zvmags(&output, 1, &fft, 1, bufferOver2)
-
-    var spectrum = [Float]()
-    var maxPart = 0;
-    var maxPartMagnitude:Float = 0;
-    var frequencies:[Float] = []
-    for var i=1; i<bufferSizePOT/2; ++i {
-      let imag = output.imagp[i]
-      let real = output.realp[i]
-      frequencies.append(real)
-      let magnitude = sqrt(pow(real,2)+pow(imag,2))
-      if (magnitude > maxPartMagnitude) {
-        maxPartMagnitude = magnitude
-        maxPart = i;
-      }
-      spectrum.append(magnitude) }
-
-    // Release the setup
     vDSP_destroy_fftsetup(fftSetup)
 
-    return Buffer(elements: spectrum, complexElements: output)
+    return Buffer(elements: normalizedMagnitudes, complexElements: output)
   }
 
   // MARK: - Helpers
