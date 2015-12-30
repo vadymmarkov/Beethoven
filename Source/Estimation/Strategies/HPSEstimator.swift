@@ -1,5 +1,3 @@
-import Foundation
-
 public struct HPSEstimator: LocationEstimator {
 
   public var harmonics = 5

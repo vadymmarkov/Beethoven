@@ -16,8 +16,6 @@ struct EstimationFactory {
       estimator = JainsEstimator()
     case .HPS:
       estimator = HPSEstimator()
-    case .MPM:
-      estimator = MPMEstimator()
     default:
       estimator = MaxValueEstimator()
     }

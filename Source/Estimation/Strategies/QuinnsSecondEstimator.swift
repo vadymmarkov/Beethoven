@@ -6,12 +6,12 @@ public struct QuinnsSecondEstimator: LocationEstimator {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(elements)
 
-    guard let complexElements = buffer.complexElements else {
+    guard let realElements = buffer.realElements, imagElements = buffer.imagElements else {
       return maxIndex
     }
 
-    let realp = complexElements.realp
-    let imagp = complexElements.imagp
+    let realp = realElements
+    let imagp = imagElements
 
     let prevIndex = maxIndex == 0 ? maxIndex : maxIndex - 1
     let nextIndex = maxIndex == buffer.count - 1 ? maxIndex : maxIndex + 1

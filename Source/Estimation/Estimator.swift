@@ -1,11 +1,3 @@
-import Foundation
-
-public enum EstimationError: ErrorType {
-  case EmptyBuffer
-  case UnknownMaxIndex
-  case UnknownFrequency
-}
-
 public protocol Estimator {
 
   func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float
@@ -38,20 +30,5 @@ extension Estimator {
     return location >= 0 && location < elements.count
       ? location
       : reserveLocation
-  }
-}
-
-public protocol LocationEstimator: Estimator {
-
-  func estimateLocation(buffer: Buffer) throws -> Int
-}
-
-extension LocationEstimator {
-
-  // MARK: - Default implementation
-
-  public func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
-    let location = try estimateLocation(buffer)
-    return estimateFrequency(sampleRate, location: location, bufferCount: buffer.count)
   }
 }

@@ -31,26 +31,13 @@ public struct FFTTransformer: Transformer {
 
     var normalizedMagnitudes = [Float](count: inputCount, repeatedValue: 0.0)
     vDSP_vsmul(sqrtq(magnitudes), 1, [2.0 / Float(inputCount)],
-    &normalizedMagnitudes, 1, vDSP_Length(inputCount))
+      &normalizedMagnitudes, 1, vDSP_Length(inputCount))
 
-//    var spectrum = [Float]()
-//    var maxPart = 0;
-//    var maxPartMagnitude:Float = 0;
-//    var frequencies:[Float] = []
-//    for var i=1; i<bufferSizePOT/2; ++i {
-//      let imag = output.imagp[i]
-//      let real = output.realp[i]
-//      frequencies.append(real)
-//      let magnitude = sqrt(pow(real,2)+pow(imag,2))
-//      if (magnitude > maxPartMagnitude) {
-//        maxPartMagnitude = magnitude
-//        maxPart = i;
-//      }
-//      spectrum.append(magnitude) }
+    let buffer = Buffer(elements: normalizedMagnitudes)
 
     vDSP_destroy_fftsetup(fftSetup)
 
-    return Buffer(elements: normalizedMagnitudes, complexElements: output)
+    return buffer
   }
 
   // MARK: - Helpers

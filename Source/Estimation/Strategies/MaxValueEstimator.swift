@@ -1,5 +1,3 @@
-import Foundation
-
 public struct MaxValueEstimator: LocationEstimator {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {

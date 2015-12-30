@@ -1,5 +1,3 @@
-import Foundation
-
 extension Array where Element:Comparable {
 
   static func fromUnsafePointer(data: UnsafePointer<Element>, count: Int) -> [Element] {
