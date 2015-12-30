@@ -18,9 +18,10 @@ public struct FFTTransformer: Transformer {
     var transferBuffer = [Float](count: windowSize, repeatedValue: 0)
     var window = [Float](count: windowSize, repeatedValue: 0)
 
-    vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))//0
-    vDSP_vmul(buffer.floatChannelData.memory, 1, window, 1, &transferBuffer, 1, vDSP_Length(windowSize))
-    
+    vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))
+    vDSP_vmul(buffer.floatChannelData.memory, 1, window,
+      1, &transferBuffer, 1, vDSP_Length(windowSize))
+
     vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
       &output, 1, vDSP_Length(inputCount))
 

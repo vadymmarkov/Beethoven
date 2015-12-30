@@ -34,7 +34,9 @@ public class OutputSignalTracker: SignalTracker {
     audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: audioFile.processingFormat)
     audioPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
 
-    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: nil) { buffer, time in
+    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: nil) {
+      buffer, time in
+
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }
