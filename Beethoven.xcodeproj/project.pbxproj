@@ -32,6 +32,13 @@
 		D59CB16C1C345E0A00290B63 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1541C345E0A00290B63 /* Transformer.swift */; };
 		D59CB16D1C345E0A00290B63 /* TransformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1551C345E0A00290B63 /* TransformFactory.swift */; };
 		D59CB16E1C345E0A00290B63 /* TransformStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1561C345E0A00290B63 /* TransformStrategy.swift */; };
+		D59CB1711C34600E00290B63 /* BufferSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1701C34600E00290B63 /* BufferSpec.swift */; };
+		D59CB1741C34610000290B63 /* ArrayExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1731C34610000290B63 /* ArrayExtensionsSpec.swift */; };
+		D59CB1781C3462C300290B63 /* FFTTransformerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1771C3462C300290B63 /* FFTTransformerSpec.swift */; };
+		D59CB17A1C34652200290B63 /* TransformFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1791C34652200290B63 /* TransformFactorySpec.swift */; };
+		D59CB17D1C34665800290B63 /* EstimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB17C1C34665800290B63 /* EstimatorSpec.swift */; };
+		D59CB17F1C34666900290B63 /* EstimationFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB17E1C34666900290B63 /* EstimationFactorySpec.swift */; };
+		D59CB1811C34692E00290B63 /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1801C34692E00290B63 /* ConfigSpec.swift */; };
 		D5A49C751C343EC300427BF8 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C731C343EC300427BF8 /* Quick.framework */; };
 		D5A49C761C343EC300427BF8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C741C343EC300427BF8 /* Nimble.framework */; };
 		D5A49CDE1C3458EA00427BF8 /* Pitchy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */; };
@@ -74,6 +81,13 @@
 		D59CB1541C345E0A00290B63 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		D59CB1551C345E0A00290B63 /* TransformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformFactory.swift; sourceTree = "<group>"; };
 		D59CB1561C345E0A00290B63 /* TransformStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformStrategy.swift; sourceTree = "<group>"; };
+		D59CB1701C34600E00290B63 /* BufferSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferSpec.swift; sourceTree = "<group>"; };
+		D59CB1731C34610000290B63 /* ArrayExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsSpec.swift; sourceTree = "<group>"; };
+		D59CB1771C3462C300290B63 /* FFTTransformerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFTTransformerSpec.swift; sourceTree = "<group>"; };
+		D59CB1791C34652200290B63 /* TransformFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformFactorySpec.swift; sourceTree = "<group>"; };
+		D59CB17C1C34665800290B63 /* EstimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimatorSpec.swift; sourceTree = "<group>"; };
+		D59CB17E1C34666900290B63 /* EstimationFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationFactorySpec.swift; sourceTree = "<group>"; };
+		D59CB1801C34692E00290B63 /* ConfigSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSpec.swift; sourceTree = "<group>"; };
 		D5A49C731C343EC300427BF8 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D5A49C741C343EC300427BF8 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		D5A49CD01C343FD700427BF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -222,6 +236,48 @@
 			path = Strategies;
 			sourceTree = "<group>";
 		};
+		D59CB16F1C345FFE00290B63 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D59CB1701C34600E00290B63 /* BufferSpec.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D59CB1721C3460EB00290B63 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D59CB1731C34610000290B63 /* ArrayExtensionsSpec.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D59CB1751C3462A100290B63 /* Transform */ = {
+			isa = PBXGroup;
+			children = (
+				D59CB1761C3462AD00290B63 /* Strategies */,
+				D59CB1791C34652200290B63 /* TransformFactorySpec.swift */,
+			);
+			path = Transform;
+			sourceTree = "<group>";
+		};
+		D59CB1761C3462AD00290B63 /* Strategies */ = {
+			isa = PBXGroup;
+			children = (
+				D59CB1771C3462C300290B63 /* FFTTransformerSpec.swift */,
+			);
+			path = Strategies;
+			sourceTree = "<group>";
+		};
+		D59CB17B1C34662900290B63 /* Estimation */ = {
+			isa = PBXGroup;
+			children = (
+				D59CB17C1C34665800290B63 /* EstimatorSpec.swift */,
+				D59CB17E1C34666900290B63 /* EstimationFactorySpec.swift */,
+			);
+			path = Estimation;
+			sourceTree = "<group>";
+		};
 		D5A49CCE1C343FD700427BF8 /* BeethovenTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +307,11 @@
 		D5A49CD31C343FD700427BF8 /* Spec */ = {
 			isa = PBXGroup;
 			children = (
+				D59CB16F1C345FFE00290B63 /* Data */,
+				D59CB1721C3460EB00290B63 /* Extensions */,
+				D59CB1751C3462A100290B63 /* Transform */,
+				D59CB17B1C34662900290B63 /* Estimation */,
+				D59CB1801C34692E00290B63 /* ConfigSpec.swift */,
 			);
 			path = Spec;
 			sourceTree = "<group>";
@@ -454,6 +515,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D59CB1811C34692E00290B63 /* ConfigSpec.swift in Sources */,
+				D59CB17A1C34652200290B63 /* TransformFactorySpec.swift in Sources */,
+				D59CB1781C3462C300290B63 /* FFTTransformerSpec.swift in Sources */,
+				D59CB1741C34610000290B63 /* ArrayExtensionsSpec.swift in Sources */,
+				D59CB17D1C34665800290B63 /* EstimatorSpec.swift in Sources */,
+				D59CB17F1C34666900290B63 /* EstimationFactorySpec.swift in Sources */,
+				D59CB1711C34600E00290B63 /* BufferSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +670,7 @@
 		D51575C31C343B77006F8E75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -610,12 +679,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.BeethovenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		D51575C41C343B77006F8E75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
