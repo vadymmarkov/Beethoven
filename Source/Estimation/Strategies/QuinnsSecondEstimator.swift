@@ -1,17 +1,17 @@
 import Foundation
 
-public struct QuinnsSecondEstimator: EstimationAware {
+public struct QuinnsSecondEstimator: LocationEstimator {
 
   public func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(elements)
 
-    guard let complexElements = buffer.complexElements else {
+    guard let realElements = buffer.realElements, imagElements = buffer.imagElements else {
       return maxIndex
     }
 
-    let realp = complexElements.realp
-    let imagp = complexElements.imagp
+    let realp = realElements
+    let imagp = imagElements
 
     let prevIndex = maxIndex == 0 ? maxIndex : maxIndex - 1
     let nextIndex = maxIndex == buffer.count - 1 ? maxIndex : maxIndex + 1
@@ -29,7 +29,9 @@ public struct QuinnsSecondEstimator: EstimationAware {
 
   func tau(x: Float) -> Float {
     let p1 = log(3 * pow(x, 2.0) + 6 * x + 1)
-    let p2 = log((x + 1 - sqrt(2/3)) / (x + 1 + sqrt(2/3)))
+    let part1 = x + 1 - sqrt(2/3)
+    let part2 = x + 1 + sqrt(2/3)
+    let p2 = log(part1 / part2)
     return 1/4 * p1 - sqrt(6)/24 * p2
   }
 }

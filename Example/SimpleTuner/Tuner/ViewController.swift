@@ -33,7 +33,6 @@ class ViewController: UIViewController {
 
   lazy var tuner: PitchEngine = { [unowned self] in
     let pitchEngine = PitchEngine(
-      bufferSize: 4096,
       delegate: self
     )
 
@@ -64,6 +63,7 @@ class ViewController: UIViewController {
   // MARK: - Action methods
 
   func actionButtonDidPress(button: UIButton) {
+    noteLabel.text = "--"
     tuner.active ? tuner.stop() : tuner.start()
     tuner.active
       ? button.setTitle("Stop".uppercaseString, forState: .Normal)
@@ -82,10 +82,15 @@ class ViewController: UIViewController {
   }
 }
 
-// MARK: - TunerDelegate
+// MARK: - PitchEngineDelegate
 
 extension ViewController: PitchEngineDelegate {
-  func pitchEngineDidRecievePitch(tuner: PitchEngine, pitch: Pitch) {
+
+  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch) {
     noteLabel.text = pitch.note.string
+  }
+
+  func pitchEngineDidRecieveError(pitchEngine: PitchEngine, error: ErrorType) {
+    print(error)
   }
 }

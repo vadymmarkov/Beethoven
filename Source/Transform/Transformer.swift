@@ -1,7 +1,7 @@
 import Foundation
 import AVFoundation
 
-public protocol TransformAware {
+public protocol Transformer {
 
   func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer
 }

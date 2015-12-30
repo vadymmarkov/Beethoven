@@ -1,18 +1,18 @@
 import AVFoundation
 
-public class OutputSignalTracker: SignalTrackingAware {
+public class OutputSignalTracker: SignalTracker {
 
   public let bufferSize: AVAudioFrameCount
   public let audioURL: NSURL
-  public weak var delegate: SignalTrackingDelegate?
+  public weak var delegate: SignalTrackerDelegate?
 
-  private let audioEngine = AVAudioEngine()
-  private var audioPlayer = AVAudioPlayerNode()
+  private var audioEngine: AVAudioEngine!
+  private var audioPlayer: AVAudioPlayerNode!
   private let bus = 0
 
   // MARK: - Initialization
 
-  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackingDelegate? = nil) {
+  public required init(audioURL: NSURL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
     self.audioURL = audioURL
     self.bufferSize = bufferSize
     self.delegate = delegate
@@ -24,16 +24,17 @@ public class OutputSignalTracker: SignalTrackingAware {
     let session = AVAudioSession.sharedInstance()
 
     try session.setCategory(AVAudioSessionCategoryPlayback)
-    try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+
+    audioEngine = AVAudioEngine()
+    audioPlayer = AVAudioPlayerNode()
 
     let audioFile = try AVAudioFile(forReading: audioURL)
-    let outputFormat = audioEngine.outputNode.outputFormatForBus(bus)
 
     audioEngine.attachNode(audioPlayer)
-    audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: nil)
+    audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: audioFile.processingFormat)
     audioPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
 
-    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: outputFormat) { buffer, time in
+    audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: nil) { buffer, time in
       dispatch_async(dispatch_get_main_queue()) {
         self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }
@@ -49,5 +50,7 @@ public class OutputSignalTracker: SignalTrackingAware {
     audioPlayer.stop()
     audioEngine.stop()
     audioEngine.reset()
+    audioEngine = nil
+    audioPlayer = nil
   }
 }

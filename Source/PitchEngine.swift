@@ -21,9 +21,10 @@ public class PitchEngine {
   public var active = false
   public weak var delegate: PitchEngineDelegate?
 
-  private var transformer: TransformAware
-  private var estimator: EstimationAware
-  private var signalTracker: SignalTrackingAware
+  private var transformer: Transformer
+  private var estimator: Estimator
+  private var signalTracker: SignalTracker
+  private var queue: dispatch_queue_t
 
   public var mode: Mode {
     return signalTracker is InputSignalTracker ? .Record : .Playback
@@ -31,7 +32,7 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(config: Config, delegate: PitchEngineDelegate? = nil) {
+  public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
     transformer = TransformFactory.create(config.transformStrategy)
     estimator = EstimationFactory.create(config.estimationStrategy)
@@ -41,7 +42,9 @@ public class PitchEngine {
     } else {
       signalTracker = InputSignalTracker(bufferSize: bufferSize)
     }
-    
+
+    queue = dispatch_queue_create("BeethovenQueue", DISPATCH_QUEUE_SERIAL)
+
     signalTracker.delegate = self
 
     self.delegate = delegate
@@ -102,11 +105,11 @@ public class PitchEngine {
 
 // MARK: - SignalTrackingDelegate
 
-extension PitchEngine: SignalTrackingDelegate {
+extension PitchEngine: SignalTrackerDelegate {
 
-  public func signalTracker(signalTracker: SignalTrackingAware,
+  public func signalTracker(signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
-      dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [weak self] in
+      dispatch_async(queue) { [weak self] in
         guard let weakSelf = self else { return }
 
         let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
@@ -116,9 +119,13 @@ extension PitchEngine: SignalTrackingDelegate {
             buffer: transformedBuffer)
           let pitch = Pitch(frequency: Double(frequency))
 
-          weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+          dispatch_async(dispatch_get_main_queue()) {
+            weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+          }
         } catch {
-          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+          dispatch_async(dispatch_get_main_queue()) {
+            weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+          }
         }
     }
   }
