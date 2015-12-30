@@ -5,7 +5,7 @@ extension Array where Element:Comparable {
     return Array(buffer)
   }
 
-  var maxIndex : Int? {
+  var maxIndex: Int? {
     return self.enumerate().maxElement({$1.element > $0.element})?.index
   }
 }

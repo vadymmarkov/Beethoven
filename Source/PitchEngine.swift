@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import AVFoundation
 import Pitchy
 
@@ -93,7 +93,7 @@ public class PitchEngine {
     active = false
   }
 
-  private func activate() {
+  func activate() {
     do {
       try signalTracker.start()
       active = true
@@ -117,7 +117,7 @@ extension PitchEngine: SignalTrackerDelegate {
         do {
           let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
             buffer: transformedBuffer)
-          let pitch = Pitch(frequency: Double(frequency))
+          let pitch = try Pitch(frequency: Double(frequency))
 
           dispatch_async(dispatch_get_main_queue()) {
             weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
