@@ -72,6 +72,11 @@ class ViewController: UIViewController {
     title = "Pitchy".uppercaseString
     view.backgroundColor = UIColor.hex("181717")
 
+
+    //let gradientLayer = [UIColor.hex("224AAA"), UIColor.hex("3DAFAE")].gradient()
+    //gradientLayer.frame = view.frame
+    //view.layer.insertSublayer(gradientLayer, atIndex: 0)
+
     [noteLabel, actionButton, leftOffsetLabel, rightOffsetLabel].forEach {
       view.addSubview($0)
     }
@@ -130,6 +135,11 @@ extension ViewController: PitchEngineDelegate {
 
   func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch) {
     noteLabel.text = pitch.note.string
+
+    let offsetPercentage = pitch.closestOffset.percentage
+    let label = offsetPercentage > 0 ? rightOffsetLabel : leftOffsetLabel
+
+    label.text = "\(offsetPercentage)%"
   }
 
   func pitchEngineDidRecieveError(pitchEngine: PitchEngine, error: ErrorType) {
