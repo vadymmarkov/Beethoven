@@ -1,21 +1,46 @@
 import UIKit
-import Hue
 import Beethoven
 import Pitchy
+import Hue
+import Cartography
 
 class ViewController: UIViewController {
 
   lazy var noteLabel: UILabel = {
     let label = UILabel()
-    label.text = "--"
-    label.font = UIFont(name: "HelveticaNeue-Medium", size: 30)!
+    label.text = "A4"
+    label.font = UIFont.boldSystemFontOfSize(70)
     label.textColor = UIColor.hex("DCD9DB")
     label.textAlignment = .Center
     label.numberOfLines = 0
     label.sizeToFit()
 
     return label
-    }()
+  }()
+
+  lazy var leftOffsetLabel: UILabel = {
+    let label = UILabel()
+    label.text = "+50%"
+    label.font = UIFont.systemFontOfSize(24)
+    label.textColor = UIColor.whiteColor()
+    label.textAlignment = .Center
+    label.numberOfLines = 0
+    label.sizeToFit()
+
+    return label
+  }()
+
+  lazy var rightOffsetLabel: UILabel = {
+    let label = UILabel()
+    label.text = "-50%"
+    label.font = UIFont.systemFontOfSize(24)
+    label.textColor = UIColor.whiteColor()
+    label.textAlignment = .Center
+    label.numberOfLines = 0
+    label.sizeToFit()
+
+    return label
+  }()
 
   lazy var actionButton: UIButton = { [unowned self] in
     let button = UIButton(type: .System)
@@ -29,7 +54,7 @@ class ViewController: UIViewController {
     button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 18)!
 
     return button
-    }()
+  }()
 
   lazy var tuner: PitchEngine = { [unowned self] in
     let pitchEngine = PitchEngine(
@@ -37,7 +62,7 @@ class ViewController: UIViewController {
     )
 
     return pitchEngine
-    }()
+  }()
 
   // MARK: - View Lifecycle
 
@@ -47,15 +72,9 @@ class ViewController: UIViewController {
     title = "Pitchy".uppercaseString
     view.backgroundColor = UIColor.hex("181717")
 
-    [noteLabel, actionButton].forEach {
+    [noteLabel, actionButton, leftOffsetLabel, rightOffsetLabel].forEach {
       view.addSubview($0)
     }
-
-    setupLayout()
-  }
-
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
 
     setupLayout()
   }
@@ -70,15 +89,38 @@ class ViewController: UIViewController {
       : button.setTitle("Start".uppercaseString, forState: .Normal)
   }
 
-  // MARK: - Configuration
+  // MARK: - Constrains
 
   func setupLayout() {
     let totalSize = UIScreen.mainScreen().bounds
 
-    actionButton.frame = CGRect(x: 50, y: (totalSize.height - 120) / 2,
-      width: totalSize.width - 100, height: 50)
-    noteLabel.frame = CGRect(x: 0, y: actionButton.frame.minY - 140,
-      width: totalSize.width, height: 40)
+    constrain(actionButton, noteLabel) { actionButton, noteLabel in
+      let superview = actionButton.superview!
+
+      actionButton.top == superview.top + (totalSize.height - 100) / 2
+      actionButton.centerX == superview.centerX
+      actionButton.width == 280
+      actionButton.height == 50
+
+      noteLabel.top == actionButton.top - 180
+      noteLabel.centerX == superview.centerX
+      noteLabel.width == 100
+      noteLabel.height == 80
+    }
+
+    constrain(noteLabel, leftOffsetLabel, rightOffsetLabel) {
+      noteLabel, leftOffsetLabel, rightOffsetLabel in
+
+      leftOffsetLabel.top == noteLabel.top
+      leftOffsetLabel.right == noteLabel.left - 25
+      leftOffsetLabel.width == 70
+      leftOffsetLabel.height == 80
+
+      rightOffsetLabel.top == noteLabel.top
+      rightOffsetLabel.left == noteLabel.right + 25
+      rightOffsetLabel.width == 70
+      rightOffsetLabel.height == 80
+    }
   }
 }
 

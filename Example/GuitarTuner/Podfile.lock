@@ -1,11 +1,13 @@
 PODS:
   - Beethoven (1.0.0):
     - Pitchy
+  - Cartography (0.6.0)
   - Hue (0.1.0)
   - Pitchy (1.0.0)
 
 DEPENDENCIES:
   - Beethoven (from `../../`)
+  - Cartography
   - Hue (from `https://github.com/hyperoslo/Hue`)
   - Pitchy (from `https://github.com/vadymmarkov/Pitchy`)
 
@@ -27,6 +29,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Beethoven: 33b9add13299ea95e84bce44900055ac3c232fe0
+  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   Hue: 236ca79bd7426ab735bf0436589b8e505611a3fa
   Pitchy: 4e8302612409d07a27c5083f0bbc2a4bd376f1cc
 
