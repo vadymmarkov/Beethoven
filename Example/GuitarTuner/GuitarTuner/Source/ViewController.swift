@@ -1,6 +1,6 @@
 import UIKit
-import Hex
-import Tuner
+import Hue
+import Beethoven
 import Pitchy
 
 class ViewController: UIViewController {
@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     let label = UILabel()
     label.text = "--"
     label.font = UIFont(name: "HelveticaNeue-Medium", size: 30)!
-    label.textColor = UIColor(hex: "DCD9DB")
+    label.textColor = UIColor.hex("DCD9DB")
     label.textAlignment = .Center
     label.numberOfLines = 0
     label.sizeToFit()
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     let button = UIButton(type: .System)
     button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     button.layer.cornerRadius = 20
-    button.backgroundColor = UIColor(hex: "E13C6C")
+    button.backgroundColor = UIColor.hex("E13C6C")
 
     button.addTarget(self, action: "actionButtonDidPress:",
       forControlEvents: .TouchUpInside)
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
 
     title = "Pitchy".uppercaseString
-    view.backgroundColor = UIColor(hex: "181717")
+    view.backgroundColor = UIColor.hex("181717")
 
     [noteLabel, actionButton].forEach {
       view.addSubview($0)

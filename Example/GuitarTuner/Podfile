@@ -2,6 +2,6 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-pod 'Hex'
-pod 'Tuner', path: '../../'
+pod 'Beethoven', path: '../../'
 pod 'Pitchy', git: 'https://github.com/vadymmarkov/Pitchy'
+pod 'Hue', git: 'https://github.com/hyperoslo/Hue'

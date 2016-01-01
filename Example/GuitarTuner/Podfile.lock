@@ -1,28 +1,33 @@
 PODS:
-  - Hex (3.0.0)
-  - Pitchy (0.1.0)
-  - Tuner (0.1.0):
+  - Beethoven (1.0.0):
     - Pitchy
+  - Hue (0.1.0)
+  - Pitchy (1.0.0)
 
 DEPENDENCIES:
-  - Hex
+  - Beethoven (from `../../`)
+  - Hue (from `https://github.com/hyperoslo/Hue`)
   - Pitchy (from `https://github.com/vadymmarkov/Pitchy`)
-  - Tuner (from `../../`)
 
 EXTERNAL SOURCES:
+  Beethoven:
+    :path: ../../
+  Hue:
+    :git: https://github.com/hyperoslo/Hue
   Pitchy:
     :git: https://github.com/vadymmarkov/Pitchy
-  Tuner:
-    :path: ../../
 
 CHECKOUT OPTIONS:
+  Hue:
+    :commit: 1fcddfad166e60e5af3d5d3496f3e5dbceaf474c
+    :git: https://github.com/hyperoslo/Hue
   Pitchy:
-    :commit: d88e2a8084c2aa59db6ee0fc17eb1cc100f2584d
+    :commit: 8c88ce2cf49dea638cd04491216f80303966da2f
     :git: https://github.com/vadymmarkov/Pitchy
 
 SPEC CHECKSUMS:
-  Hex: ee430da9c4412d9196366ae5327f279021dc03eb
-  Pitchy: a41a236f8bf01ac97f6790d1267c154ca4e86688
-  Tuner: b8339bf332388aeaafeed03283b59679b93d9864
+  Beethoven: 33b9add13299ea95e84bce44900055ac3c232fe0
+  Hue: 236ca79bd7426ab735bf0436589b8e505611a3fa
+  Pitchy: 4e8302612409d07a27c5083f0bbc2a4bd376f1cc
 
 COCOAPODS: 0.39.0

@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		3F98FBD1DC50E0F898E6D571 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C4BE8A74712506927C1A5A /* Pods.framework */; };
-		D57D41011BE95A350026B005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D41001BE95A350026B005 /* AppDelegate.swift */; };
-		D57D41031BE95A350026B005 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D41021BE95A350026B005 /* ViewController.swift */; };
-		D57D41081BE95A350026B005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D57D41071BE95A350026B005 /* Assets.xcassets */; };
-		D57D410B1BE95A350026B005 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57D41091BE95A350026B005 /* LaunchScreen.storyboard */; };
+		D51729C71C370D9F0077E8B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51729C31C370D9F0077E8B2 /* AppDelegate.swift */; };
+		D51729C81C370D9F0077E8B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51729C41C370D9F0077E8B2 /* ViewController.swift */; };
+		D51729C91C370D9F0077E8B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51729C61C370D9F0077E8B2 /* Assets.xcassets */; };
+		D52829B91C370BEE00682061 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D52829B31C370BEE00682061 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04C4BE8A74712506927C1A5A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE5E2252A207B0034BD027E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D57D40FD1BE95A350026B005 /* SimpleTuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleTuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D57D41001BE95A350026B005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D57D41021BE95A350026B005 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D57D41071BE95A350026B005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D57D410A1BE95A350026B005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D57D410C1BE95A350026B005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D51729C31C370D9F0077E8B2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D51729C41C370D9F0077E8B2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D51729C61C370D9F0077E8B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D52829B41C370BEE00682061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D52829B51C370BEE00682061 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D57D40FD1BE95A350026B005 /* GuitarTuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuitarTuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8F00EA6973AC67496CDA01 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,10 +55,46 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D51729C11C370D8F0077E8B2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D52829B31C370BEE00682061 /* LaunchScreen.storyboard */,
+				D52829B51C370BEE00682061 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D51729C21C370D9F0077E8B2 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D51729C31C370D9F0077E8B2 /* AppDelegate.swift */,
+				D51729C41C370D9F0077E8B2 /* ViewController.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D51729C51C370D9F0077E8B2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D51729C61C370D9F0077E8B2 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D52829B01C370BEE00682061 /* GuitarTuner */ = {
+			isa = PBXGroup;
+			children = (
+				D51729C21C370D9F0077E8B2 /* Source */,
+				D51729C51C370D9F0077E8B2 /* Resources */,
+				D51729C11C370D8F0077E8B2 /* Supporting Files */,
+			);
+			path = GuitarTuner;
+			sourceTree = "<group>";
+		};
 		D57D40F41BE95A350026B005 = {
 			isa = PBXGroup;
 			children = (
-				D57D40FF1BE95A350026B005 /* Tuner */,
+				D52829B01C370BEE00682061 /* GuitarTuner */,
 				D57D40FE1BE95A350026B005 /* Products */,
 				B1F81FE7C1C2AAC75147905E /* Pods */,
 				7FCBD55DDFAE042D34748647 /* Frameworks */,
@@ -68,29 +104,17 @@
 		D57D40FE1BE95A350026B005 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D57D40FD1BE95A350026B005 /* SimpleTuner.app */,
+				D57D40FD1BE95A350026B005 /* GuitarTuner.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D57D40FF1BE95A350026B005 /* Tuner */ = {
-			isa = PBXGroup;
-			children = (
-				D57D41001BE95A350026B005 /* AppDelegate.swift */,
-				D57D41021BE95A350026B005 /* ViewController.swift */,
-				D57D41071BE95A350026B005 /* Assets.xcassets */,
-				D57D41091BE95A350026B005 /* LaunchScreen.storyboard */,
-				D57D410C1BE95A350026B005 /* Info.plist */,
-			);
-			path = Tuner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D57D40FC1BE95A350026B005 /* SimpleTuner */ = {
+		D57D40FC1BE95A350026B005 /* GuitarTuner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "SimpleTuner" */;
+			buildConfigurationList = D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "GuitarTuner" */;
 			buildPhases = (
 				66A9FD38F43B817419D16E65 /* Check Pods Manifest.lock */,
 				D57D40F91BE95A350026B005 /* Sources */,
@@ -103,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = SimpleTuner;
+			name = GuitarTuner;
 			productName = Tuner;
-			productReference = D57D40FD1BE95A350026B005 /* SimpleTuner.app */;
+			productReference = D57D40FD1BE95A350026B005 /* GuitarTuner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +146,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "SimpleTuner" */;
+			buildConfigurationList = D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "GuitarTuner" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -135,7 +159,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D57D40FC1BE95A350026B005 /* SimpleTuner */,
+				D57D40FC1BE95A350026B005 /* GuitarTuner */,
 			);
 		};
 /* End PBXProject section */
@@ -145,8 +169,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D57D410B1BE95A350026B005 /* LaunchScreen.storyboard in Resources */,
-				D57D41081BE95A350026B005 /* Assets.xcassets in Resources */,
+				D51729C91C370D9F0077E8B2 /* Assets.xcassets in Resources */,
+				D52829B91C370BEE00682061 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,18 +229,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D57D41031BE95A350026B005 /* ViewController.swift in Sources */,
-				D57D41011BE95A350026B005 /* AppDelegate.swift in Sources */,
+				D51729C81C370D9F0077E8B2 /* ViewController.swift in Sources */,
+				D51729C71C370D9F0077E8B2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D57D41091BE95A350026B005 /* LaunchScreen.storyboard */ = {
+		D52829B31C370BEE00682061 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D57D410A1BE95A350026B005 /* Base */,
+				D52829B41C370BEE00682061 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -310,10 +334,10 @@
 			baseConfigurationReference = 8EE5E2252A207B0034BD027E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Tuner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GuitarTuner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.Tuner;
-				PRODUCT_NAME = SimpleTuner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.GuitarTuner;
+				PRODUCT_NAME = GuitarTuner;
 			};
 			name = Debug;
 		};
@@ -322,17 +346,17 @@
 			baseConfigurationReference = DD8F00EA6973AC67496CDA01 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Tuner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GuitarTuner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.Tuner;
-				PRODUCT_NAME = SimpleTuner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.GuitarTuner;
+				PRODUCT_NAME = GuitarTuner;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "SimpleTuner" */ = {
+		D57D40F81BE95A350026B005 /* Build configuration list for PBXProject "GuitarTuner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D57D410D1BE95A350026B005 /* Debug */,
@@ -341,7 +365,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "SimpleTuner" */ = {
+		D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "GuitarTuner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D57D41101BE95A350026B005 /* Debug */,
