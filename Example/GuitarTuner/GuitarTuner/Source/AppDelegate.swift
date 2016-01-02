@@ -1,5 +1,5 @@
 import UIKit
-import Hex
+import Hue
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -12,25 +12,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
   lazy var viewController: ViewController = {
-    return ViewController()
+    let controller = ViewController()
+    return controller
     }()
 
-  func application(
-    application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-      window = UIWindow(frame: UIScreen.mainScreen().bounds)
-      window?.rootViewController = navigationController
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window?.rootViewController = navigationController
 
-      applyStyles()
+    applyStyles()
 
-      window?.makeKeyAndVisible()
+    window?.makeKeyAndVisible()
 
-      return true
+    return true
   }
 
   func applyStyles() {
     let navigationBar = UINavigationBar.appearance()
-    navigationBar.barTintColor = UIColor(hex: "111011")
+    navigationBar.barStyle = .Black
+    navigationBar.barTintColor = UIColor.hex("111011")
     navigationBar.translucent = false
     navigationBar.shadowImage = UIImage()
     navigationBar.titleTextAttributes = [
