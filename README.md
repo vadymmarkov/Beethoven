@@ -25,6 +25,13 @@ it, simply add the following line to your Podfile:
 pod 'Beethoven'
 ```
 
+**Beethoven** is also available through [Carthage](https://github.com/Carthage/Carthage).
+To install just write into your Cartfile:
+
+```ruby
+github "vadymmarkov/Beethoven"
+```
+
 ## Author
 
 Vadym Markov, markov.vadym@gmail.com
