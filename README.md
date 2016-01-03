@@ -28,13 +28,13 @@
 ## Description
 
 <img src="https://github.com/vadymmarkov/Beethoven/blob/master/Resources/BeethovenIcon.png" width="195" height="199" alt="Beethoven Icon" align="right" />
-**Beethoven** is an audio processing pure Swift library that provides an
-easy-to-use interface to solve an age-old problem of pitch detection os musical
+**Beethoven** is an audio processing Swift library that provides an
+easy-to-use interface to solve an age-old problem of pitch detection of musical
 signals. You can read more about this subject on
 [Wikipedia](https://en.wikipedia.org/wiki/Pitch_detection_algorithm).
 
 The basic workflow is to get the audio buffer from the input/output source,
-transform it to a format applicable for processing and apply one of pitch
+transform it to a format applicable for processing and apply one of the pitch
 estimation algorithms to find the fundamental frequency. For the end user it
 comes down to choosing transform strategy, estimation algorithm and
 implementation of delegate methods.
@@ -62,8 +62,8 @@ convert `AVAudioPCMBuffer` object to the array of floating numbers (with
 
 ### Configuration
 Configure buffer size, transform strategy and estimation strategy with the
-`Config` struct that could be used in initialization of `PitchEngine`. For the
-case when a signal needs to be tracked from the device output there is
+`Config` struct that could be used in the initialization of `PitchEngine`. For
+the case when a signal needs to be tracked from the device output there is
 `audioURL` parameter which is the URL to your audio file.
 
 ```swift
@@ -90,7 +90,8 @@ public init(bufferSize: AVAudioFrameCount = 4096,
     audioURL: NSURL? = nil)
 ```
 
-It means that `Config` also could be instantiated without any parameters:
+It means that `Config` could also be instantiated without any parameters:
+
 ```swift
 let config = Config()
 ```
@@ -142,7 +143,7 @@ internal `Buffer` struct which also has optional `realElements` and
 `imagElements` properties that could be useful in the further calculations.
 
 There are 2 types of transformations at the moment:
-- [FFT](https://en.wikipedia.org/wiki/Fast_Fourier_transform)
+- FFT [Fast Fourier transform](https://en.wikipedia.org/wiki/Fast_Fourier_transform)
 - `Simple` conversion to use raw float channel data
 
 A new transform strategy could be easily added by implementing of `Transformer`
@@ -195,8 +196,7 @@ transients, low and high frequencies. Also it's a real-time processing, so we
 are not protected against different kind of errors. For this purpose there is a
 range of error types that should be handled properly.
 
-*Signal tracking errors*
-**Beethoven** works with `AVAudioEngine` which could also produce errors.
+**Signal tracking errors**
 
 ```swift
 public enum Error: ErrorType {
@@ -204,9 +204,10 @@ public enum Error: ErrorType {
 }
 ```
 
-*Record permission errors*
+**Record permission errors**
+
 `PitchEngine` asks for `AVAudioSessionRecordPermission` on start, but if
-permission is denied it produces the corresponding error.
+permission is denied it produces the corresponding error:
 
 ```swift
 public enum Error: ErrorType {
@@ -214,8 +215,9 @@ public enum Error: ErrorType {
 }
 ```
 
-*Pitch estimation errors*
-Some errors could occur during the process of pitch estimation.
+**Pitch estimation errors**
+
+Some errors could occur during the process of pitch estimation:
 
 ```swift
 public enum EstimationError: ErrorType {
@@ -227,6 +229,9 @@ public enum EstimationError: ErrorType {
 ```
 
 ## Pitch detection specifics
+
+**Beethoven** performs a pitch detection of a monophonic recording only at the
+moment.
 
 **Based on Stackoverflow** [answer](http://stackoverflow.com/a/14503090):
 
@@ -272,7 +277,7 @@ github "vadymmarkov/Beethoven"
 ## Components
 
 **Beethoven** uses [Pitchy](https://github.com/vadymmarkov/Pitchy) library to
-get a music pitch from a frequency.
+get a music pitch with note, octave and offsets from a specified frequency.
 
 ## Author
 
@@ -285,4 +290,5 @@ file for more info.
 
 ## License
 
-**Beethoven** is available under the MIT license. See the LICENSE file for more info.
+**Beethoven** is available under the MIT license. See the [LICENSE](https://github.com/vadymmarkov/Beethoven/blob/master/LICENSE.md) file
+for more info.
