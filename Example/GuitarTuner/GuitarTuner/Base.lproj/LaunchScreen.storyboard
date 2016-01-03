@@ -15,7 +15,24 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guitar Tuner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yx6-Vw-2fN">
+                                <rect key="frame" x="140" y="266" width="320" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="XdX-Vb-kEP"/>
+                                    <constraint firstAttribute="width" constant="320" id="h6d-VZ-jQ6"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="rqR-TE-cVa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23921568627450979" green="0.68627450980392157" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="yx6-Vw-2fN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="EGO-YN-xyv"/>
+                            <constraint firstItem="yx6-Vw-2fN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WVF-H8-99H"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
