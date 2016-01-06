@@ -6,28 +6,6 @@
 [![License](https://img.shields.io/cocoapods/l/Beethoven.svg?style=flat)](http://cocoadocs.org/docsets/Beethoven)
 [![Platform](https://img.shields.io/cocoapods/p/Beethoven.svg?style=flat)](http://cocoadocs.org/docsets/Beethoven)
 
-## Table of Contents
-
-* [Description](#description)
-* [Key features](#key-features)
-* [Usage](#usage)
-  * [Configuration](#configuration)
-  * [Pitch engine](#pitch-engine)
-  * [Signal tracking](#signal-tracking)
-  * [Transform](#transform)
-  * [Estimation](#estimation)
-  * [Error handling](#error-handling)
-* [Pitch detection specifics](#pitch-detection-specifics)
-* [Examples](#examples)
-* [Installation](#installation)
-* [Components](#components)
-* [Author](#author)
-* [Contributing](#contributing)
-* [License](#license)
-
-## Description
-
-<img src="https://github.com/vadymmarkov/Beethoven/blob/master/Resources/BeethovenIcon.png" width="195" height="199" alt="Beethoven Icon" align="right" />
 **Beethoven** is an audio processing Swift library that provides an
 easy-to-use interface to solve an age-old problem of pitch detection of musical
 signals. You can read more about this subject on
@@ -48,6 +26,26 @@ detection scenarios, musical instruments and human voice. Current
 implementations could also be not perfect and obviously there is a place for
 improvements. It means that [contribution](#contributing) is very important
 and more than welcome!
+
+## Table of Contents
+
+<img src="https://github.com/vadymmarkov/Beethoven/blob/master/Resources/BeethovenIcon.png" width="195" height="199" alt="Beethoven Icon" align="right" />
+
+* [Key features](#key-features)
+* [Usage](#usage)
+  * [Configuration](#configuration)
+  * [Pitch engine](#pitch-engine)
+  * [Signal tracking](#signal-tracking)
+  * [Transform](#transform)
+  * [Estimation](#estimation)
+  * [Error handling](#error-handling)
+* [Pitch detection specifics](#pitch-detection-specifics)
+* [Examples](#examples)
+* [Installation](#installation)
+* [Components](#components)
+* [Author](#author)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Key features
 
