@@ -6,6 +6,24 @@ public class InputSignalTracker: SignalTracker {
     case InputNodeMissing
   }
 
+  var audioChannel:AVCaptureAudioChannel?
+  let captureSession = AVCaptureSession()
+
+  public var levelThreshold:Float?
+
+  private var signalPeakLevel:Float {
+    get {
+      return audioChannel?.peakHoldLevel ?? 0.0
+    }
+  }
+
+  private var signalAverageLevel:Float {
+    get {
+      return audioChannel?.averagePowerLevel ?? 0.0
+    }
+  }
+
+
   public let bufferSize: AVAudioFrameCount
   public weak var delegate: SignalTrackerDelegate?
 
@@ -18,6 +36,8 @@ public class InputSignalTracker: SignalTracker {
   public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
+
+    setupAudio()
   }
 
   // MARK: - Tracking
@@ -35,10 +55,17 @@ public class InputSignalTracker: SignalTracker {
     let format = inputNode.inputFormatForBus(bus)
 
     inputNode.installTapOnBus(bus, bufferSize: bufferSize, format: format) { buffer, time in
-      dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
+
+      let levelThreshold = self.levelThreshold ?? -1000000.0
+
+      if self.signalAverageLevel > levelThreshold {
+        dispatch_async(dispatch_get_main_queue()) {
+          self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
+        }
       }
     }
+
+    captureSession.startRunning()
 
     audioEngine.prepare()
     try audioEngine.start()
@@ -48,5 +75,34 @@ public class InputSignalTracker: SignalTracker {
     audioEngine.stop()
     audioEngine.reset()
     audioEngine = nil
+    captureSession.stopRunning()
   }
+
+
+
+  func setupAudio() {
+
+    do {
+      let audioDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+
+      let audioCaptureInput = try AVCaptureDeviceInput(device: audioDevice)
+
+      captureSession.addInput(audioCaptureInput)
+
+      let audioOutput = AVCaptureAudioDataOutput()
+
+      captureSession.addOutput(audioOutput)
+
+      let connection = audioOutput.connections[0] as! AVCaptureConnection
+
+      let firstAudioChannel = connection.audioChannels[0] as! AVCaptureAudioChannel
+
+      audioChannel = firstAudioChannel
+
+    } catch let err as NSError {
+      //
+    }
+  }
+
+
 }
