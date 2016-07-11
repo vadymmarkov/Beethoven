@@ -12,7 +12,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Beethoven:
-    :path: ../../
+    :path: "../../"
   Hue:
     :git: https://github.com/hyperoslo/Hue
 
@@ -27,4 +27,6 @@ SPEC CHECKSUMS:
   Hue: 236ca79bd7426ab735bf0436589b8e505611a3fa
   Pitchy: 4e8302612409d07a27c5083f0bbc2a4bd376f1cc
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 547bb5d70536de8b9654a7d4c659da98f162c231
+
+COCOAPODS: 1.0.0.beta.8
