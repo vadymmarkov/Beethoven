@@ -36,7 +36,7 @@ class ViewController: UIViewController {
     button.titleLabel?.font = UIFont.systemFontOfSize(20)
     button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
 
-    button.addTarget(self, action: "actionButtonDidPress:",
+    button.addTarget(self, action: #selector(ViewController.actionButtonDidPress(_:)),
       forControlEvents: .TouchUpInside)
     button.setTitle("Start".uppercaseString, forState: .Normal)
 
