@@ -19,10 +19,6 @@ public class PitchEngine {
 
   public let bufferSize: AVAudioFrameCount
   public var active = false
-  public var levelThreshold:Float? {
-    get { return self.signalTracker.levelThreshold }
-    set { self.signalTracker.levelThreshold = newValue }
-  }
   public weak var delegate: PitchEngineDelegate?
 
   private var transformer: Transformer
@@ -32,6 +28,15 @@ public class PitchEngine {
 
   public var mode: Mode {
     return signalTracker is InputSignalTracker ? .Record : .Playback
+  }
+
+  public var levelThreshold:Float? {
+    get {
+      return self.signalTracker.levelThreshold
+    }
+    set {
+      self.signalTracker.levelThreshold = newValue
+    }
   }
 
   // MARK: - Initialization
@@ -115,15 +120,6 @@ extension PitchEngine: SignalTrackerDelegate {
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       dispatch_async(queue) { [weak self] in
         guard let weakSelf = self else { return }
-
-//        var signalPeakLevel:Float?
-//        var signalAverageLevel:Float?
-//
-//        if let inputSignalTrack = signalTracker as? InputSignalTracker {
-//            signalPeakLevel = inputSignalTrack.signalPeakLevel
-//            signalAverageLevel = inputSignalTrack.signalAverageLevel
-//            NSLog("peak : \(signalPeakLevel) - average : \(signalAverageLevel)")
-//        }
 
         let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
 

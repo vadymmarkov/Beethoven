@@ -10,7 +10,6 @@ public protocol SignalTrackerDelegate: class {
 public protocol SignalTracker: class {
 
   var levelThreshold:Float? { get set }
-
   weak var delegate: SignalTrackerDelegate? { get set }
 
   func start() throws
