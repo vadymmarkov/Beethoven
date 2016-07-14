@@ -14,8 +14,8 @@ public struct HPSEstimator: LocationEstimator {
 
     var location = minIndex
 
-    for var j = minIndex; j <= maxHIndex; j++ {
-      for var i = 1; i <= harmonics; i++ {
+    for j in minIndex...maxHIndex {
+      for i in 1...harmonics {
         spectrum[j] *= spectrum[j * i]
       }
 
@@ -27,7 +27,7 @@ public struct HPSEstimator: LocationEstimator {
     var max2 = minIndex
     let maxsearch = location * 3 / 4
 
-    for var i = minIndex + 1; i < maxsearch; i++ {
+    for i in (minIndex + 1)..<maxsearch {
       if spectrum[i] > spectrum[max2] {
         max2 = i
       }
