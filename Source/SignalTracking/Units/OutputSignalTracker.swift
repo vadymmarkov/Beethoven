@@ -5,8 +5,7 @@ public class OutputSignalTracker: SignalTracker {
   public let bufferSize: AVAudioFrameCount
   public let audioURL: NSURL
   public weak var delegate: SignalTrackerDelegate?
-
-  public var levelThreshold:Float?
+  public var levelThreshold: Float?
 
   private var audioEngine: AVAudioEngine!
   private var audioPlayer: AVAudioPlayerNode!
@@ -35,7 +34,6 @@ public class OutputSignalTracker: SignalTracker {
     audioEngine.attachNode(audioPlayer)
     audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: audioFile.processingFormat)
     audioPlayer.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-
 
     audioEngine.outputNode.installTapOnBus(bus, bufferSize: bufferSize, format: nil) {
       buffer, time in
