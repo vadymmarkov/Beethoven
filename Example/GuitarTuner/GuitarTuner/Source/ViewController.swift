@@ -45,6 +45,7 @@ class ViewController: UIViewController {
 
   lazy var pitchEngine: PitchEngine = { [unowned self] in
     let pitchEngine = PitchEngine(delegate: self)
+    pitchEngine.levelThreshold = -30.0
     return pitchEngine
     }()
 
@@ -134,6 +135,8 @@ extension ViewController: PitchEngineDelegate {
 
     let offsetPercentage = pitch.closestOffset.percentage
     let absOffsetPercentage = abs(offsetPercentage)
+
+    NSLog("pitch : \(pitch.note.string) - percentage : \(offsetPercentage)")
 
     guard absOffsetPercentage > 1.0 else {
       return

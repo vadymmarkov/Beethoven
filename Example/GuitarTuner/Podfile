@@ -2,6 +2,11 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-pod 'Beethoven', path: '../../'
-pod 'Hue', git: 'https://github.com/hyperoslo/Hue'
-pod 'Cartography'
+target 'GuitarTuner' do
+
+  pod 'Beethoven', path: '../../'
+  pod 'Hue', git: 'https://github.com/hyperoslo/Hue'
+  pod 'Cartography'
+
+end
+
