@@ -118,12 +118,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D57D410F1BE95A350026B005 /* Build configuration list for PBXNativeTarget "GuitarTuner" */;
 			buildPhases = (
+				0E47FCD898C9F86D6AB5429F /* 📦 Check Pods Manifest.lock */,
 				1962EBAD1F8E34314E982594 /* [CP] Check Pods Manifest.lock */,
 				D57D40F91BE95A350026B005 /* Sources */,
 				D57D40FA1BE95A350026B005 /* Frameworks */,
 				D57D40FB1BE95A350026B005 /* Resources */,
 				9A1FE1805890F1ADECBB5C91 /* [CP] Embed Pods Frameworks */,
 				C388AD861F71DDEC8588850E /* [CP] Copy Pods Resources */,
+				BBF9D165E87DC40FC3115EAE /* 📦 Embed Pods Frameworks */,
+				6F77F9EE9820226CF5C57DF3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,6 +182,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0E47FCD898C9F86D6AB5429F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		1962EBAD1F8E34314E982594 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -194,6 +212,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		6F77F9EE9820226CF5C57DF3 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9A1FE1805890F1ADECBB5C91 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,6 +235,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBF9D165E87DC40FC3115EAE /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
