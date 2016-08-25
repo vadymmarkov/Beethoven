@@ -16,15 +16,15 @@ public class InputSignalTracker: SignalTracker {
   private let session = AVAudioSession.sharedInstance()
   private let bus = 0
 
-  private var signalPeakLevel: Float {
+  public var peakLevel: Float? {
     get {
-      return audioChannel?.peakHoldLevel ?? 0.0
+      return audioChannel?.peakHoldLevel
     }
   }
 
-  private var signalAverageLevel: Float {
+  public var averageLevel: Float? {
     get {
-      return audioChannel?.averagePowerLevel ?? 0.0
+      return audioChannel?.averagePowerLevel
     }
   }
 
@@ -55,7 +55,7 @@ public class InputSignalTracker: SignalTracker {
 
       let levelThreshold = self.levelThreshold ?? -1000000.0
 
-      if self.signalAverageLevel > levelThreshold {
+      if self.averageLevel > levelThreshold {
         dispatch_async(dispatch_get_main_queue()) {
           self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
         }

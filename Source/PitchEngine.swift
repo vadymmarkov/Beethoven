@@ -39,6 +39,10 @@ public class PitchEngine {
     }
   }
 
+  public var signalLevel:Float {
+    get { return signalTracker.averageLevel ?? 0.0 }
+  }
+
   // MARK: - Initialization
 
   public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
