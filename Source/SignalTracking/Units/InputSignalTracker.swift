@@ -68,10 +68,12 @@ public class InputSignalTracker: SignalTracker {
   }
 
   public func stop() {
-    audioEngine.stop()
-    audioEngine.reset()
-    audioEngine = nil
-    captureSession.stopRunning()
+    if audioEngine != nil {
+        audioEngine.stop()
+        audioEngine.reset()
+        audioEngine = nil
+        captureSession.stopRunning()
+    }
   }
 
   func setupAudio() {
