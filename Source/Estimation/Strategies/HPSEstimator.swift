@@ -25,17 +25,23 @@ public struct HPSEstimator: LocationEstimator {
     }
 
     var max2 = minIndex
-    let maxsearch = location * 3 / 4
+    var maxsearch = location * 3 / 4
 
-    for i in (minIndex + 1)..<maxsearch {
-      if spectrum[i] > spectrum[max2] {
-        max2 = i
+    if location > (minIndex + 1) {
+      if maxsearch <= (minIndex + 1) {
+        maxsearch = location
       }
-    }
 
-    if abs(max2 * 2 - location) < 4 {
-      if spectrum[max2] / spectrum[location] > 0.2 {
-        location = max2
+      for i in (minIndex + 1)..<maxsearch {
+        if spectrum[i] > spectrum[max2] {
+          max2 = i
+        }
+      }
+
+      if abs(max2 * 2 - location) < 4 {
+        if spectrum[max2] / spectrum[location] > 0.2 {
+          location = max2
+        }
       }
     }
 
