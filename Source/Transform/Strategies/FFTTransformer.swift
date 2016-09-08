@@ -3,34 +3,42 @@ import Accelerate
 
 public struct FFTTransformer: Transformer {
 
-  public func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer {
+  public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
     let frameCount = buffer.frameLength
     let log2n = UInt(round(log2(Double(frameCount))))
     let bufferSizePOT = Int(1 << log2n)
     let inputCount = bufferSizePOT / 2
     let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
 
-    var realp = [Float](count: inputCount, repeatedValue: 0)
-    var imagp = [Float](count: inputCount, repeatedValue: 0)
+    var realp = [Float](repeating: 0, count: inputCount)
+    var imagp = [Float](repeating: 0, count: inputCount)
     var output = DSPSplitComplex(realp: &realp, imagp: &imagp)
 
     let windowSize = bufferSizePOT
-    var transferBuffer = [Float](count: windowSize, repeatedValue: 0)
-    var window = [Float](count: windowSize, repeatedValue: 0)
+    var transferBuffer = [Float](repeating: 0, count: windowSize)
+    var window = [Float](repeating: 0, count: windowSize)
 
     vDSP_hann_window(&window, vDSP_Length(windowSize), Int32(vDSP_HANN_NORM))
-    vDSP_vmul(buffer.floatChannelData.memory, 1, window,
+    vDSP_vmul((buffer.floatChannelData?.pointee)!, 1, window,
       1, &transferBuffer, 1, vDSP_Length(windowSize))
 
-    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
-      &output, 1, vDSP_Length(inputCount))
+    let temp = UnsafePointer<Float>(transferBuffer)
 
-    vDSP_fft_zrip(fftSetup, &output, 1, log2n, FFTDirection(FFT_FORWARD))
+    temp.withMemoryRebound(to: DSPComplex.self, capacity: transferBuffer.count) { (typeConvertedTransferBuffer) -> Void in
+        vDSP_ctoz(typeConvertedTransferBuffer, 2,
+                  &output, 1, vDSP_Length(inputCount))
 
-    var magnitudes = [Float](count:inputCount, repeatedValue:0.0)
+    }
+
+//    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
+//      &output, 1, vDSP_Length(inputCount))
+
+    vDSP_fft_zrip(fftSetup!, &output, 1, log2n, FFTDirection(FFT_FORWARD))
+
+    var magnitudes = [Float](repeating: 0.0, count: inputCount)
     vDSP_zvmags(&output, 1, &magnitudes, 1, vDSP_Length(inputCount))
 
-    var normalizedMagnitudes = [Float](count: inputCount, repeatedValue: 0.0)
+    var normalizedMagnitudes = [Float](repeating: 0.0, count: inputCount)
     vDSP_vsmul(sqrtq(magnitudes), 1, [2.0 / Float(inputCount)],
       &normalizedMagnitudes, 1, vDSP_Length(inputCount))
 
@@ -43,8 +51,8 @@ public struct FFTTransformer: Transformer {
 
   // MARK: - Helpers
 
-  func sqrtq(x: [Float]) -> [Float] {
-    var results = [Float](count: x.count, repeatedValue: 0.0)
+  func sqrtq(_ x: [Float]) -> [Float] {
+    var results = [Float](repeating: 0.0, count: x.count)
     vvsqrtf(&results, x, [Int32(x.count)])
 
     return results
