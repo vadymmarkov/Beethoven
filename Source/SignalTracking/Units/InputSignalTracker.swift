@@ -12,7 +12,7 @@ public class InputSignalTracker: SignalTracker {
 
   var audioChannel: AVCaptureAudioChannel?
   let captureSession = AVCaptureSession()
-  private var audioEngine: AVAudioEngine!
+  private var audioEngine: AVAudioEngine?
   private let session = AVAudioSession.sharedInstance()
   private let bus = 0
 
@@ -45,7 +45,7 @@ public class InputSignalTracker: SignalTracker {
 
     audioEngine = AVAudioEngine()
 
-    guard let inputNode = audioEngine.inputNode else {
+    guard let inputNode = audioEngine?.inputNode else {
       throw Error.InputNodeMissing
     }
 
@@ -63,17 +63,19 @@ public class InputSignalTracker: SignalTracker {
     }
 
     captureSession.startRunning()
-    audioEngine.prepare()
-    try audioEngine.start()
+    audioEngine?.prepare()
+    try audioEngine?.start()
   }
 
   public func stop() {
-    if audioEngine != nil {
-        audioEngine.stop()
-        audioEngine.reset()
-        audioEngine = nil
-        captureSession.stopRunning()
+    guard audioEngine != nil else {
+      return
     }
+
+    audioEngine?.stop()
+    audioEngine?.reset()
+    audioEngine = nil
+    captureSession.stopRunning()
   }
 
   func setupAudio() {
