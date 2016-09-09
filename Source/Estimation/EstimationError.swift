@@ -1,6 +1,6 @@
-public enum EstimationError: ErrorType {
-  case EmptyBuffer
-  case UnknownMaxIndex
-  case UnknownLocation
-  case UnknownFrequency
+public enum EstimationError: Error {
+  case emptyBuffer
+  case unknownMaxIndex
+  case unknownLocation
+  case unknownFrequency
 }

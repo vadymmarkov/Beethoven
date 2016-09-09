@@ -2,11 +2,11 @@ import Foundation
 
 public struct QuinnsFirstEstimator: LocationEstimator {
 
-  public func estimateLocation(buffer: Buffer) throws -> Int {
+  public func estimateLocation(_ buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(elements)
 
-    guard let realElements = buffer.realElements, imagElements = buffer.imagElements else {
+    guard let realElements = buffer.realElements, let imagElements = buffer.imagElements else {
       return maxIndex
     }
 

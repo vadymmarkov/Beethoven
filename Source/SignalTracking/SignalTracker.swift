@@ -2,7 +2,7 @@ import AVFoundation
 
 public protocol SignalTrackerDelegate: class {
 
-  func signalTracker(signalTracker: SignalTracker,
+  func signalTracker(_ signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer,
     atTime time: AVAudioTime)
 }

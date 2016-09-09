@@ -1,10 +1,10 @@
 struct TransformFactory {
 
-  static func create(strategy: TransformStrategy) -> Transformer {
+  static func create(_ strategy: TransformStrategy) -> Transformer {
     let estimator: Transformer
 
     switch strategy {
-    case .FFT:
+    case .fft:
       estimator = FFTTransformer()
     default:
       estimator = SimpleTransformer()
