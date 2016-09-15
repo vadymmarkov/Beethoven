@@ -1,9 +1,9 @@
 public enum EstimationStrategy {
-  case MaxValue
-  case Quadradic
-  case Barycentric
-  case QuinnsFirst
-  case QuinnsSecond
-  case Jains
-  case HPS
+  case maxValue
+  case quadradic
+  case barycentric
+  case quinnsFirst
+  case quinnsSecond
+  case jains
+  case hps
 }

@@ -1,20 +1,20 @@
 struct EstimationFactory {
 
-  static func create(strategy: EstimationStrategy) -> Estimator {
+  static func create(_ strategy: EstimationStrategy) -> Estimator {
     let estimator: Estimator
 
     switch strategy {
-    case .Quadradic:
+    case .quadradic:
       estimator = QuadradicEstimator()
-    case .Barycentric:
+    case .barycentric:
       estimator = BarycentricEstimator()
-    case .QuinnsFirst:
+    case .quinnsFirst:
       estimator = QuinnsFirstEstimator()
-    case .QuinnsSecond:
+    case .quinnsSecond:
       estimator = QuinnsSecondEstimator()
-    case .Jains:
+    case .jains:
       estimator = JainsEstimator()
-    case .HPS:
+    case .hps:
       estimator = HPSEstimator()
     default:
       estimator = MaxValueEstimator()

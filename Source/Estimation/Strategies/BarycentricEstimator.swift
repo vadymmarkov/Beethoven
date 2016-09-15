@@ -2,7 +2,7 @@ import Foundation
 
 public struct BarycentricEstimator: LocationEstimator {
 
-  public func estimateLocation(buffer: Buffer) throws -> Int {
+  public func estimateLocation(_ buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(elements)
 
@@ -12,7 +12,7 @@ public struct BarycentricEstimator: LocationEstimator {
     let d = (y3 - y1) / (y1 + y2 + y3)
 
     guard !d.isNaN else {
-      throw EstimationError.UnknownLocation
+      throw EstimationError.unknownLocation
     }
 
     let location = maxIndex + Int(round(d))

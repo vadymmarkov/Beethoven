@@ -2,5 +2,5 @@ import AVFoundation
 
 public protocol Transformer {
 
-  func transformBuffer(buffer: AVAudioPCMBuffer) -> Buffer
+  func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer
 }
