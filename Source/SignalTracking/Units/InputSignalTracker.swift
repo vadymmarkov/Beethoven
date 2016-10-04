@@ -61,6 +61,10 @@ open class InputSignalTracker: SignalTracker {
         DispatchQueue.main.async {
           self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
         }
+      } else {
+        DispatchQueue.main.async {
+          self.delegate?.signalTrackerWentBelowLevelThreshold(self)
+        }
       }
     }
 
