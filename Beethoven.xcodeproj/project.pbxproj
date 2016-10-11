@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF3190521DABE01600C897CA /* YINTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3190511DABE01600C897CA /* YINTransformer.swift */; };
+		AF4AFD9A1DAA3462002B6DC9 /* YINUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */; };
 		D51575B61C343B77006F8E75 /* Beethoven.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51575AB1C343B77006F8E75 /* Beethoven.framework */; };
 		D59CB1571C345E0A00290B63 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1371C345E0A00290B63 /* Config.swift */; };
 		D59CB1581C345E0A00290B63 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1391C345E0A00290B63 /* Buffer.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF3190511DABE01600C897CA /* YINTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINTransformer.swift; sourceTree = "<group>"; };
+		AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
 		D51575AB1C343B77006F8E75 /* Beethoven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Beethoven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D51575B51C343B77006F8E75 /* Beethoven-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beethoven-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D59CB1371C345E0A00290B63 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				D59CB13D1C345E0A00290B63 /* EstimationStrategy.swift */,
 				D59CB13E1C345E0A00290B63 /* Estimator.swift */,
 				D59CB13F1C345E0A00290B63 /* LocationEstimator.swift */,
+				AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */,
 			);
 			path = Estimation;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			children = (
 				D59CB1521C345E0A00290B63 /* FFTTransformer.swift */,
 				D59CB1531C345E0A00290B63 /* SimpleTransformer.swift */,
+				AF3190511DABE01600C897CA /* YINTransformer.swift */,
 			);
 			path = Strategies;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				D59CB16D1C345E0A00290B63 /* TransformFactory.swift in Sources */,
 				D59CB1631C345E0A00290B63 /* QuinnsFirstEstimator.swift in Sources */,
 				D59CB15B1C345E0A00290B63 /* EstimationStrategy.swift in Sources */,
+				AF4AFD9A1DAA3462002B6DC9 /* YINUtil.swift in Sources */,
 				D59CB15E1C345E0A00290B63 /* BarycentricEstimator.swift in Sources */,
 				D59CB1621C345E0A00290B63 /* QuadradicEstimator.swift in Sources */,
 				D59CB1591C345E0A00290B63 /* EstimationError.swift in Sources */,
@@ -508,6 +515,7 @@
 				D59CB1571C345E0A00290B63 /* Config.swift in Sources */,
 				D59CB1681C345E0A00290B63 /* InputSignalTracker.swift in Sources */,
 				D59CB1581C345E0A00290B63 /* Buffer.swift in Sources */,
+				AF3190521DABE01600C897CA /* YINTransformer.swift in Sources */,
 				D59CB16A1C345E0A00290B63 /* FFTTransformer.swift in Sources */,
 				D59CB15A1C345E0A00290B63 /* EstimationFactory.swift in Sources */,
 			);
