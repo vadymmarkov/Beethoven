@@ -19,19 +19,20 @@ class YINUtil {
         let frameSize = buffer.count
         let yinBufferSize = frameSize / 2
 
+
+        // power terms calculation
+        //
         var powerTerms = [Float](repeating:0, count:yinBufferSize)
 
         let addSquare = { (res:Float, element:Float) -> Float in
             res + element * element
         }
 
-        // power terms calculation
-        //
         let powerTermFirstElement = buffer.reduce(0.0, addSquare)
 
-        powerTerms.append(powerTermFirstElement)
+        powerTerms[0] = powerTermFirstElement
 
-        for tau in 1 ..< buffer.count {
+        for tau in 1 ..< yinBufferSize {
             let v = powerTerms[tau - 1]
             let v1 = buffer[tau - 1] * buffer[tau - 1]
             let v2 = buffer[tau + yinBufferSize] * buffer[tau + yinBufferSize]
