@@ -29,6 +29,8 @@ class YINEstimator: Estimator {
             f0 = 0.0
         }
 
+        NSLog("YINEstimator : f0 = \(f0)")
+        
         return f0
     }
     

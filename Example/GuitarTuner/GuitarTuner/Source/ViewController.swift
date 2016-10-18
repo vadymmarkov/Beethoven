@@ -44,7 +44,10 @@ class ViewController: UIViewController {
     }()
 
   lazy var pitchEngine: PitchEngine = { [unowned self] in
-    let pitchEngine = PitchEngine(delegate: self)
+    var config = Config()
+    config.transformStrategy = .yin
+    config.estimationStrategy = .yin
+    let pitchEngine = PitchEngine(config: config, delegate: self)
     pitchEngine.levelThreshold = -30.0
 
     return pitchEngine
