@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return controller
     }()
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = navigationController
 
     applyStyles()
@@ -29,12 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applyStyles() {
     let navigationBar = UINavigationBar.appearance()
-    navigationBar.barStyle = .Black
-    navigationBar.barTintColor = UIColor.hex("111011")
-    navigationBar.translucent = false
+    navigationBar.barStyle = .black
+    navigationBar.barTintColor = UIColor(hex: "111011")
+    navigationBar.isTranslucent = false
     navigationBar.shadowImage = UIImage()
     navigationBar.titleTextAttributes = [
-      NSForegroundColorAttributeName: UIColor.whiteColor()
+      NSForegroundColorAttributeName: UIColor.white
     ]
   }
 }
