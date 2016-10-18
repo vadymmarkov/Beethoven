@@ -14,6 +14,11 @@ public struct YINTransformer : Transformer {
 
     public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
 
+        let pointer = buffer.floatChannelData
+        let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
 
+        let diffElements = YINUtil.difference(buffer: elements)
+
+        return Buffer(elements: diffElements)
     }
 }

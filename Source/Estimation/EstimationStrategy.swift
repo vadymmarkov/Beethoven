@@ -6,4 +6,5 @@ public enum EstimationStrategy {
   case quinnsSecond
   case jains
   case hps
+  case yin
 }
