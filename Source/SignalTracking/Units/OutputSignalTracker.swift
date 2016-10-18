@@ -11,6 +11,15 @@ open class OutputSignalTracker: SignalTracker {
   fileprivate var audioPlayer: AVAudioPlayerNode!
   fileprivate let bus = 0
 
+  public var peakLevel: Float? {
+    get { return 0.0 }
+  }
+
+  public var averageLevel: Float? {
+    get { return 0.0 }
+  }
+
+
   // MARK: - Initialization
 
   public required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {

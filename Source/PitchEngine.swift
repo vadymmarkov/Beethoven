@@ -3,8 +3,9 @@ import AVFoundation
 import Pitchy
 
 public protocol PitchEngineDelegate: class {
-  func pitchEngineDidRecievePitch(_ pitchEngine: PitchEngine, pitch: Pitch)
-  func pitchEngineDidRecieveError(_ pitchEngine: PitchEngine, error: Error)
+  func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch)
+  func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error)
+  func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 }
 
 open class PitchEngine {
@@ -37,6 +38,10 @@ open class PitchEngine {
     set {
       self.signalTracker.levelThreshold = newValue
     }
+  }
+
+  public var signalLevel:Float {
+    get { return signalTracker.averageLevel ?? 0.0 }
   }
 
   // MARK: - Initialization
@@ -83,7 +88,7 @@ open class PitchEngine {
         guard let weakSelf = self else { return }
 
         guard granted else {
-          weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf,
+          weakSelf.delegate?.pitchEngineDidReceiveError(weakSelf,
             error: PitchEngineError.recordPermissionDenied as Error)
           return
         }
@@ -107,7 +112,7 @@ open class PitchEngine {
       try signalTracker.start()
       active = true
     } catch {
-      delegate?.pitchEngineDidRecieveError(self, error: error)
+      delegate?.pitchEngineDidReceiveError(self, error: error)
     }
   }
 }
@@ -129,13 +134,21 @@ extension PitchEngine: SignalTrackerDelegate {
           let pitch = try Pitch(frequency: Double(frequency))
 
           DispatchQueue.main.async {
-            weakSelf.delegate?.pitchEngineDidRecievePitch(weakSelf, pitch: pitch)
+            weakSelf.delegate?.pitchEngineDidReceivePitch(weakSelf, pitch: pitch)
           }
         } catch {
           DispatchQueue.main.async {
-            weakSelf.delegate?.pitchEngineDidRecieveError(weakSelf, error: error)
+            weakSelf.delegate?.pitchEngineDidReceiveError(weakSelf, error: error)
           }
         }
     }
   }
+
+  public func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker) {
+    DispatchQueue.main.async {
+      self.delegate?.pitchEngineWentBelowLevelThreshold(self)
+    }
+
+  }
+
 }
