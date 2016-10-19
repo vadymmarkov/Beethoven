@@ -10,7 +10,7 @@ import UIKit
 
 class YINEstimator: Estimator {
 
-    var threshold:Float = 0.0
+    var threshold:Float = 0.05
 
     func estimateFrequency(_ sampleRate: Float, buffer: Buffer) throws -> Float {
 

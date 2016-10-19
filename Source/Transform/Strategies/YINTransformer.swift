@@ -17,7 +17,7 @@ public struct YINTransformer : Transformer {
         let pointer = buffer.floatChannelData
         let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
 
-        let diffElements = YINUtil.difference(buffer: elements)
+        let diffElements = YINUtil.difference2(buffer: elements)
 
         return Buffer(elements: diffElements)
     }

@@ -13,6 +13,21 @@ import Accelerate
 
 class YINUtil {
 
+    class func difference2(buffer:[Float]) -> [Float] {
+
+        let bufferHalfCount = buffer.count / 2
+
+        var resultBuffer = [Float](repeating:0.0, count:bufferHalfCount)
+
+        for tau in 0 ..< bufferHalfCount {
+            for i in 0 ..< bufferHalfCount {
+                let delta = buffer[i] - buffer[i + tau]
+                resultBuffer[tau] += delta * delta
+            }
+        }
+
+        return resultBuffer
+    }
 
     class func difference(buffer:[Float]) -> [Float] {
 
