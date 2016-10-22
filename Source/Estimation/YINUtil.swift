@@ -13,6 +13,8 @@ import Accelerate
 
 class YINUtil {
 
+    // slow and eats a lot of CPU, but working
+    //
     class func difference2(buffer:[Float]) -> [Float] {
 
         let bufferHalfCount = buffer.count / 2
@@ -29,6 +31,8 @@ class YINUtil {
         return resultBuffer
     }
 
+    // supposedly faster and less CPU consuming, but doesn't work
+    //
     class func difference(buffer:[Float]) -> [Float] {
 
         let frameSize = buffer.count
@@ -43,7 +47,10 @@ class YINUtil {
             res + element * element
         }
 
-        let powerTermFirstElement = buffer.reduce(0.0, addSquare)
+        var powerTermFirstElement:Float = 0.0
+        for j in 0 ..< yinBufferSize {
+            powerTermFirstElement += buffer[j] * buffer[j]
+        }
 
         powerTerms[0] = powerTermFirstElement
 
@@ -60,6 +67,9 @@ class YINUtil {
         let bufferSizePOT = Int(1 << log2n)
         let inputCount = bufferSizePOT / 2
         let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
+
+        // buffer.count : 4410 - inputCount : 2048 - yinBufferSize : 2205
+        NSLog("buffer.count : \(buffer.count) - inputCount : \(inputCount) - yinBufferSize : \(yinBufferSize)")
 
         var audioRealp = [Float](repeating: 0, count: inputCount)
         var audioImagp = [Float](repeating: 0, count: inputCount)
@@ -86,8 +96,8 @@ class YINUtil {
         //            kernel[j] = 0.0
         //        }
 
-        var kernelRealp = [Float](repeating: 0, count: inputCount)
-        var kernelImagp = [Float](repeating: 0, count: inputCount)
+        var kernelRealp = [Float](repeating: 0, count: frameSize)
+        var kernelImagp = [Float](repeating: 0, count: frameSize)
         var kernelTransformedComplex = DSPSplitComplex(realp: &kernelRealp, imagp: &kernelImagp)
 
         let ktemp = UnsafePointer<Float>(kernel)
@@ -99,8 +109,8 @@ class YINUtil {
         vDSP_fft_zrip(fftSetup!, &kernelTransformedComplex, 1, log2n, FFTDirection(FFT_FORWARD))
 
 
-        var yinStyleACFRealp = [Float](repeating: 0, count: inputCount)
-        var yinStyleACFImagp = [Float](repeating: 0, count: inputCount)
+        var yinStyleACFRealp = [Float](repeating: 0, count: frameSize)
+        var yinStyleACFImagp = [Float](repeating: 0, count: frameSize)
         var yinStyleACFComplex = DSPSplitComplex(realp: &yinStyleACFRealp, imagp: &yinStyleACFImagp)
 
         for j in 0 ..< inputCount {
@@ -110,8 +120,13 @@ class YINUtil {
 
         vDSP_fft_zrip(fftSetup!, &yinStyleACFComplex, 1, log2n, FFTDirection(FFT_INVERSE))
 
+        var resultYinBuffer = [Float](repeating:0.0, count: yinBufferSize)
 
-        return yinStyleACFRealp
+        for j in 0 ..< yinBufferSize {
+            resultYinBuffer[j] = powerTerms[0] + powerTerms[j] - 2 * yinStyleACFRealp[j + yinBufferSize - 1]
+        }
+
+        return resultYinBuffer
     }
 
     class func cumulativeDifference(yinBuffer: inout [Float]) {
@@ -183,8 +198,8 @@ class YINUtil {
             betterTau = Float(tau)
             
         }
-        
-        return betterTau
+
+        return fabs(betterTau)
     }
     
     class func sumSquare(yinBuffer:[Float], start:Int, end:Int) -> Float {
