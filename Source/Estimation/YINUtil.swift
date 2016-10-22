@@ -31,9 +31,41 @@ class YINUtil {
         return resultBuffer
     }
 
-    // supposedly faster and less CPU consuming, but doesn't work
+    // accelerated version of difference2 - Instruments shows roughly around 22% CPU usage, compared to 95% for difference2
     //
-    class func difference(buffer:[Float]) -> [Float] {
+    class func differenceA(buffer:[Float]) -> [Float] {
+        let bufferHalfCount = buffer.count / 2
+
+        var resultBuffer = [Float](repeating:0.0, count:bufferHalfCount)
+
+        var tempBuffer = [Float](repeating:0.0, count:bufferHalfCount)
+        var tempBufferSq = [Float](repeating:0.0, count:bufferHalfCount)
+
+        let len = vDSP_Length(bufferHalfCount)
+        var vSum:Float = 0.0
+
+        for tau in 0 ..< bufferHalfCount {
+
+            let bufferTau = UnsafePointer<Float>(buffer).advanced(by: tau)
+            // do a diff of buffer with itself at tau offset
+            vDSP_vsub(buffer, 1, bufferTau, 1, &tempBuffer, 1, len)
+            // square each value of the diff vector
+            vDSP_vsq(tempBuffer, 1, &tempBufferSq, 1, len)
+            // sum the squared values into vSum
+            vDSP_sve(tempBufferSq, 1, &vSum, len)
+            // store that in the result buffer
+            resultBuffer[tau] = vSum
+        }
+        
+        return resultBuffer
+    }
+
+    // supposedly faster and less CPU consuming, but doesn't work, must be because I missed something when porting it from
+    // https://code.soundsoftware.ac.uk/projects/pyin/repository but I don't know what
+    //
+    // kept for reference only
+    //
+    class func difference_broken_do_not_use(buffer:[Float]) -> [Float] {
 
         let frameSize = buffer.count
         let yinBufferSize = frameSize / 2
