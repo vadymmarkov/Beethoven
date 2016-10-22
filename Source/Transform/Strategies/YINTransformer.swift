@@ -12,13 +12,13 @@ import AVFoundation
 
 public struct YINTransformer : Transformer {
 
-    public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
+  public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
 
-        let pointer = buffer.floatChannelData
-        let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
+    let pointer = buffer.floatChannelData
+    let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
 
-        let diffElements = YINUtil.differenceA(buffer: elements)
+    let diffElements = YINUtil.differenceA(buffer: elements)
 
-        return Buffer(elements: diffElements)
-    }
+    return Buffer(elements: diffElements)
+  }
 }
