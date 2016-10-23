@@ -56,7 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF3190511DABE01600C897CA /* YINTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = YINTransformer.swift; sourceTree = "<group>"; tabWidth = 4; };
+		AF3190511DABE01600C897CA /* YINTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = YINTransformer.swift; sourceTree = "<group>"; tabWidth = 2; };
 		AFFF3FF01DB633B4004AD9D9 /* YINEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINEstimator.swift; sourceTree = "<group>"; };
 		D51575AB1C343B77006F8E75 /* Beethoven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Beethoven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D51575B51C343B77006F8E75 /* Beethoven-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beethoven-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };

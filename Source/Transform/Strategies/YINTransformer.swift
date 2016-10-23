@@ -10,9 +10,9 @@
 import Foundation
 import AVFoundation
 
-public struct YINTransformer: Transformer {
+struct YINTransformer: Transformer {
 
-  public func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
+  func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
     let buffer = try SimpleTransformer().transform(buffer: buffer)
     let diffElements = YINUtil.differenceA(buffer: buffer.elements)
 

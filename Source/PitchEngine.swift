@@ -8,7 +8,7 @@ public protocol PitchEngineDelegate: class {
   func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 }
 
-open class PitchEngine {
+public class PitchEngine {
 
   public enum PitchEngineError: Error {
     case recordPermissionDenied
@@ -18,19 +18,19 @@ open class PitchEngine {
     case record, playback
   }
 
-  open let bufferSize: AVAudioFrameCount
-  open var active = false
-  open weak var delegate: PitchEngineDelegate?
+  public let bufferSize: AVAudioFrameCount
+  public var active = false
+  public weak var delegate: PitchEngineDelegate?
 
   fileprivate var estimator: Estimator
   fileprivate var signalTracker: SignalTracker
   fileprivate var queue: DispatchQueue
 
-  open var mode: Mode {
+  public var mode: Mode {
     return signalTracker is InputSignalTracker ? .record : .playback
   }
 
-  open var levelThreshold: Float? {
+  public var levelThreshold: Float? {
     get {
       return self.signalTracker.levelThreshold
     }
@@ -62,7 +62,7 @@ open class PitchEngine {
 
   // MARK: - Processing
 
-  open func start() {
+  public func start() {
     guard mode == .playback else {
       activate()
       return
@@ -98,7 +98,7 @@ open class PitchEngine {
     }
   }
 
-  open func stop() {
+  public func stop() {
     signalTracker.stop()
     active = false
   }
@@ -117,7 +117,7 @@ open class PitchEngine {
 
 extension PitchEngine: SignalTrackerDelegate {
 
-  public func signalTracker(_ signalTracker: SignalTracker,
+  func signalTracker(_ signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       queue.async { [weak self] in
         guard let weakSelf = self else { return }
@@ -140,7 +140,7 @@ extension PitchEngine: SignalTrackerDelegate {
     }
   }
 
-  public func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker) {
+  func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker) {
     DispatchQueue.main.async {
       self.delegate?.pitchEngineWentBelowLevelThreshold(self)
     }

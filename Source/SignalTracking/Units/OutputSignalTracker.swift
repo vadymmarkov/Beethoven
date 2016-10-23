@@ -1,27 +1,28 @@
 import AVFoundation
 
-open class OutputSignalTracker: SignalTracker {
+class OutputSignalTracker: SignalTracker {
 
-  open let bufferSize: AVAudioFrameCount
-  open let audioURL: URL
-  open weak var delegate: SignalTrackerDelegate?
-  open var levelThreshold: Float?
+  weak var delegate: SignalTrackerDelegate?
+  var levelThreshold: Float?
+
+  fileprivate let bufferSize: AVAudioFrameCount
+  fileprivate let audioURL: URL
 
   fileprivate var audioEngine: AVAudioEngine!
   fileprivate var audioPlayer: AVAudioPlayerNode!
   fileprivate let bus = 0
 
-  public var peakLevel: Float? {
+  var peakLevel: Float? {
     get { return 0.0 }
   }
 
-  public var averageLevel: Float? {
+  var averageLevel: Float? {
     get { return 0.0 }
   }
 
   // MARK: - Initialization
 
-  public required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048,
+  required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048,
                        delegate: SignalTrackerDelegate? = nil) {
     self.audioURL = audioURL
     self.bufferSize = bufferSize
@@ -30,9 +31,8 @@ open class OutputSignalTracker: SignalTracker {
 
   // MARK: - Tracking
 
-  open func start() throws {
+  func start() throws {
     let session = AVAudioSession.sharedInstance()
-
     try session.setCategory(AVAudioSessionCategoryPlayback)
 
     audioEngine = AVAudioEngine()
@@ -58,7 +58,7 @@ open class OutputSignalTracker: SignalTracker {
     audioPlayer.play()
   }
 
-  open func stop() {
+  func stop() {
     audioPlayer.stop()
     audioEngine.stop()
     audioEngine.reset()

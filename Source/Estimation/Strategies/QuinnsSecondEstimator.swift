@@ -32,6 +32,7 @@ struct QuinnsSecondEstimator: LocationEstimator {
     let part1 = x + 1 - sqrt(2/3)
     let part2 = x + 1 + sqrt(2/3)
     let p2 = log(part1 / part2)
+
     return 1/4 * p1 - sqrt(6)/24 * p2
   }
 }

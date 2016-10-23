@@ -1,7 +1,6 @@
 import AVFoundation
 
-public protocol SignalTrackerDelegate: class {
-
+protocol SignalTrackerDelegate: class {
   func signalTracker(_ signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer,
     atTime time: AVAudioTime)
@@ -9,8 +8,7 @@ public protocol SignalTrackerDelegate: class {
   func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker)
 }
 
-public protocol SignalTracker: class {
-
+protocol SignalTracker: class {
   var levelThreshold: Float? { get set }
   var peakLevel: Float? { get }
   var averageLevel: Float? { get }

@@ -1,4 +1,4 @@
-public protocol Estimator {
+protocol Estimator {
   var transformer: Transformer { get }
 
   init()
@@ -11,7 +11,7 @@ extension Estimator {
 
   // MARK: - Default implementation
 
-  public func estimateFrequency(sampleRate: Float, location: Int, bufferCount: Int) -> Float {
+  func estimateFrequency(sampleRate: Float, location: Int, bufferCount: Int) -> Float {
     return Float(location) * sampleRate / (Float(bufferCount) * 2)
   }
 

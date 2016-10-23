@@ -1,8 +1,8 @@
-public protocol LocationEstimator: Estimator {
+protocol LocationEstimator: Estimator {
   func estimateLocation(buffer: Buffer) throws -> Int
 }
 
-public extension LocationEstimator {
+extension LocationEstimator {
 
   // MARK: - Default implementation
 
