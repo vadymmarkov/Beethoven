@@ -1,5 +1,4 @@
 public protocol LocationEstimator: Estimator {
-
   func estimateLocation(_ buffer: Buffer) throws -> Int
 }
 

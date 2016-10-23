@@ -10,18 +10,15 @@ import UIKit
 
 struct YINEstimator: Estimator {
 
-  var transformer: Transformer = YINTransformer()
-
-  var threshold: Float = 0.05
+  let transformer: Transformer = YINTransformer()
+  let threshold: Float = 0.05
 
   func estimateFrequency(_ sampleRate: Float, buffer: Buffer) throws -> Float {
-
     var elements = buffer.elements
 
     YINUtil.cumulativeDifference(yinBuffer: &elements)
 
     let tau = YINUtil.absoluteThreshold(yinBuffer: elements, withThreshold: threshold)
-
     var f0: Float
 
     if tau != 0 {

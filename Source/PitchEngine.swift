@@ -47,7 +47,7 @@ open class PitchEngine {
 
   public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
-    estimator = EstimationFactory.create(config.estimationStrategy)
+    estimator = config.estimator.init()
 
     if let audioURL = config.audioURL {
       signalTracker = OutputSignalTracker(audioURL: audioURL, bufferSize: bufferSize)

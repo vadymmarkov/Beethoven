@@ -21,8 +21,6 @@
 		D59CB1571C345E0A00290B63 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1371C345E0A00290B63 /* Config.swift */; };
 		D59CB1581C345E0A00290B63 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1391C345E0A00290B63 /* Buffer.swift */; };
 		D59CB1591C345E0A00290B63 /* EstimationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13B1C345E0A00290B63 /* EstimationError.swift */; };
-		D59CB15A1C345E0A00290B63 /* EstimationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13C1C345E0A00290B63 /* EstimationFactory.swift */; };
-		D59CB15B1C345E0A00290B63 /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13D1C345E0A00290B63 /* EstimationStrategy.swift */; };
 		D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13E1C345E0A00290B63 /* Estimator.swift */; };
 		D59CB15D1C345E0A00290B63 /* LocationEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13F1C345E0A00290B63 /* LocationEstimator.swift */; };
 		D59CB15E1C345E0A00290B63 /* BarycentricEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1411C345E0A00290B63 /* BarycentricEstimator.swift */; };
@@ -73,8 +71,6 @@
 		D59CB1371C345E0A00290B63 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D59CB1391C345E0A00290B63 /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		D59CB13B1C345E0A00290B63 /* EstimationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationError.swift; sourceTree = "<group>"; };
-		D59CB13C1C345E0A00290B63 /* EstimationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = EstimationFactory.swift; sourceTree = "<group>"; tabWidth = 2; };
-		D59CB13D1C345E0A00290B63 /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
 		D59CB13E1C345E0A00290B63 /* Estimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimator.swift; sourceTree = "<group>"; };
 		D59CB13F1C345E0A00290B63 /* LocationEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEstimator.swift; sourceTree = "<group>"; };
 		D59CB1411C345E0A00290B63 /* BarycentricEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarycentricEstimator.swift; sourceTree = "<group>"; };
@@ -249,8 +245,6 @@
 			children = (
 				D59CB1401C345E0A00290B63 /* Strategies */,
 				D59CB13B1C345E0A00290B63 /* EstimationError.swift */,
-				D59CB13C1C345E0A00290B63 /* EstimationFactory.swift */,
-				D59CB13D1C345E0A00290B63 /* EstimationStrategy.swift */,
 				D59CB13E1C345E0A00290B63 /* Estimator.swift */,
 				D59CB13F1C345E0A00290B63 /* LocationEstimator.swift */,
 				AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */,
@@ -484,7 +478,6 @@
 				D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */,
 				D59CB15D1C345E0A00290B63 /* LocationEstimator.swift in Sources */,
 				D59CB1631C345E0A00290B63 /* QuinnsFirstEstimator.swift in Sources */,
-				D59CB15B1C345E0A00290B63 /* EstimationStrategy.swift in Sources */,
 				AF4AFD9A1DAA3462002B6DC9 /* YINUtil.swift in Sources */,
 				D59CB15E1C345E0A00290B63 /* BarycentricEstimator.swift in Sources */,
 				D59CB1621C345E0A00290B63 /* QuadradicEstimator.swift in Sources */,
@@ -502,7 +495,6 @@
 				D59CB1581C345E0A00290B63 /* Buffer.swift in Sources */,
 				AF3190521DABE01600C897CA /* YINTransformer.swift in Sources */,
 				D59CB16A1C345E0A00290B63 /* FFTTransformer.swift in Sources */,
-				D59CB15A1C345E0A00290B63 /* EstimationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

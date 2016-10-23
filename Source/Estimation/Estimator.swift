@@ -1,6 +1,8 @@
 public protocol Estimator {
   var transformer: Transformer { get }
 
+  init()
+
   func estimateFrequency(_ sampleRate: Float, buffer: Buffer) throws -> Float
   func estimateFrequency(_ sampleRate: Float, location: Int, bufferCount: Int) -> Float
 }
