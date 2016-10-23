@@ -1,10 +1,10 @@
 import AVFoundation
 
-class InputSignalTracker: SignalTracker {
+public enum InputSignalTrackerError: Error {
+  case inputNodeMissing
+}
 
-  enum InputSignalTrackerError: Error {
-    case inputNodeMissing
-  }
+class InputSignalTracker: SignalTracker {
 
   weak var delegate: SignalTrackerDelegate?
   var levelThreshold: Float?

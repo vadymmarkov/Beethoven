@@ -8,11 +8,11 @@ public protocol PitchEngineDelegate: class {
   func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 }
 
-public class PitchEngine {
+public enum PitchEngineError: Error {
+  case recordPermissionDenied
+}
 
-  public enum PitchEngineError: Error {
-    case recordPermissionDenied
-  }
+public class PitchEngine {
 
   public enum Mode {
     case record, playback
