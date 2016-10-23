@@ -30,7 +30,8 @@ open class InputSignalTracker: SignalTracker {
 
   // MARK: - Initialization
 
-  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
+  public required init(bufferSize: AVAudioFrameCount = 2048,
+                       delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
 
@@ -52,7 +53,6 @@ open class InputSignalTracker: SignalTracker {
     let format = inputNode.inputFormat(forBus: bus)
 
     inputNode.installTap(onBus: bus, bufferSize: bufferSize, format: format) { buffer, time in
-
       guard let averageLevel = self.averageLevel else { return }
 
       let levelThreshold = self.levelThreshold ?? -1000000.0
