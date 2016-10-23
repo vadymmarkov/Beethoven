@@ -13,7 +13,7 @@ struct YINEstimator: Estimator {
   let transformer: Transformer = YINTransformer()
   let threshold: Float = 0.05
 
-  func estimateFrequency(_ sampleRate: Float, buffer: Buffer) throws -> Float {
+  func estimateFrequency(sampleRate: Float, buffer: Buffer) throws -> Float {
     var elements = buffer.elements
 
     YINUtil.cumulativeDifference(yinBuffer: &elements)

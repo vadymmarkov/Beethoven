@@ -1,6 +1,6 @@
 struct MaxValueEstimator: LocationEstimator {
 
-  func estimateLocation(_ buffer: Buffer) throws -> Int {
-    return try maxBufferIndex(buffer.elements)
+  func estimateLocation(buffer: Buffer) throws -> Int {
+    return try maxBufferIndex(from: buffer.elements)
   }
 }

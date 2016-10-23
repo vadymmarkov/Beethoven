@@ -2,9 +2,9 @@ import Foundation
 
 struct QuinnsFirstEstimator: LocationEstimator {
 
-  func estimateLocation(_ buffer: Buffer) throws -> Int {
+  func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
-    let maxIndex = try maxBufferIndex(elements)
+    let maxIndex = try maxBufferIndex(from: elements)
 
     guard let realElements = buffer.realElements, let imagElements = buffer.imagElements else {
       return maxIndex
@@ -24,6 +24,6 @@ struct QuinnsFirstEstimator: LocationEstimator {
     let d = dp > 0 && dm > 0 ? dp : dm
     let location = maxIndex + Int(round(d))
 
-    return sanitize(location, reserveLocation: maxIndex, elements: elements)
+    return sanitize(location: location, reserveLocation: maxIndex, elements: elements)
   }
 }

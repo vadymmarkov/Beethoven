@@ -124,7 +124,8 @@ extension PitchEngine: SignalTrackerDelegate {
 
         do {
           let transformedBuffer = try weakSelf.estimator.transformer.transform(buffer: buffer)
-          let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
+          let frequency = try weakSelf.estimator.estimateFrequency(
+            sampleRate: Float(time.sampleRate),
             buffer: transformedBuffer)
           let pitch = try Pitch(frequency: Double(frequency))
 
