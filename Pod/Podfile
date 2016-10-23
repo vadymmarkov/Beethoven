@@ -1,7 +1,0 @@
-platform :ios, '8.0'
-use_frameworks!
-inhibit_all_warnings!
-
-pod 'Pitchy', git: 'https://github.com/vadymmarkov/Pitchy'
-pod 'Nimble'
-pod 'Quick'
