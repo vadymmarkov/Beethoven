@@ -1,7 +1,7 @@
 struct HPSEstimator: LocationEstimator {
 
-  var harmonics = 5
-  var minIndex = 20
+  let harmonics = 5
+  let minIndex = 20
 
   func estimateLocation(buffer: Buffer) throws -> Int {
     var spectrum = buffer.elements

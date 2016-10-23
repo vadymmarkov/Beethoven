@@ -20,6 +20,8 @@
 		D5843EDF1DBD2CF50077F86E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EDE1DBD2CF50077F86E /* Buffer.swift */; };
 		D5843EE21DBD2D110077F86E /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE11DBD2D110077F86E /* Array+Extensions.swift */; };
 		D5843EE41DBD2D290077F86E /* YINUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE31DBD2D290077F86E /* YINUtil.swift */; };
+		D5843EE71DBD2FAA0077F86E /* EstimationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE51DBD2FAA0077F86E /* EstimationFactory.swift */; };
+		D5843EE81DBD2FAA0077F86E /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE61DBD2FAA0077F86E /* EstimationStrategy.swift */; };
 		D59CB1571C345E0A00290B63 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1371C345E0A00290B63 /* Config.swift */; };
 		D59CB1591C345E0A00290B63 /* EstimationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13B1C345E0A00290B63 /* EstimationError.swift */; };
 		D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13E1C345E0A00290B63 /* Estimator.swift */; };
@@ -70,6 +72,8 @@
 		D5843EDE1DBD2CF50077F86E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		D5843EE11DBD2D110077F86E /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		D5843EE31DBD2D290077F86E /* YINUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINUtil.swift; sourceTree = "<group>"; };
+		D5843EE51DBD2FAA0077F86E /* EstimationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationFactory.swift; sourceTree = "<group>"; };
+		D5843EE61DBD2FAA0077F86E /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
 		D59CB1371C345E0A00290B63 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D59CB13B1C345E0A00290B63 /* EstimationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationError.swift; sourceTree = "<group>"; };
 		D59CB13E1C345E0A00290B63 /* Estimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimator.swift; sourceTree = "<group>"; };
@@ -252,10 +256,12 @@
 		D59CB13A1C345E0A00290B63 /* Estimation */ = {
 			isa = PBXGroup;
 			children = (
-				D59CB1401C345E0A00290B63 /* Strategies */,
 				D59CB13B1C345E0A00290B63 /* EstimationError.swift */,
+				D5843EE51DBD2FAA0077F86E /* EstimationFactory.swift */,
+				D5843EE61DBD2FAA0077F86E /* EstimationStrategy.swift */,
 				D59CB13E1C345E0A00290B63 /* Estimator.swift */,
 				D59CB13F1C345E0A00290B63 /* LocationEstimator.swift */,
+				D59CB1401C345E0A00290B63 /* Strategies */,
 			);
 			path = Estimation;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */,
 				D59CB15D1C345E0A00290B63 /* LocationEstimator.swift in Sources */,
 				D59CB1631C345E0A00290B63 /* QuinnsFirstEstimator.swift in Sources */,
+				D5843EE81DBD2FAA0077F86E /* EstimationStrategy.swift in Sources */,
 				D59CB15E1C345E0A00290B63 /* BarycentricEstimator.swift in Sources */,
 				D59CB1621C345E0A00290B63 /* QuadradicEstimator.swift in Sources */,
 				D59CB1591C345E0A00290B63 /* EstimationError.swift in Sources */,
@@ -495,6 +502,7 @@
 				AF3190521DABE01600C897CA /* YINTransformer.swift in Sources */,
 				D5843EDF1DBD2CF50077F86E /* Buffer.swift in Sources */,
 				D59CB16A1C345E0A00290B63 /* FFTTransformer.swift in Sources */,
+				D5843EE71DBD2FAA0077F86E /* EstimationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
