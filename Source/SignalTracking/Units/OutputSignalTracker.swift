@@ -6,7 +6,7 @@ class OutputSignalTracker: SignalTracker {
   var levelThreshold: Float?
 
   fileprivate let bufferSize: AVAudioFrameCount
-  fileprivate let audioURL: URL
+  fileprivate let audioUrl: URL
 
   fileprivate var audioEngine: AVAudioEngine!
   fileprivate var audioPlayer: AVAudioPlayerNode!
@@ -22,9 +22,9 @@ class OutputSignalTracker: SignalTracker {
 
   // MARK: - Initialization
 
-  required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048,
-                       delegate: SignalTrackerDelegate? = nil) {
-    self.audioURL = audioURL
+  required init(audioUrl: URL, bufferSize: AVAudioFrameCount = 2048,
+                delegate: SignalTrackerDelegate? = nil) {
+    self.audioUrl = audioUrl
     self.bufferSize = bufferSize
     self.delegate = delegate
   }
@@ -38,7 +38,7 @@ class OutputSignalTracker: SignalTracker {
     audioEngine = AVAudioEngine()
     audioPlayer = AVAudioPlayerNode()
 
-    let audioFile = try AVAudioFile(forReading: audioURL)
+    let audioFile = try AVAudioFile(forReading: audioUrl)
 
     audioEngine.attach(audioPlayer)
     audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: audioFile.processingFormat)

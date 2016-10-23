@@ -59,33 +59,24 @@ convert `AVAudioPCMBuffer` object to the array of floating numbers (with
 ## Usage
 
 ### Configuration
-Configure buffer size and estimation strategy with the
-`Config` struct that could be used in the initialization of `PitchEngine`. For
-the case when a signal needs to be tracked from the device output there is
-`audioURL` parameter which is the URL to your audio file.
+Configure buffer size and estimation strategy with the `Config` struct that
+will be used in the initialization of `PitchEngine`. For
+the case when a signal needs to be tracked from the device output there is the
+`audioURL` parameter which is the URL of your audio file.
 
 ```swift
 // Creates a configuration for the input signal tracking (by default)
 let config = Config(
   bufferSize: 4096,
-  transformStrategy: .FFT,
-  estimationStrategy: .HPS)
+  estimationStrategy: .yin
+)
 
 // Creates a configuration for the output signal tracking
 let config = Config(
   bufferSize: 4096,
-  transformStrategy: .FFT,
-  estimationStrategy: .HPS,
-  audioURL: URL)
-```
-
-Initializer has default values:
-
-```swift
-public init(bufferSize: AVAudioFrameCount = 4096,
-    transformStrategy: TransformStrategy = .FFT,
-    estimationStrategy: EstimationStrategy = .HPS,
-    audioURL: NSURL? = nil)
+  estimationStrategy: .yin,
+  audioURL: URL
+)
 ```
 
 It means that `Config` could also be instantiated without any parameters:
