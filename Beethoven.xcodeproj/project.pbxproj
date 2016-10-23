@@ -126,9 +126,7 @@
 		D51575A11C343B77006F8E75 = {
 			isa = PBXGroup;
 			children = (
-				D5A49C731C343EC300427BF8 /* Quick.framework */,
-				D5A49C741C343EC300427BF8 /* Nimble.framework */,
-				D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */,
+				D55C01F41DBD1F8100575260 /* Frameworks */,
 				D59CB1361C345E0A00290B63 /* Source */,
 				D5A49CD41C343FD700427BF8 /* Beethoven */,
 				D5A49CCE1C343FD700427BF8 /* BeethovenTests */,
@@ -145,6 +143,16 @@
 				D51575B51C343B77006F8E75 /* Beethoven-iOS-Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D55C01F41DBD1F8100575260 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5A49C731C343EC300427BF8 /* Quick.framework */,
+				D5A49C741C343EC300427BF8 /* Nimble.framework */,
+				D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D59CB1361C345E0A00290B63 /* Source */ = {
