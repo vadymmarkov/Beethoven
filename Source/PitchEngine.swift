@@ -31,7 +31,7 @@ open class PitchEngine {
     return signalTracker is InputSignalTracker ? .record : .playback
   }
 
-  open var levelThreshold:Float? {
+  open var levelThreshold: Float? {
     get {
       return self.signalTracker.levelThreshold
     }
@@ -40,7 +40,7 @@ open class PitchEngine {
     }
   }
 
-  public var signalLevel:Float {
+  public var signalLevel: Float {
     get { return signalTracker.averageLevel ?? 0.0 }
   }
 
@@ -148,7 +148,5 @@ extension PitchEngine: SignalTrackerDelegate {
     DispatchQueue.main.async {
       self.delegate?.pitchEngineWentBelowLevelThreshold(self)
     }
-
   }
-
 }

@@ -6,14 +6,14 @@ public protocol SignalTrackerDelegate: class {
     didReceiveBuffer buffer: AVAudioPCMBuffer,
     atTime time: AVAudioTime)
 
-  func signalTrackerWentBelowLevelThreshold(_ signalTracker:SignalTracker)
+  func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker)
 }
 
 public protocol SignalTracker: class {
 
-  var levelThreshold:Float? { get set }
-  var peakLevel:Float? { get }
-  var averageLevel:Float? { get }
+  var levelThreshold: Float? { get set }
+  var peakLevel: Float? { get }
+  var averageLevel: Float? { get }
   weak var delegate: SignalTrackerDelegate? { get set }
 
   func start() throws

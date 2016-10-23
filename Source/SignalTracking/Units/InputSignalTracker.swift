@@ -92,13 +92,10 @@ open class InputSignalTracker: SignalTracker {
       captureSession.addInput(audioCaptureInput)
 
       let audioOutput = AVCaptureAudioDataOutput()
-
       captureSession.addOutput(audioOutput)
 
-      let connection = audioOutput.connections[0] as! AVCaptureConnection
-      let firstAudioChannel = connection.audioChannels[0] as! AVCaptureAudioChannel
-
-      audioChannel = firstAudioChannel
+      let connection = audioOutput.connections[0] as? AVCaptureConnection
+      audioChannel = connection?.audioChannels[0] as? AVCaptureAudioChannel
     } catch {}
   }
 }

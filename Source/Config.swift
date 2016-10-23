@@ -1,7 +1,7 @@
 import AVFoundation
 
 public struct Config {
-  
+
   public var bufferSize: AVAudioFrameCount
   public var transformStrategy: TransformStrategy
   public var estimationStrategy: EstimationStrategy

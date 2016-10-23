@@ -19,10 +19,10 @@ open class OutputSignalTracker: SignalTracker {
     get { return 0.0 }
   }
 
-
   // MARK: - Initialization
 
-  public required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
+  public required init(audioURL: URL, bufferSize: AVAudioFrameCount = 2048,
+                       delegate: SignalTrackerDelegate? = nil) {
     self.audioURL = audioURL
     self.bufferSize = bufferSize
     self.delegate = delegate

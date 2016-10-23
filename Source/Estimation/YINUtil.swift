@@ -13,12 +13,9 @@ import Accelerate
 
 class YINUtil {
 
-  // slow and eats a lot of CPU, but working
-  //
-  class func difference2(buffer:[Float]) -> [Float] {
-
+  // Slow and eats a lot of CPU, but working
+  class func difference2(buffer: [Float]) -> [Float] {
     let bufferHalfCount = buffer.count / 2
-
     var resultBuffer = [Float](repeating:0.0, count:bufferHalfCount)
 
     for tau in 0 ..< bufferHalfCount {
@@ -31,21 +28,17 @@ class YINUtil {
     return resultBuffer
   }
 
-  // accelerated version of difference2 - Instruments shows roughly around 22% CPU usage, compared to 95% for difference2
-  //
-  class func differenceA(buffer:[Float]) -> [Float] {
+  // Accelerated version of difference2 -
+  // Instruments shows roughly around 22% CPU usage, compared to 95% for difference2
+  class func differenceA(buffer: [Float]) -> [Float] {
     let bufferHalfCount = buffer.count / 2
-
     var resultBuffer = [Float](repeating:0.0, count:bufferHalfCount)
-
     var tempBuffer = [Float](repeating:0.0, count:bufferHalfCount)
     var tempBufferSq = [Float](repeating:0.0, count:bufferHalfCount)
-
     let len = vDSP_Length(bufferHalfCount)
-    var vSum:Float = 0.0
+    var vSum: Float = 0.0
 
     for tau in 0 ..< bufferHalfCount {
-
       let bufferTau = UnsafePointer<Float>(buffer).advanced(by: tau)
       // do a diff of buffer with itself at tau offset
       vDSP_vsub(buffer, 1, bufferTau, 1, &tempBuffer, 1, len)
@@ -60,26 +53,23 @@ class YINUtil {
     return resultBuffer
   }
 
-  // supposedly faster and less CPU consuming, but doesn't work, must be because I missed something when porting it from
+  // Supposedly faster and less CPU consuming, but doesn't work, must be because I missed something when porting it from
   // https://code.soundsoftware.ac.uk/projects/pyin/repository but I don't know what
   //
-  // kept for reference only
-  //
-  class func difference_broken_do_not_use(buffer:[Float]) -> [Float] {
+  // Kept for reference only.
+  class func difference_broken_do_not_use(buffer: [Float]) -> [Float] {
 
     let frameSize = buffer.count
     let yinBufferSize = frameSize / 2
 
-
     // power terms calculation
-    //
     var powerTerms = [Float](repeating:0, count:yinBufferSize)
 
-    let addSquare = { (res:Float, element:Float) -> Float in
+    _ = { (res: Float, element: Float) -> Float in
       res + element * element
     }
 
-    var powerTermFirstElement:Float = 0.0
+    var powerTermFirstElement: Float = 0.0
     for j in 0 ..< yinBufferSize {
       powerTermFirstElement += buffer[j] * buffer[j]
     }
@@ -99,10 +89,6 @@ class YINUtil {
     let bufferSizePOT = Int(1 << log2n)
     let inputCount = bufferSizePOT / 2
     let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
-
-    // buffer.count : 4410 - inputCount : 2048 - yinBufferSize : 2205
-    NSLog("buffer.count : \(buffer.count) - inputCount : \(inputCount) - yinBufferSize : \(yinBufferSize)")
-
     var audioRealp = [Float](repeating: 0, count: inputCount)
     var audioImagp = [Float](repeating: 0, count: inputCount)
     var audioTransformedComplex = DSPSplitComplex(realp: &audioRealp, imagp: &audioImagp)
@@ -140,14 +126,13 @@ class YINUtil {
 
     vDSP_fft_zrip(fftSetup!, &kernelTransformedComplex, 1, log2n, FFTDirection(FFT_FORWARD))
 
-
     var yinStyleACFRealp = [Float](repeating: 0, count: frameSize)
     var yinStyleACFImagp = [Float](repeating: 0, count: frameSize)
     var yinStyleACFComplex = DSPSplitComplex(realp: &yinStyleACFRealp, imagp: &yinStyleACFImagp)
 
     for j in 0 ..< inputCount {
-      yinStyleACFRealp[j] = audioRealp[j] * kernelRealp[j] - audioImagp[j] * kernelImagp[j];
-      yinStyleACFImagp[j] = audioRealp[j] * kernelImagp[j] + audioImagp[j] * kernelRealp[j];
+      yinStyleACFRealp[j] = audioRealp[j] * kernelRealp[j] - audioImagp[j] * kernelImagp[j]
+      yinStyleACFImagp[j] = audioRealp[j] * kernelImagp[j] + audioImagp[j] * kernelRealp[j]
     }
 
     vDSP_fft_zrip(fftSetup!, &yinStyleACFComplex, 1, log2n, FFTDirection(FFT_INVERSE))
@@ -164,10 +149,11 @@ class YINUtil {
   class func cumulativeDifference(yinBuffer: inout [Float]) {
     yinBuffer[0] = 1.0
 
-    var runningSum:Float = 0.0
+    var runningSum: Float = 0.0
 
     for tau in 1 ..< yinBuffer.count {
       runningSum += yinBuffer[tau]
+
       if runningSum == 0 {
         yinBuffer[tau] = 1
       } else {
@@ -176,14 +162,12 @@ class YINUtil {
     }
   }
 
-  class func absoluteThreshold(yinBuffer:[Float], withThreshold threshold: Float) -> Int {
-
+  class func absoluteThreshold(yinBuffer: [Float], withThreshold threshold: Float) -> Int {
     var tau = 2
     var minTau = 0
-    var minVal:Float = 1000.0
+    var minVal: Float = 1000.0
 
     while tau < yinBuffer.count {
-
       if yinBuffer[tau] < threshold {
         while (tau + 1) < yinBuffer.count && yinBuffer[tau + 1] < yinBuffer[tau] {
           tau += 1
@@ -205,14 +189,14 @@ class YINUtil {
     return 0
   }
 
-  class func parabolicInterpolation(yinBuffer:[Float], tau:Int) -> Float {
+  class func parabolicInterpolation(yinBuffer: [Float], tau: Int) -> Float {
+    guard tau != yinBuffer.count else {
+      return Float(tau)
+    }
 
-    guard tau != yinBuffer.count else { return Float(tau) }
-
-    var betterTau:Float = 0.0
+    var betterTau: Float = 0.0
 
     if tau > 0  && tau < yinBuffer.count - 1 {
-
       let s0 = yinBuffer[tau - 1]
       let s1 = yinBuffer[tau]
       let s2 = yinBuffer[tau + 1]
@@ -224,18 +208,15 @@ class YINUtil {
       }
 
       betterTau = Float(tau) + adjustment
-
     } else {
-
       betterTau = Float(tau)
-
     }
 
     return fabs(betterTau)
   }
 
-  class func sumSquare(yinBuffer:[Float], start:Int, end:Int) -> Float {
-    var out:Float = 0.0
+  class func sumSquare(yinBuffer: [Float], start: Int, end: Int) -> Float {
+    var out: Float = 0.0
 
     for i in start ..< end {
       out += yinBuffer[i] * yinBuffer[i]
@@ -243,5 +224,4 @@ class YINUtil {
 
     return out
   }
-
 }

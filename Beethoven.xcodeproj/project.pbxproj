@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		AF3190511DABE01600C897CA /* YINTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = YINTransformer.swift; sourceTree = "<group>"; tabWidth = 4; };
-		AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = YINUtil.swift; sourceTree = "<group>"; tabWidth = 4; };
+		AF4AFD991DAA3462002B6DC9 /* YINUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = YINUtil.swift; sourceTree = "<group>"; tabWidth = 2; };
 		AFFF3FF01DB633B4004AD9D9 /* YINEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINEstimator.swift; sourceTree = "<group>"; };
 		D51575AB1C343B77006F8E75 /* Beethoven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Beethoven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D51575B51C343B77006F8E75 /* Beethoven-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beethoven-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,9 +97,7 @@
 		D5A49C731C343EC300427BF8 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D5A49C741C343EC300427BF8 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		D5A49CD01C343FD700427BF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5A49CD21C343FD700427BF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A49CD61C343FD700427BF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5A49CD81C343FD700427BF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pitchy.framework; path = Carthage/Build/iOS/Pitchy.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				D5A49CCF1C343FD700427BF8 /* iOS */,
-				D5A49CD11C343FD700427BF8 /* Mac */,
 				D5A49CD31C343FD700427BF8 /* Spec */,
 			);
 			path = BeethovenTests;
@@ -305,14 +302,6 @@
 				D5A49CD01C343FD700427BF8 /* Info.plist */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		D5A49CD11C343FD700427BF8 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				D5A49CD21C343FD700427BF8 /* Info.plist */,
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 		D5A49CD31C343FD700427BF8 /* Spec */ = {
@@ -331,7 +320,6 @@
 			isa = PBXGroup;
 			children = (
 				D5A49CD51C343FD700427BF8 /* iOS */,
-				D5A49CD71C343FD700427BF8 /* Mac */,
 			);
 			path = Beethoven;
 			sourceTree = "<group>";
@@ -342,14 +330,6 @@
 				D5A49CD61C343FD700427BF8 /* Info.plist */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		D5A49CD71C343FD700427BF8 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				D5A49CD81C343FD700427BF8 /* Info.plist */,
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,6 +354,7 @@
 				D51575A81C343B77006F8E75 /* Headers */,
 				D51575A91C343B77006F8E75 /* Resources */,
 				D5A49CE11C34591300427BF8 /* Copy frameworks with Carthage */,
+				D55C01F31DBD1BF400575260 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -459,6 +440,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D55C01F31DBD1BF400575260 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		D5A49C7B1C343EF300427BF8 /* Copy frameworks with Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

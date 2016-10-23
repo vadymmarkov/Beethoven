@@ -10,7 +10,7 @@
 import Foundation
 import AVFoundation
 
-public struct YINTransformer : Transformer {
+public struct YINTransformer: Transformer {
 
   public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
 

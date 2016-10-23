@@ -8,5 +8,3 @@ script: xctool -project Pod/Pod.xcodeproj -scheme Tests -sdk iphonesimulator bui
 # Use when you have third party dependencies (CocoaPods generates a workspace)
 # podfile: Pod/Podfile
 # script: xctool -workspace Pod/Pod.xcworkspace -scheme Tests -sdk iphonesimulator build test GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean test
-
-after_success: slather
