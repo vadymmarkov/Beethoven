@@ -40,8 +40,6 @@
 		D59CB16A1C345E0A00290B63 /* FFTTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1521C345E0A00290B63 /* FFTTransformer.swift */; };
 		D59CB16B1C345E0A00290B63 /* SimpleTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1531C345E0A00290B63 /* SimpleTransformer.swift */; };
 		D59CB16C1C345E0A00290B63 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1541C345E0A00290B63 /* Transformer.swift */; };
-		D59CB16D1C345E0A00290B63 /* TransformFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1551C345E0A00290B63 /* TransformFactory.swift */; };
-		D59CB16E1C345E0A00290B63 /* TransformStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1561C345E0A00290B63 /* TransformStrategy.swift */; };
 		D5A49C751C343EC300427BF8 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C731C343EC300427BF8 /* Quick.framework */; };
 		D5A49C761C343EC300427BF8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C741C343EC300427BF8 /* Nimble.framework */; };
 		D5A49CDE1C3458EA00427BF8 /* Pitchy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */; };
@@ -94,8 +92,6 @@
 		D59CB1521C345E0A00290B63 /* FFTTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFTTransformer.swift; sourceTree = "<group>"; };
 		D59CB1531C345E0A00290B63 /* SimpleTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTransformer.swift; sourceTree = "<group>"; };
 		D59CB1541C345E0A00290B63 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
-		D59CB1551C345E0A00290B63 /* TransformFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformFactory.swift; sourceTree = "<group>"; };
-		D59CB1561C345E0A00290B63 /* TransformStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformStrategy.swift; sourceTree = "<group>"; };
 		D5A49C731C343EC300427BF8 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D5A49C741C343EC300427BF8 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pitchy.framework; path = Carthage/Build/iOS/Pitchy.framework; sourceTree = "<group>"; };
@@ -308,8 +304,6 @@
 			children = (
 				D59CB1511C345E0A00290B63 /* Strategies */,
 				D59CB1541C345E0A00290B63 /* Transformer.swift */,
-				D59CB1551C345E0A00290B63 /* TransformFactory.swift */,
-				D59CB1561C345E0A00290B63 /* TransformStrategy.swift */,
 			);
 			path = Transform;
 			sourceTree = "<group>";
@@ -485,12 +479,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D59CB1641C345E0A00290B63 /* QuinnsSecondEstimator.swift in Sources */,
-				D59CB16E1C345E0A00290B63 /* TransformStrategy.swift in Sources */,
 				D59CB1651C345E0A00290B63 /* Array+Extensions.swift in Sources */,
 				D59CB1601C345E0A00290B63 /* JainsEstimator.swift in Sources */,
 				D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */,
 				D59CB15D1C345E0A00290B63 /* LocationEstimator.swift in Sources */,
-				D59CB16D1C345E0A00290B63 /* TransformFactory.swift in Sources */,
 				D59CB1631C345E0A00290B63 /* QuinnsFirstEstimator.swift in Sources */,
 				D59CB15B1C345E0A00290B63 /* EstimationStrategy.swift in Sources */,
 				AF4AFD9A1DAA3462002B6DC9 /* YINUtil.swift in Sources */,

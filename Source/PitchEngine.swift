@@ -22,7 +22,6 @@ open class PitchEngine {
   open var active = false
   open weak var delegate: PitchEngineDelegate?
 
-  fileprivate var transformer: Transformer
   fileprivate var estimator: Estimator
   fileprivate var signalTracker: SignalTracker
   fileprivate var queue: DispatchQueue
@@ -48,7 +47,6 @@ open class PitchEngine {
 
   public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
-    transformer = TransformFactory.create(config.transformStrategy)
     estimator = EstimationFactory.create(config.estimationStrategy)
 
     if let audioURL = config.audioURL {
@@ -58,9 +56,7 @@ open class PitchEngine {
     }
 
     queue = DispatchQueue(label: "BeethovenQueue", attributes: [])
-
     signalTracker.delegate = self
-
     self.delegate = delegate
   }
 
@@ -127,7 +123,7 @@ extension PitchEngine: SignalTrackerDelegate {
         guard let weakSelf = self else { return }
 
         do {
-          let transformedBuffer = try weakSelf.transformer.transform(buffer: buffer)
+          let transformedBuffer = try weakSelf.estimator.transformer.transform(buffer: buffer)
           let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
             buffer: transformedBuffer)
           let pitch = try Pitch(frequency: Double(frequency))

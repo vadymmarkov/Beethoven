@@ -1,9 +1,9 @@
-public struct HPSEstimator: LocationEstimator {
+struct HPSEstimator: LocationEstimator {
 
-  public var harmonics = 5
-  public var minIndex = 20
+  var harmonics = 5
+  var minIndex = 20
 
-  public func estimateLocation(_ buffer: Buffer) throws -> Int {
+  func estimateLocation(_ buffer: Buffer) throws -> Int {
     var spectrum = buffer.elements
     let maxIndex = spectrum.count - 1
     var maxHIndex = spectrum.count / harmonics

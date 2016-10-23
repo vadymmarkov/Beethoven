@@ -8,7 +8,9 @@
 
 import UIKit
 
-class YINEstimator: Estimator {
+struct YINEstimator: Estimator {
+
+  var transformer: Transformer = YINTransformer()
 
   var threshold: Float = 0.05
 
