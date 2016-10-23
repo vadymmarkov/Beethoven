@@ -126,9 +126,8 @@ extension PitchEngine: SignalTrackerDelegate {
       queue.async { [weak self] in
         guard let weakSelf = self else { return }
 
-        let transformedBuffer = weakSelf.transformer.transformBuffer(buffer)
-
         do {
+          let transformedBuffer = try weakSelf.transformer.transform(buffer: buffer)
           let frequency = try weakSelf.estimator.estimateFrequency(Float(time.sampleRate),
             buffer: transformedBuffer)
           let pitch = try Pitch(frequency: Double(frequency))

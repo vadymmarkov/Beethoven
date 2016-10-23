@@ -3,7 +3,7 @@ import Accelerate
 
 public struct FFTTransformer: Transformer {
 
-  public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
+  public func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
     let frameCount = buffer.frameLength
     let log2n = UInt(round(log2(Double(frameCount))))
     let bufferSizePOT = Int(1 << log2n)
@@ -29,9 +29,6 @@ public struct FFTTransformer: Transformer {
                   &output, 1, vDSP_Length(inputCount))
 
     }
-
-//    vDSP_ctoz(UnsafePointer<DSPComplex>(transferBuffer), 2,
-//      &output, 1, vDSP_Length(inputCount))
 
     vDSP_fft_zrip(fftSetup!, &output, 1, log2n, FFTDirection(FFT_FORWARD))
 
