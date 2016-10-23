@@ -1,9 +1,9 @@
 PODS:
-  - Beethoven (1.0.0):
+  - Beethoven (2.0.0):
     - Pitchy
-  - Cartography (0.6.0)
-  - Hue (1.1.1)
-  - Pitchy (1.0.0)
+  - Cartography (1.0.1)
+  - Hue (2.0.0)
+  - Pitchy (2.0.1)
 
 DEPENDENCIES:
   - Beethoven (from `../../`)
@@ -12,21 +12,21 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Beethoven:
-    :path: "../../"
+    :path: ../../
   Hue:
     :git: https://github.com/hyperoslo/Hue
 
 CHECKOUT OPTIONS:
   Hue:
-    :commit: 66e5c25d9ef9a95840c23467dc79f12ded8af0c8
+    :commit: 9588169ba4201e8a1038a3d2c1750843bf90d7e0
     :git: https://github.com/hyperoslo/Hue
 
 SPEC CHECKSUMS:
-  Beethoven: 33b9add13299ea95e84bce44900055ac3c232fe0
-  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
-  Hue: 931aeeadcb29ce5de5b97589aa936be4638a1501
-  Pitchy: 4e8302612409d07a27c5083f0bbc2a4bd376f1cc
+  Beethoven: 8dedb982e34b53a1a2c5c79ee879929d65710869
+  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
+  Hue: 2b317616a04cc5d7cccdb024c88e6d143e2b9cf1
+  Pitchy: 00dbe7cb7ac87fd9c32cb2aa6ce50d11f931289f
 
-PODFILE CHECKSUM: 63470e9ecb94f73e46132580d5ace67162bce27b
+PODFILE CHECKSUM: 1e153b4e2c75610a8ffdfdf508f1f60b13da109d
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1

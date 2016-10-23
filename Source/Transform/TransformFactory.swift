@@ -1,15 +1,17 @@
 struct TransformFactory {
 
   static func create(_ strategy: TransformStrategy) -> Transformer {
-    let estimator: Transformer
+    let transformer: Transformer
 
     switch strategy {
     case .fft:
-      estimator = FFTTransformer()
+      transformer = FFTTransformer()
+    case .yin:
+      transformer = YINTransformer()
     default:
-      estimator = SimpleTransformer()
+      transformer = SimpleTransformer()
     }
 
-    return estimator
+    return transformer
   }
 }

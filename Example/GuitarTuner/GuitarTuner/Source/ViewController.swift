@@ -9,9 +9,9 @@ class ViewController: UIViewController {
   lazy var noteLabel: UILabel = {
     let label = UILabel()
     label.text = "--"
-    label.font = UIFont.boldSystemFontOfSize(65)
-    label.textColor = UIColor.hex("DCD9DB")
-    label.textAlignment = .Center
+    label.font = UIFont.boldSystemFont(ofSize: 65)
+    label.textColor = UIColor(hex: "DCD9DB")
+    label.textAlignment = .center
     label.numberOfLines = 0
     label.sizeToFit()
 
@@ -20,9 +20,9 @@ class ViewController: UIViewController {
 
   lazy var offsetLabel: UILabel = { [unowned self] in
     let label = UILabel()
-    label.font = UIFont.systemFontOfSize(28)
-    label.textColor = UIColor.whiteColor()
-    label.textAlignment = .Center
+    label.font = UIFont.systemFont(ofSize: 28)
+    label.textColor = UIColor.white
+    label.textAlignment = .center
     label.numberOfLines = 0
     label.sizeToFit()
 
@@ -30,21 +30,24 @@ class ViewController: UIViewController {
     }()
 
   lazy var actionButton: UIButton = { [unowned self] in
-    let button = UIButton(type: .System)
+    let button = UIButton(type: .system)
     button.layer.cornerRadius = 20
-    button.backgroundColor = UIColor.hex("3DAFAE")
-    button.titleLabel?.font = UIFont.systemFontOfSize(20)
-    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    button.backgroundColor = UIColor(hex: "3DAFAE")
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+    button.setTitleColor(UIColor.white, for: UIControlState())
 
     button.addTarget(self, action: #selector(ViewController.actionButtonDidPress(_:)),
-      forControlEvents: .TouchUpInside)
-    button.setTitle("Start".uppercaseString, forState: .Normal)
+      for: .touchUpInside)
+    button.setTitle("Start".uppercased(), for: UIControlState())
 
     return button
     }()
 
   lazy var pitchEngine: PitchEngine = { [unowned self] in
-    let pitchEngine = PitchEngine(delegate: self)
+    var config = Config()
+    config.transformStrategy = .yin
+    config.estimationStrategy = .yin
+    let pitchEngine = PitchEngine(config: config, delegate: self)
     pitchEngine.levelThreshold = -30.0
 
     return pitchEngine
@@ -55,8 +58,8 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = "Tuner".uppercaseString
-    view.backgroundColor = UIColor.hex("111011")
+    title = "Tuner".uppercased()
+    view.backgroundColor = UIColor(hex: "111011")
 
     [noteLabel, actionButton, offsetLabel].forEach {
       view.addSubview($0)
@@ -67,25 +70,25 @@ class ViewController: UIViewController {
 
   // MARK: - Action methods
 
-  func actionButtonDidPress(button: UIButton) {
+  func actionButtonDidPress(_ button: UIButton) {
     let text = pitchEngine.active
-      ? NSLocalizedString("Start", comment: "").uppercaseString
-      : NSLocalizedString("Stop", comment: "").uppercaseString
+      ? NSLocalizedString("Start", comment: "").uppercased()
+      : NSLocalizedString("Stop", comment: "").uppercased()
 
-    button.setTitle(text, forState: .Normal)
+    button.setTitle(text, for: .normal)
     button.backgroundColor = pitchEngine.active
-      ? UIColor.hex("3DAFAE")
-      : UIColor.hex("E13C6C")
+      ? UIColor(hex: "3DAFAE")
+      : UIColor(hex: "E13C6C")
 
     noteLabel.text = "--"
     pitchEngine.active ? pitchEngine.stop() : pitchEngine.start()
-    offsetLabel.hidden = !pitchEngine.active
+    offsetLabel.isHidden = !pitchEngine.active
   }
 
   // MARK: - Constrains
 
   func setupLayout() {
-    let totalSize = UIScreen.mainScreen().bounds
+    let totalSize = UIScreen.main.bounds
 
     constrain(actionButton, noteLabel, offsetLabel) {
       actionButton, noteLabel, offsetLabel in
@@ -111,16 +114,16 @@ class ViewController: UIViewController {
 
   // MARK: - UI
 
-  func offsetColor(offsetPercentage: Double) -> UIColor {
+  func offsetColor(_ offsetPercentage: Double) -> UIColor {
     let color: UIColor
 
     switch abs(offsetPercentage) {
     case 0...5:
-      color = UIColor.hex("3DAFAE")
+      color = UIColor(hex: "3DAFAE")
     case 6...25:
-      color = UIColor.hex("FDFFB1")
+      color = UIColor(hex: "FDFFB1")
     default:
-      color = UIColor.hex("E13C6C")
+      color = UIColor(hex: "E13C6C")
     }
 
     return color
@@ -131,7 +134,7 @@ class ViewController: UIViewController {
 
 extension ViewController: PitchEngineDelegate {
 
-  func pitchEngineDidRecievePitch(pitchEngine: PitchEngine, pitch: Pitch) {
+  func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch) {
     noteLabel.text = pitch.note.string
 
     let offsetPercentage = pitch.closestOffset.percentage
@@ -148,10 +151,15 @@ extension ViewController: PitchEngineDelegate {
 
     offsetLabel.text = "\(prefix)" + String(format:"%.2f", absOffsetPercentage) + "%"
     offsetLabel.textColor = color
-    offsetLabel.hidden = false
+    offsetLabel.isHidden = false
   }
 
-  func pitchEngineDidRecieveError(pitchEngine: PitchEngine, error: ErrorType) {
+  func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error) {
     print(error)
   }
+
+  public func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine) {
+
+  }
+
 }

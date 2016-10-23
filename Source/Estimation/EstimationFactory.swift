@@ -16,6 +16,8 @@ struct EstimationFactory {
       estimator = JainsEstimator()
     case .hps:
       estimator = HPSEstimator()
+    case .yin:
+      estimator = YINEstimator()
     default:
       estimator = MaxValueEstimator()
     }
