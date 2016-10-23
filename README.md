@@ -59,7 +59,7 @@ convert `AVAudioPCMBuffer` object to the array of floating numbers (with
 ## Usage
 
 ### Configuration
-Configure buffer size, transform strategy and estimation strategy with the
+Configure buffer size and estimation strategy with the
 `Config` struct that could be used in the initialization of `PitchEngine`. For
 the case when a signal needs to be tracked from the device output there is
 `audioURL` parameter which is the URL to your audio file.

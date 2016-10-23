@@ -12,7 +12,6 @@ struct SimpleTransformer: Transformer {
     }
 
     let elements = Array.fromUnsafePointer(pointer.pointee, count:Int(buffer.frameLength))
-    
     return Buffer(elements: elements)
   }
 }

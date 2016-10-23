@@ -2,7 +2,7 @@ import AVFoundation
 
 class InputSignalTracker: SignalTracker {
 
-  public enum InputSignalTrackerError: Error {
+  enum InputSignalTrackerError: Error {
     case inputNodeMissing
   }
 

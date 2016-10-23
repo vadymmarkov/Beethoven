@@ -15,7 +15,7 @@ class EstimatorSpec: QuickSpec {
       describe("#maxBufferIndex") {
         it("returns the index of the max element in the array") {
           let array: [Float] = [0.1, 0.3, 0.2]
-          let result = try! estimator.maxBufferIndex(array)
+          let result = try! estimator.maxBufferIndex(from: array)
 
           expect(result).to(equal(1))
         }
@@ -24,14 +24,14 @@ class EstimatorSpec: QuickSpec {
       describe("#sanitize") {
         it("returns the passed location if it doesn't extend array bounds") {
           let array: [Float] = [0.1, 0.3, 0.2]
-          let result = estimator.sanitize(1, reserveLocation: 0, elements: array)
+          let result = estimator.sanitize(location: 1, reserveLocation: 0, elements: array)
 
           expect(result).to(equal(1))
         }
 
         it("returns the reserve location if the passed location extends array bounds") {
           let array: [Float] = [0.1, 0.3, 0.2]
-          let result = estimator.sanitize(4, reserveLocation: 0, elements: array)
+          let result = estimator.sanitize(location: 4, reserveLocation: 0, elements: array)
 
           expect(result).to(equal(0))
         }

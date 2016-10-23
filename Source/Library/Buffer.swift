@@ -1,16 +1,16 @@
-public struct Buffer {
+struct Buffer {
 
-  public var elements: [Float]
-  public var realElements: [Float]?
-  public var imagElements: [Float]?
+  var elements: [Float]
+  var realElements: [Float]?
+  var imagElements: [Float]?
 
-  public var count: Int {
+  var count: Int {
     return elements.count
   }
 
   // MARK: - Initialization
 
-  public init(elements: [Float], realElements: [Float]? = nil, imagElements: [Float]? = nil) {
+  init(elements: [Float], realElements: [Float]? = nil, imagElements: [Float]? = nil) {
     self.elements = elements
     self.realElements = realElements
     self.imagElements = imagElements

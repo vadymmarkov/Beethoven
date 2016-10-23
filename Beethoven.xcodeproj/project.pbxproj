@@ -11,17 +11,16 @@
 		AFFF3FF11DB633B4004AD9D9 /* YINEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFF3FF01DB633B4004AD9D9 /* YINEstimator.swift */; };
 		D51575B61C343B77006F8E75 /* Beethoven.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51575AB1C343B77006F8E75 /* Beethoven.framework */; };
 		D55C020F1DBD211E00575260 /* ConfigSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C01F71DBD210600575260 /* ConfigSpec.swift */; };
-		D55C02101DBD211E00575260 /* BufferSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C01F91DBD210600575260 /* BufferSpec.swift */; };
 		D55C02111DBD211E00575260 /* EstimationFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C01FB1DBD210600575260 /* EstimationFactorySpec.swift */; };
 		D55C02121DBD211E00575260 /* EstimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C01FC1DBD210600575260 /* EstimatorSpec.swift */; };
 		D55C02131DBD211E00575260 /* ArrayExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C01FE1DBD210600575260 /* ArrayExtensionsSpec.swift */; };
 		D55C02141DBD211E00575260 /* FFTTransformerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C02011DBD210600575260 /* FFTTransformerSpec.swift */; };
-		D55C02151DBD211E00575260 /* TransformFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C02021DBD210600575260 /* TransformFactorySpec.swift */; };
 		D5843EDF1DBD2CF50077F86E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EDE1DBD2CF50077F86E /* Buffer.swift */; };
 		D5843EE21DBD2D110077F86E /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE11DBD2D110077F86E /* Array+Extensions.swift */; };
 		D5843EE41DBD2D290077F86E /* YINUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE31DBD2D290077F86E /* YINUtil.swift */; };
 		D5843EE71DBD2FAA0077F86E /* EstimationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE51DBD2FAA0077F86E /* EstimationFactory.swift */; };
 		D5843EE81DBD2FAA0077F86E /* EstimationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EE61DBD2FAA0077F86E /* EstimationStrategy.swift */; };
+		D5843EEC1DBD34AD0077F86E /* BufferSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5843EEA1DBD34680077F86E /* BufferSpec.swift */; };
 		D59CB1571C345E0A00290B63 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB1371C345E0A00290B63 /* Config.swift */; };
 		D59CB1591C345E0A00290B63 /* EstimationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13B1C345E0A00290B63 /* EstimationError.swift */; };
 		D59CB15C1C345E0A00290B63 /* Estimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59CB13E1C345E0A00290B63 /* Estimator.swift */; };
@@ -61,12 +60,10 @@
 		D51575AB1C343B77006F8E75 /* Beethoven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Beethoven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D51575B51C343B77006F8E75 /* Beethoven-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beethoven-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55C01F71DBD210600575260 /* ConfigSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSpec.swift; sourceTree = "<group>"; };
-		D55C01F91DBD210600575260 /* BufferSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferSpec.swift; sourceTree = "<group>"; };
 		D55C01FB1DBD210600575260 /* EstimationFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationFactorySpec.swift; sourceTree = "<group>"; };
 		D55C01FC1DBD210600575260 /* EstimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimatorSpec.swift; sourceTree = "<group>"; };
 		D55C01FE1DBD210600575260 /* ArrayExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionsSpec.swift; sourceTree = "<group>"; };
 		D55C02011DBD210600575260 /* FFTTransformerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFTTransformerSpec.swift; sourceTree = "<group>"; };
-		D55C02021DBD210600575260 /* TransformFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformFactorySpec.swift; sourceTree = "<group>"; };
 		D55C02041DBD210600575260 /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
 		D55C02051DBD210600575260 /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		D5843EDE1DBD2CF50077F86E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
@@ -74,6 +71,7 @@
 		D5843EE31DBD2D290077F86E /* YINUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YINUtil.swift; sourceTree = "<group>"; };
 		D5843EE51DBD2FAA0077F86E /* EstimationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationFactory.swift; sourceTree = "<group>"; };
 		D5843EE61DBD2FAA0077F86E /* EstimationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationStrategy.swift; sourceTree = "<group>"; };
+		D5843EEA1DBD34680077F86E /* BufferSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferSpec.swift; sourceTree = "<group>"; };
 		D59CB1371C345E0A00290B63 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D59CB13B1C345E0A00290B63 /* EstimationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimationError.swift; sourceTree = "<group>"; };
 		D59CB13E1C345E0A00290B63 /* Estimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Estimator.swift; sourceTree = "<group>"; };
@@ -163,20 +161,12 @@
 			isa = PBXGroup;
 			children = (
 				D55C01F71DBD210600575260 /* ConfigSpec.swift */,
-				D55C01F81DBD210600575260 /* Data */,
 				D55C01FA1DBD210600575260 /* Estimation */,
 				D55C01FD1DBD210600575260 /* Extensions */,
+				D5843EE91DBD34680077F86E /* Library */,
 				D55C01FF1DBD210600575260 /* Transform */,
 			);
 			path = Spec;
-			sourceTree = "<group>";
-		};
-		D55C01F81DBD210600575260 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				D55C01F91DBD210600575260 /* BufferSpec.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		D55C01FA1DBD210600575260 /* Estimation */ = {
@@ -200,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				D55C02001DBD210600575260 /* Strategies */,
-				D55C02021DBD210600575260 /* TransformFactorySpec.swift */,
 			);
 			path = Transform;
 			sourceTree = "<group>";
@@ -238,6 +227,14 @@
 				D5843EE11DBD2D110077F86E /* Array+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D5843EE91DBD34680077F86E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D5843EEA1DBD34680077F86E /* BufferSpec.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		D59CB1361C345E0A00290B63 /* Source */ = {
@@ -510,12 +507,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D55C02101DBD211E00575260 /* BufferSpec.swift in Sources */,
 				D55C02121DBD211E00575260 /* EstimatorSpec.swift in Sources */,
-				D55C02151DBD211E00575260 /* TransformFactorySpec.swift in Sources */,
 				D55C02111DBD211E00575260 /* EstimationFactorySpec.swift in Sources */,
 				D55C02141DBD211E00575260 /* FFTTransformerSpec.swift in Sources */,
 				D55C02131DBD211E00575260 /* ArrayExtensionsSpec.swift in Sources */,
+				D5843EEC1DBD34AD0077F86E /* BufferSpec.swift in Sources */,
 				D55C020F1DBD211E00575260 /* ConfigSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
