@@ -51,9 +51,7 @@ and more than welcome!
 ## Key features
 
 - [x] Audio signal tracking with `AVAudioEngine` and audio nodes.
-- [x] Pre-processing of audio buffer by one of the available "transformers",
-which convert `AVAudioPCMBuffer` object to an array of floating numbers
-(with possible optimizations).
+- [x] Pre-processing of audio buffer by one of the available "transformers".
 - [x] Pitch estimation.
 
 ## Usage
@@ -61,17 +59,17 @@ which convert `AVAudioPCMBuffer` object to an array of floating numbers
 ### Configuration
 Configure buffer size and estimation strategy with the `Config` struct, which
 is used in the initialization of `PitchEngine`. For the case when a signal
-needs to be tracked from the device output there is the `audioUrl` parameter,
-to set the URL of your audio file.
+needs to be tracked from the device output, there is the `audioUrl` parameter,
+which is meant to be a URL of your audio file.
 
 ```swift
-// Creates a configuration for the input signal tracking (by default)
+// Creates a configuration for the input signal tracking (by default).
 let config = Config(
   bufferSize: 4096,
   estimationStrategy: .yin
 )
 
-// Creates a configuration for the output signal tracking
+// Creates a configuration for the output signal tracking.
 let config = Config(
   bufferSize: 4096,
   estimationStrategy: .yin,
@@ -79,22 +77,23 @@ let config = Config(
 )
 ```
 
-It means that `Config` could also be instantiated without any parameters:
+`Config` could also be instantiated without any parameters:
 
 ```swift
+// Input signal tracking with YIN algorithm.
 let config = Config()
 ```
 
 ### Pitch engine
 `PitchEngine` is the main class you are going to work with to find the pitch.
-It could be instantiated with a configuration and delegate:
+It can be instantiated with a configuration and delegate:
 
 ```swift
 let pitchEngine = PitchEngine(config: config, delegate: pitchEngineDelegate)
 ```
 
 Both parameters are optional, standard config is used by default, and `delegate`
-can always be set later:
+could always be set later:
 
 ```swift
 let pitchEngine = PitchEngine()
@@ -129,7 +128,7 @@ audio file and get the audio buffer from the playback output.
 Transform is the first step of audio processing where `AVAudioPCMBuffer` object
 is converted to an array of floating numbers. Also it's a place for different
 kind of optimizations. Then array is kept in the `elements` property of the
-internal `Buffer` struct which also has optional `realElements` and
+internal `Buffer` struct, which also has optional `realElements` and
 `imagElements` properties that could be useful in the further calculations.
 
 There are 3 types of transformations at the moment:
@@ -223,23 +222,23 @@ public enum EstimationError: Error {
 
 ## Pitch detection specifics
 
-**Beethoven** performs a pitch detection of a monophonic recording only at the
-moment.
+At the moment **Beethoven** performs only a pitch detection of a monophonic
+recording.
 
 **Based on Stackoverflow** [answer](http://stackoverflow.com/a/14503090):
 
-Pitch detection depends greatly on the musical content you want to work with.
-Extracting the pitch of a monophonic recording (i.e. single instrument or voice)
-is not the same as extracting the pitch of a single instrument from a polyphonic
-mixture (e.g. extracting the pitch of the melody from a polyphonic recording).
+> Pitch detection depends greatly on the musical content you want to work with.
+> Extracting the pitch of a monophonic recording (i.e. single instrument or voice)
+> is not the same as extracting the pitch of a single instrument from a polyphonic
+> mixture (e.g. extracting the pitch of the melody from a polyphonic recording).
 
-For monophonic pitch extraction there are various algorithm that could be
-implemented both in the time domain and frequency domain
-([Wikipedia](https://en.wikipedia.org/wiki/Pitch_detection_algorithm)).
+> For monophonic pitch extraction there are various algorithm that could be
+> implemented both in the time domain and frequency domain
+> ([Wikipedia](https://en.wikipedia.org/wiki/Pitch_detection_algorithm)).
 
-However, neither will work well if you want to extract the melody from
-polyphonic material. Melody extraction from polyphonic music is still a
-research problem.
+> However, neither will work well if you want to extract the melody from
+> polyphonic material. Melody extraction from polyphonic music is still a
+> research problem.
 
 ## Examples
 
@@ -266,6 +265,9 @@ To install just write into your Cartfile:
 ```ruby
 github "vadymmarkov/Beethoven"
 ```
+
+**Beethoven** can also be installed manually. Just download and drop `Sources`
+folders in your project.
 
 ## Components
 
