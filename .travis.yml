@@ -5,10 +5,11 @@ before_install:
 - brew update
 - if brew outdated | grep -qx carthage; then brew upgrade carthage; fi
 - travis_wait 35 carthage bootstrap --platform iOS
-
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./swiftlint.sh; fi
 script:
 - xcodebuild clean build -project Beethoven.xcodeproj -scheme "Beethoven-iOS" -sdk iphonesimulator | xcpretty && exit ${PIPESTATUS[0]}
 - xcodebuild test -project Beethoven.xcodeproj -scheme "Beethoven-iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' | xcpretty && exit ${PIPESTATUS[0]}
-
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then swiftlint; fi
 notifications:
   email: false
