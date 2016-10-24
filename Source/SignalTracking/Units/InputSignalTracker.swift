@@ -31,7 +31,7 @@ class InputSignalTracker: SignalTracker {
   // MARK: - Initialization
 
   required init(bufferSize: AVAudioFrameCount = 2048,
-                       delegate: SignalTrackerDelegate? = nil) {
+                delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
 

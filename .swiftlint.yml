@@ -36,7 +36,4 @@ variable_name:
   excluded: # excluded via string array
     - x
     - y
-    - id
-    - URL
-    - GlobalAPIKey
 reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)
