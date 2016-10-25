@@ -13,8 +13,7 @@ class ConfigSpec: QuickSpec {
           config = Config()
 
           expect(config.bufferSize).to(equal(4096))
-          expect(config.transformStrategy).to(equal(TransformStrategy.FFT))
-          expect(config.estimationStrategy).to(equal(EstimationStrategy.HPS))
+          expect(config.estimationStrategy).to(equal(EstimationStrategy.yin))
           expect(config.audioURL).to(beNil())
         }
       }

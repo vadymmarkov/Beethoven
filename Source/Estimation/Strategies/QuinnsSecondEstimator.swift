@@ -1,10 +1,10 @@
 import Foundation
 
-public struct QuinnsSecondEstimator: LocationEstimator {
+struct QuinnsSecondEstimator: LocationEstimator {
 
-  public func estimateLocation(_ buffer: Buffer) throws -> Int {
+  func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
-    let maxIndex = try maxBufferIndex(elements)
+    let maxIndex = try maxBufferIndex(from: elements)
 
     guard let realElements = buffer.realElements, let imagElements = buffer.imagElements else {
       return maxIndex
@@ -24,7 +24,7 @@ public struct QuinnsSecondEstimator: LocationEstimator {
     let d = (dp + dm) / 2 + tau(dp * dp) - tau(dm * dm)
     let location = maxIndex + Int(round(d))
 
-    return sanitize(location, reserveLocation: maxIndex, elements: elements)
+    return sanitize(location: location, reserveLocation: maxIndex, elements: elements)
   }
 
   func tau(_ x: Float) -> Float {
@@ -32,6 +32,7 @@ public struct QuinnsSecondEstimator: LocationEstimator {
     let part1 = x + 1 - sqrt(2/3)
     let part2 = x + 1 + sqrt(2/3)
     let p2 = log(part1 / part2)
+
     return 1/4 * p1 - sqrt(6)/24 * p2
   }
 }

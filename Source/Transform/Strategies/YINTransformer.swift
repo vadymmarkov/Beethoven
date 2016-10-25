@@ -10,14 +10,11 @@
 import Foundation
 import AVFoundation
 
-public struct YINTransformer : Transformer {
+struct YINTransformer: Transformer {
 
-  public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
-
-    let pointer = buffer.floatChannelData
-    let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
-
-    let diffElements = YINUtil.differenceA(buffer: elements)
+  func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
+    let buffer = try SimpleTransformer().transform(buffer: buffer)
+    let diffElements = YINUtil.differenceA(buffer: buffer.elements)
 
     return Buffer(elements: diffElements)
   }

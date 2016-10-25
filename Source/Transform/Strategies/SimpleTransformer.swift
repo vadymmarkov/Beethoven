@@ -1,13 +1,17 @@
 import AVFoundation
 
-public struct SimpleTransformer: Transformer {
+struct SimpleTransformer: Transformer {
 
-  public func transformBuffer(_ buffer: AVAudioPCMBuffer) -> Buffer {
-//    let pointer = UnsafePointer<Float>(buffer.floatChannelData)
-//    let elements = Array.fromUnsafePointer(pointer, count: Int(buffer.frameLength))
+  enum SimpleTransformerError: Error {
+    case FloatChannelDataIsNil
+  }
 
-    let pointer = buffer.floatChannelData
-    let elements = Array.fromUnsafePointer((pointer?.pointee)!, count:Int(buffer.frameLength))
+  func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
+    guard let pointer = buffer.floatChannelData else {
+      throw SimpleTransformerError.FloatChannelDataIsNil
+    }
+
+    let elements = Array.fromUnsafePointer(pointer.pointee, count:Int(buffer.frameLength))
     return Buffer(elements: elements)
   }
 }

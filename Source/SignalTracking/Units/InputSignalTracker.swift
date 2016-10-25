@@ -1,28 +1,28 @@
 import AVFoundation
 
-open class InputSignalTracker: SignalTracker {
+public enum InputSignalTrackerError: Error {
+  case inputNodeMissing
+}
 
-  public enum InputSignalTrackerError: Error {
-    case inputNodeMissing
-  }
+class InputSignalTracker: SignalTracker {
 
-  open let bufferSize: AVAudioFrameCount
-  open weak var delegate: SignalTrackerDelegate?
-  open var levelThreshold: Float?
+  weak var delegate: SignalTrackerDelegate?
+  var levelThreshold: Float?
 
-  var audioChannel: AVCaptureAudioChannel?
-  let captureSession = AVCaptureSession()
+  fileprivate let bufferSize: AVAudioFrameCount
+  fileprivate var audioChannel: AVCaptureAudioChannel?
+  fileprivate let captureSession = AVCaptureSession()
   fileprivate var audioEngine: AVAudioEngine?
   fileprivate let session = AVAudioSession.sharedInstance()
   fileprivate let bus = 0
 
-  public var peakLevel: Float? {
+  var peakLevel: Float? {
     get {
       return audioChannel?.peakHoldLevel
     }
   }
 
-  public var averageLevel: Float? {
+  var averageLevel: Float? {
     get {
       return audioChannel?.averagePowerLevel
     }
@@ -30,7 +30,8 @@ open class InputSignalTracker: SignalTracker {
 
   // MARK: - Initialization
 
-  public required init(bufferSize: AVAudioFrameCount = 2048, delegate: SignalTrackerDelegate? = nil) {
+  required init(bufferSize: AVAudioFrameCount = 2048,
+                delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
 
@@ -39,7 +40,7 @@ open class InputSignalTracker: SignalTracker {
 
   // MARK: - Tracking
 
-  open func start() throws {
+  func start() throws {
     try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
     try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
 
@@ -52,7 +53,6 @@ open class InputSignalTracker: SignalTracker {
     let format = inputNode.inputFormat(forBus: bus)
 
     inputNode.installTap(onBus: bus, bufferSize: bufferSize, format: format) { buffer, time in
-
       guard let averageLevel = self.averageLevel else { return }
 
       let levelThreshold = self.levelThreshold ?? -1000000.0
@@ -73,7 +73,7 @@ open class InputSignalTracker: SignalTracker {
     try audioEngine?.start()
   }
 
-  open func stop() {
+  func stop() {
     guard audioEngine != nil else {
       return
     }
@@ -84,7 +84,7 @@ open class InputSignalTracker: SignalTracker {
     captureSession.stopRunning()
   }
 
-  func setupAudio() {
+  fileprivate func setupAudio() {
     do {
       let audioDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio)
       let audioCaptureInput = try AVCaptureDeviceInput(device: audioDevice)
@@ -92,13 +92,10 @@ open class InputSignalTracker: SignalTracker {
       captureSession.addInput(audioCaptureInput)
 
       let audioOutput = AVCaptureAudioDataOutput()
-
       captureSession.addOutput(audioOutput)
 
-      let connection = audioOutput.connections[0] as! AVCaptureConnection
-      let firstAudioChannel = connection.audioChannels[0] as! AVCaptureAudioChannel
-
-      audioChannel = firstAudioChannel
+      let connection = audioOutput.connections[0] as? AVCaptureConnection
+      audioChannel = connection?.audioChannels[0] as? AVCaptureAudioChannel
     } catch {}
   }
 }

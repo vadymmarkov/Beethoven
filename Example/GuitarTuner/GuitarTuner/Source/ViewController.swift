@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     return label
     }()
 
-  lazy var offsetLabel: UILabel = { [unowned self] in
+  lazy var offsetLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 28)
     label.textColor = UIColor.white
@@ -43,10 +43,8 @@ class ViewController: UIViewController {
     return button
     }()
 
-  lazy var pitchEngine: PitchEngine = { [unowned self] in
-    var config = Config()
-    config.transformStrategy = .yin
-    config.estimationStrategy = .yin
+  lazy var pitchEngine: PitchEngine = { [weak self] in
+    var config = Config(estimationStrategy: .yin)
     let pitchEngine = PitchEngine(config: config, delegate: self)
     pitchEngine.levelThreshold = -30.0
 
@@ -85,7 +83,7 @@ class ViewController: UIViewController {
     offsetLabel.isHidden = !pitchEngine.active
   }
 
-  // MARK: - Constrains
+  // MARK: - Layout
 
   func setupLayout() {
     let totalSize = UIScreen.main.bounds
@@ -140,7 +138,7 @@ extension ViewController: PitchEngineDelegate {
     let offsetPercentage = pitch.closestOffset.percentage
     let absOffsetPercentage = abs(offsetPercentage)
 
-    NSLog("pitch : \(pitch.note.string) - percentage : \(offsetPercentage)")
+    print("pitch : \(pitch.note.string) - percentage : \(offsetPercentage)")
 
     guard absOffsetPercentage > 1.0 else {
       return
@@ -159,7 +157,6 @@ extension ViewController: PitchEngineDelegate {
   }
 
   public func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine) {
-
+    print("Below level threshold")
   }
-
 }

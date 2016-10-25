@@ -1,7 +1,7 @@
 extension Array where Element:Comparable {
 
   static func fromUnsafePointer(_ data: UnsafePointer<Element>, count: Int) -> [Element] {
-    let buffer = UnsafeBufferPointer(start: data, count: count);
+    let buffer = UnsafeBufferPointer(start: data, count: count)
     return Array(buffer)
   }
 

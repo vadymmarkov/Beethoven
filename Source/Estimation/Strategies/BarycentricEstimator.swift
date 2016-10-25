@@ -1,10 +1,10 @@
 import Foundation
 
-public struct BarycentricEstimator: LocationEstimator {
+struct BarycentricEstimator: LocationEstimator {
 
-  public func estimateLocation(_ buffer: Buffer) throws -> Int {
+  func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
-    let maxIndex = try maxBufferIndex(elements)
+    let maxIndex = try maxBufferIndex(from: elements)
 
     let y2 = abs(elements[maxIndex])
     let y1 = maxIndex == 0 ? y2 : abs(elements[maxIndex - 1])
@@ -17,6 +17,6 @@ public struct BarycentricEstimator: LocationEstimator {
 
     let location = maxIndex + Int(round(d))
 
-    return sanitize(location, reserveLocation: maxIndex, elements: elements)
+    return sanitize(location: location, reserveLocation: maxIndex, elements: elements)
   }
 }
