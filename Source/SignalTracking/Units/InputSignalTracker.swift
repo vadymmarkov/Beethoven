@@ -50,7 +50,7 @@ class InputSignalTracker: SignalTracker {
       throw InputSignalTrackerError.inputNodeMissing
     }
 
-    let format = inputNode.inputFormat(forBus: bus)
+    let format = inputNode.outputFormat(forBus: bus)
 
     inputNode.installTap(onBus: bus, bufferSize: bufferSize, format: format) { buffer, time in
       guard let averageLevel = self.averageLevel else { return }
