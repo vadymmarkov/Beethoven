@@ -28,6 +28,10 @@ class InputSignalTracker: SignalTracker {
     }
   }
 
+  var mode: SignalTrackerMode {
+    get { return .record }
+  }
+
   // MARK: - Initialization
 
   required init(bufferSize: AVAudioFrameCount = 2048,
