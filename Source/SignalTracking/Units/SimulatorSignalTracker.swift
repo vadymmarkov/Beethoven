@@ -29,17 +29,17 @@ import AVFoundation
  * #endif
  *
  */
-class SimulatorSignalTracker: SignalTracker {
+public class SimulatorSignalTracker: SignalTracker {
 
-  var mode: SignalTrackerMode = .record
+  public var mode: SignalTrackerMode = .record
 
-  var levelThreshold: Float?
+  public var levelThreshold: Float?
 
-  var peakLevel: Float?
+  public var peakLevel: Float?
 
-  var averageLevel: Float?
+  public var averageLevel: Float?
 
-  weak var delegate: SignalTrackerDelegate?
+  public weak var delegate: SignalTrackerDelegate?
 
   private var frequencies: [Double]?
   private var delay: Int
@@ -53,7 +53,7 @@ class SimulatorSignalTracker: SignalTracker {
     self.delay = delayMs
   }
 
-  func start() throws {
+  public func start() throws {
     guard let frequencies = self.frequencies else { return }
 
     let time = AVAudioTime(sampleTime: 0, atRate: SimulatorSignalTracker.sampleRate)
@@ -79,7 +79,7 @@ class SimulatorSignalTracker: SignalTracker {
     })
   }
 
-  func stop() {
+  public func stop() {
   }
 
   private func createPCMBuffer(_ frequency: Double) -> AVAudioPCMBuffer {
