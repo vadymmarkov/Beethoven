@@ -42,6 +42,7 @@
 		D5A49C751C343EC300427BF8 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C731C343EC300427BF8 /* Quick.framework */; };
 		D5A49C761C343EC300427BF8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49C741C343EC300427BF8 /* Nimble.framework */; };
 		D5A49CDE1C3458EA00427BF8 /* Pitchy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */; };
+		E0BF88FD1E85C31A00079F64 /* SimulatorSignalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BF88FC1E85C31A00079F64 /* SimulatorSignalTracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		D5A49C731C343EC300427BF8 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		D5A49C741C343EC300427BF8 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		D5A49CDD1C3458EA00427BF8 /* Pitchy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pitchy.framework; path = Carthage/Build/iOS/Pitchy.framework; sourceTree = "<group>"; };
+		E0BF88FC1E85C31A00079F64 /* SimulatorSignalTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulatorSignalTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +292,7 @@
 		D59CB14D1C345E0A00290B63 /* Units */ = {
 			isa = PBXGroup;
 			children = (
+				E0BF88FC1E85C31A00079F64 /* SimulatorSignalTracker.swift */,
 				D59CB14E1C345E0A00290B63 /* InputSignalTracker.swift */,
 				D59CB14F1C345E0A00290B63 /* OutputSignalTracker.swift */,
 			);
@@ -492,6 +495,7 @@
 				D5843EE41DBD2D290077F86E /* YINUtil.swift in Sources */,
 				D59CB1611C345E0A00290B63 /* MaxValueEstimator.swift in Sources */,
 				D59CB15F1C345E0A00290B63 /* HPSEstimator.swift in Sources */,
+				E0BF88FD1E85C31A00079F64 /* SimulatorSignalTracker.swift in Sources */,
 				D59CB16B1C345E0A00290B63 /* SimpleTransformer.swift in Sources */,
 				D5843EE21DBD2D110077F86E /* Array+Extensions.swift in Sources */,
 				D59CB1571C345E0A00290B63 /* Config.swift in Sources */,

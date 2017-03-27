@@ -19,6 +19,10 @@ class OutputSignalTracker: SignalTracker {
   var averageLevel: Float? {
     get { return 0.0 }
   }
+  
+  var mode: SignalTrackerMode {
+    get { return .playback }
+  }
 
   // MARK: - Initialization
 

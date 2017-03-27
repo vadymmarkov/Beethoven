@@ -14,10 +14,6 @@ public enum PitchEngineError: Error {
 
 public class PitchEngine {
 
-  public enum Mode {
-    case record, playback
-  }
-
   public let bufferSize: AVAudioFrameCount
   public var active = false
   public weak var delegate: PitchEngineDelegate?
@@ -26,8 +22,8 @@ public class PitchEngine {
   fileprivate var signalTracker: SignalTracker
   fileprivate var queue: DispatchQueue
 
-  public var mode: Mode {
-    return signalTracker is InputSignalTracker ? .record : .playback
+  public var mode: SignalTrackerMode {
+    return signalTracker.mode
   }
 
   public var levelThreshold: Float? {
@@ -45,18 +41,22 @@ public class PitchEngine {
 
   // MARK: - Initialization
 
-  public init(config: Config = Config(), delegate: PitchEngineDelegate? = nil) {
+  public init(config: Config = Config(), signalTracker: SignalTracker? = nil, delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
     estimator = EstimationFactory.create(config.estimationStrategy)
 
-    if let audioUrl = config.audioUrl {
-      signalTracker = OutputSignalTracker(audioUrl: audioUrl, bufferSize: bufferSize)
+    if let signalTracker = signalTracker {
+      self.signalTracker = signalTracker
     } else {
-      signalTracker = InputSignalTracker(bufferSize: bufferSize)
+      if let audioUrl = config.audioUrl {
+        self.signalTracker = OutputSignalTracker(audioUrl: audioUrl, bufferSize: bufferSize)
+      } else {
+        self.signalTracker = InputSignalTracker(bufferSize: bufferSize)
+      }
     }
 
     queue = DispatchQueue(label: "BeethovenQueue", attributes: [])
-    signalTracker.delegate = self
+    self.signalTracker.delegate = self
     self.delegate = delegate
   }
 
@@ -117,7 +117,7 @@ public class PitchEngine {
 
 extension PitchEngine: SignalTrackerDelegate {
 
-  func signalTracker(_ signalTracker: SignalTracker,
+  public func signalTracker(_ signalTracker: SignalTracker,
     didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
       queue.async { [weak self] in
         guard let weakSelf = self else { return }
@@ -140,7 +140,7 @@ extension PitchEngine: SignalTrackerDelegate {
     }
   }
 
-  func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker) {
+  public func signalTrackerWentBelowLevelThreshold(_ signalTracker: SignalTracker) {
     DispatchQueue.main.async {
       self.delegate?.pitchEngineWentBelowLevelThreshold(self)
     }
