@@ -3,8 +3,8 @@ import AVFoundation
 import Pitchy
 
 public protocol PitchEngineDelegate: class {
-  func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch)
-  func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error)
+  func pitchEngine(_ pitchEngine: PitchEngine, didReceivePitch pitch: Pitch)
+  func pitchEngine(_ pitchEngine: PitchEngine, didReceiveError error: Error)
   func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 }
 
@@ -87,10 +87,8 @@ public final class PitchEngine {
         guard let weakSelf = self else { return }
 
         guard granted else {
-          weakSelf.delegate?.pitchEngineDidReceiveError(
-            weakSelf,
-            error: Error.recordPermissionDenied
-          )
+          weakSelf.delegate?.pitchEngine(weakSelf,
+                                         didReceiveError: Error.recordPermissionDenied)
           return
         }
 
@@ -111,7 +109,7 @@ public final class PitchEngine {
       try signalTracker.start()
       active = true
     } catch {
-      delegate?.pitchEngineDidReceiveError(self, error: error)
+      delegate?.pitchEngine(self, didReceiveError: error)
     }
   }
 }
@@ -123,21 +121,23 @@ extension PitchEngine: SignalTrackerDelegate {
                             didReceiveBuffer buffer: AVAudioPCMBuffer,
                             atTime time: AVAudioTime) {
       queue.async { [weak self] in
-        guard let weakSelf = self else { return }
+        guard let `self` = self else { return }
 
         do {
-          let transformedBuffer = try weakSelf.estimator.transformer.transform(buffer: buffer)
-          let frequency = try weakSelf.estimator.estimateFrequency(
+          let transformedBuffer = try self.estimator.transformer.transform(buffer: buffer)
+          let frequency = try self.estimator.estimateFrequency(
             sampleRate: Float(time.sampleRate),
             buffer: transformedBuffer)
           let pitch = try Pitch(frequency: Double(frequency))
 
-          DispatchQueue.main.async {
-            weakSelf.delegate?.pitchEngineDidReceivePitch(weakSelf, pitch: pitch)
+          DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.pitchEngine(self, didReceivePitch: pitch)
           }
         } catch {
-          DispatchQueue.main.async {
-            weakSelf.delegate?.pitchEngineDidReceiveError(weakSelf, error: error)
+          DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.pitchEngine(self, didReceiveError: error)
           }
         }
     }

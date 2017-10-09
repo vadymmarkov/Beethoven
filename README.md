@@ -104,8 +104,8 @@ pitchEngine.delegate = pitchEngineDelegate
 the pitch detection has been started:
 
 ```swift
-func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch)
-func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error)
+func pitchEngine(_ pitchEngine: PitchEngine, didReceivePitch pitch: Pitch)
+func pitchEngine(_ pitchEngine: PitchEngine, didReceiveError error: Error)
 func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 ```
 

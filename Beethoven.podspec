@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.ios.source_files = 'Source/**/*'
 
   s.frameworks = 'Foundation', 'AVFoundation', 'Accelerate'
-  s.dependency 'Pitchy'
+  s.dependency 'Pitchy', '~> 3.0'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
 end

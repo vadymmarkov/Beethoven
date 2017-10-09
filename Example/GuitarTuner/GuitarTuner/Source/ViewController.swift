@@ -4,8 +4,7 @@ import Pitchy
 import Hue
 import Cartography
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
   lazy var noteLabel: UILabel = {
     let label = UILabel()
     label.text = "--"
@@ -14,9 +13,8 @@ class ViewController: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 0
     label.sizeToFit()
-
     return label
-    }()
+  }()
 
   lazy var offsetLabel: UILabel = {
     let label = UILabel()
@@ -25,9 +23,8 @@ class ViewController: UIViewController {
     label.textAlignment = .center
     label.numberOfLines = 0
     label.sizeToFit()
-
     return label
-    }()
+  }()
 
   lazy var actionButton: UIButton = { [unowned self] in
     let button = UIButton(type: .system)
@@ -41,15 +38,14 @@ class ViewController: UIViewController {
     button.setTitle("Start".uppercased(), for: UIControlState())
 
     return button
-    }()
+  }()
 
   lazy var pitchEngine: PitchEngine = { [weak self] in
-    var config = Config(estimationStrategy: .yin)
+    let config = Config(estimationStrategy: .yin)
     let pitchEngine = PitchEngine(config: config, delegate: self)
     pitchEngine.levelThreshold = -30.0
-
     return pitchEngine
-    }()
+  }()
 
   // MARK: - View Lifecycle
 
@@ -68,7 +64,7 @@ class ViewController: UIViewController {
 
   // MARK: - Action methods
 
-  func actionButtonDidPress(_ button: UIButton) {
+  @objc func actionButtonDidPress(_ button: UIButton) {
     let text = pitchEngine.active
       ? NSLocalizedString("Start", comment: "").uppercased()
       : NSLocalizedString("Stop", comment: "").uppercased()
@@ -112,7 +108,7 @@ class ViewController: UIViewController {
 
   // MARK: - UI
 
-  func offsetColor(_ offsetPercentage: Double) -> UIColor {
+  private func offsetColor(_ offsetPercentage: Double) -> UIColor {
     let color: UIColor
 
     switch abs(offsetPercentage) {
@@ -131,8 +127,7 @@ class ViewController: UIViewController {
 // MARK: - PitchEngineDelegate
 
 extension ViewController: PitchEngineDelegate {
-
-  func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch) {
+  func pitchEngine(_ pitchEngine: PitchEngine, didReceivePitch pitch: Pitch) {
     noteLabel.text = pitch.note.string
 
     let offsetPercentage = pitch.closestOffset.percentage
@@ -152,7 +147,7 @@ extension ViewController: PitchEngineDelegate {
     offsetLabel.isHidden = false
   }
 
-  func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error) {
+  func pitchEngine(_ pitchEngine: PitchEngine, didReceiveError error: Error) {
     print(error)
   }
 
