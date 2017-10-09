@@ -12,15 +12,14 @@ public enum PitchEngineError: Error {
   case recordPermissionDenied
 }
 
-public class PitchEngine {
-
+public final class PitchEngine {
   public let bufferSize: AVAudioFrameCount
   public var active = false
   public weak var delegate: PitchEngineDelegate?
 
-  fileprivate var estimator: Estimator
-  fileprivate var signalTracker: SignalTracker
-  fileprivate var queue: DispatchQueue
+  private var estimator: Estimator
+  private var signalTracker: SignalTracker
+  private var queue: DispatchQueue
 
   public var mode: SignalTrackerMode {
     return signalTracker.mode
@@ -36,12 +35,14 @@ public class PitchEngine {
   }
 
   public var signalLevel: Float {
-    get { return signalTracker.averageLevel ?? 0.0 }
+    return signalTracker.averageLevel ?? 0.0
   }
 
   // MARK: - Initialization
 
-  public init(config: Config = Config(), signalTracker: SignalTracker? = nil, delegate: PitchEngineDelegate? = nil) {
+  public init(config: Config = Config(),
+              signalTracker: SignalTracker? = nil,
+              delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
     estimator = EstimationFactory.create(config.estimationStrategy)
 
@@ -93,8 +94,6 @@ public class PitchEngine {
           weakSelf.activate()
         }
       }
-    default:
-      break
     }
   }
 
@@ -118,7 +117,8 @@ public class PitchEngine {
 extension PitchEngine: SignalTrackerDelegate {
 
   public func signalTracker(_ signalTracker: SignalTracker,
-    didReceiveBuffer buffer: AVAudioPCMBuffer, atTime time: AVAudioTime) {
+                            didReceiveBuffer buffer: AVAudioPCMBuffer,
+                            atTime time: AVAudioTime) {
       queue.async { [weak self] in
         guard let weakSelf = self else { return }
 

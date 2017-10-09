@@ -13,20 +13,21 @@ class OutputSignalTracker: SignalTracker {
   fileprivate let bus = 0
 
   var peakLevel: Float? {
-    get { return 0.0 }
+    return 0.0
   }
 
   var averageLevel: Float? {
-    get { return 0.0 }
+    return 0.0
   }
-  
+
   var mode: SignalTrackerMode {
-    get { return .playback }
+    return .playback
   }
 
   // MARK: - Initialization
 
-  required init(audioUrl: URL, bufferSize: AVAudioFrameCount = 2048,
+  required init(audioUrl: URL,
+                bufferSize: AVAudioFrameCount = 2048,
                 delegate: SignalTrackerDelegate? = nil) {
     self.audioUrl = audioUrl
     self.bufferSize = bufferSize
@@ -48,9 +49,7 @@ class OutputSignalTracker: SignalTracker {
     audioEngine.connect(audioPlayer, to: audioEngine.outputNode, format: audioFile.processingFormat)
     audioPlayer.scheduleFile(audioFile, at: nil, completionHandler: nil)
 
-    audioEngine.outputNode.installTap(onBus: bus, bufferSize: bufferSize, format: nil) {
-      buffer, time in
-
+    audioEngine.outputNode.installTap(onBus: bus, bufferSize: bufferSize, format: nil) { buffer, time in
       DispatchQueue.main.async {
         self.delegate?.signalTracker(self, didReceiveBuffer: buffer, atTime: time)
       }

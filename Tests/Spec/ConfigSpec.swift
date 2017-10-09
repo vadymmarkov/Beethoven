@@ -2,8 +2,7 @@
 import Quick
 import Nimble
 
-class ConfigSpec: QuickSpec {
-
+final class ConfigSpec: QuickSpec {
   override func spec() {
     describe("Config") {
       var config: Config!
@@ -14,7 +13,7 @@ class ConfigSpec: QuickSpec {
 
           expect(config.bufferSize).to(equal(4096))
           expect(config.estimationStrategy).to(equal(EstimationStrategy.yin))
-          expect(config.audioURL).to(beNil())
+          expect(config.audioUrl).to(beNil())
         }
       }
     }

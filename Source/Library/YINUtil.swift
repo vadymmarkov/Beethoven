@@ -11,8 +11,7 @@
 import UIKit
 import Accelerate
 
-class YINUtil {
-
+final class YINUtil {
   // Slow and eats a lot of CPU, but working
   class func difference2(buffer: [Float]) -> [Float] {
     let bufferHalfCount = buffer.count / 2
@@ -58,7 +57,6 @@ class YINUtil {
   //
   // Kept for reference only.
   class func difference_broken_do_not_use(buffer: [Float]) -> [Float] {
-
     let frameSize = buffer.count
     let yinBufferSize = frameSize / 2
 

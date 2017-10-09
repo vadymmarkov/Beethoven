@@ -17,19 +17,15 @@ class InputSignalTracker: SignalTracker {
   fileprivate let bus = 0
 
   var peakLevel: Float? {
-    get {
-      return audioChannel?.peakHoldLevel
-    }
+    return audioChannel?.peakHoldLevel
   }
 
   var averageLevel: Float? {
-    get {
-      return audioChannel?.averagePowerLevel
-    }
+    return audioChannel?.averagePowerLevel
   }
 
   var mode: SignalTrackerMode {
-    get { return .record }
+    return .record
   }
 
   // MARK: - Initialization
@@ -90,16 +86,16 @@ class InputSignalTracker: SignalTracker {
 
   fileprivate func setupAudio() {
     do {
-      let audioDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio)
-      let audioCaptureInput = try AVCaptureDeviceInput(device: audioDevice)
+      let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)
+      let audioCaptureInput = try AVCaptureDeviceInput(device: audioDevice!)
 
       captureSession.addInput(audioCaptureInput)
 
       let audioOutput = AVCaptureAudioDataOutput()
       captureSession.addOutput(audioOutput)
 
-      let connection = audioOutput.connections[0] as? AVCaptureConnection
-      audioChannel = connection?.audioChannels[0] as? AVCaptureAudioChannel
+      let connection = audioOutput.connections[0]
+      audioChannel = connection.audioChannels[0]
     } catch {}
   }
 }

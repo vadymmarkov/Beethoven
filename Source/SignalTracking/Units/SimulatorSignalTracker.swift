@@ -84,19 +84,19 @@ public class SimulatorSignalTracker: SignalTracker {
 
   private func createPCMBuffer(_ frequency: Double) -> AVAudioPCMBuffer {
     let format = AVAudioFormat(standardFormatWithSampleRate: SimulatorSignalTracker.sampleRate, channels: 1)
-    let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(SimulatorSignalTracker.sampleCount))
+    let buffer = AVAudioPCMBuffer(pcmFormat: format!, frameCapacity: AVAudioFrameCount(SimulatorSignalTracker.sampleCount))
 
-    if let channelData = buffer.floatChannelData {
-      let velocity = Float32(2.0 * M_PI * frequency / SimulatorSignalTracker.sampleRate)
+    if let channelData = buffer?.floatChannelData {
+      let velocity = Float32(2.0 * .pi * frequency / SimulatorSignalTracker.sampleRate)
 
       for i in 0..<SimulatorSignalTracker.sampleCount {
         let sample: Float32 = sin(velocity * Float32(i))
         channelData[0][i] = sample
       }
 
-      buffer.frameLength = buffer.frameCapacity
+      buffer?.frameLength = (buffer?.frameCapacity)!
     }
 
-    return buffer
+    return buffer!
   }
 }
