@@ -45,7 +45,7 @@ final class FFTTransformer: Transformer {
 
   // MARK: - Helpers
 
-  private func sqrtq(_ x: [Float]) -> [Float] {
+  func sqrtq(_ x: [Float]) -> [Float] {
     var results = [Float](repeating: 0.0, count: x.count)
     vvsqrtf(&results, x, [Int32(x.count)])
 
