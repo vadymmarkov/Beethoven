@@ -1,5 +1,4 @@
 struct Buffer {
-
   var elements: [Float]
   var realElements: [Float]?
   var imagElements: [Float]?

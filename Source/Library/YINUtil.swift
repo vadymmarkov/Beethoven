@@ -56,6 +56,7 @@ final class YINUtil {
   // https://code.soundsoftware.ac.uk/projects/pyin/repository but I don't know what
   //
   // Kept for reference only.
+  // swiftlint:disable function_body_length
   class func difference_broken_do_not_use(buffer: [Float]) -> [Float] {
     let frameSize = buffer.count
     let yinBufferSize = frameSize / 2

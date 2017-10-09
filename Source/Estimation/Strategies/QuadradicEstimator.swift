@@ -1,7 +1,6 @@
 import Foundation
 
-struct QuadradicEstimator: LocationEstimator {
-
+final class QuadradicEstimator: LocationEstimator {
   func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(from: elements)

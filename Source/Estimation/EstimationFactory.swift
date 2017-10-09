@@ -1,6 +1,5 @@
-struct EstimationFactory {
-
-  static func create(_ strategy: EstimationStrategy) -> Estimator {
+final class EstimationFactory {
+  func create(_ strategy: EstimationStrategy) -> Estimator {
     let estimator: Estimator
 
     switch strategy {

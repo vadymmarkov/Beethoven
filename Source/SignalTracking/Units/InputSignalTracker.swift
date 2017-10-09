@@ -4,17 +4,16 @@ public enum InputSignalTrackerError: Error {
   case inputNodeMissing
 }
 
-class InputSignalTracker: SignalTracker {
-
+final class InputSignalTracker: SignalTracker {
   weak var delegate: SignalTrackerDelegate?
   var levelThreshold: Float?
 
-  fileprivate let bufferSize: AVAudioFrameCount
-  fileprivate var audioChannel: AVCaptureAudioChannel?
-  fileprivate let captureSession = AVCaptureSession()
-  fileprivate var audioEngine: AVAudioEngine?
-  fileprivate let session = AVAudioSession.sharedInstance()
-  fileprivate let bus = 0
+  private let bufferSize: AVAudioFrameCount
+  private var audioChannel: AVCaptureAudioChannel?
+  private let captureSession = AVCaptureSession()
+  private var audioEngine: AVAudioEngine?
+  private let session = AVAudioSession.sharedInstance()
+  private let bus = 0
 
   var peakLevel: Float? {
     return audioChannel?.peakHoldLevel
@@ -34,7 +33,6 @@ class InputSignalTracker: SignalTracker {
                 delegate: SignalTrackerDelegate? = nil) {
     self.bufferSize = bufferSize
     self.delegate = delegate
-
     setupAudio()
   }
 
@@ -84,7 +82,7 @@ class InputSignalTracker: SignalTracker {
     captureSession.stopRunning()
   }
 
-  fileprivate func setupAudio() {
+  private func setupAudio() {
     do {
       let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)
       let audioCaptureInput = try AVCaptureDeviceInput(device: audioDevice!)

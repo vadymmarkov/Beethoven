@@ -8,18 +8,18 @@ public protocol PitchEngineDelegate: class {
   func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 }
 
-public enum PitchEngineError: Error {
-  case recordPermissionDenied
-}
-
 public final class PitchEngine {
+  public enum Error: Swift.Error {
+    case recordPermissionDenied
+  }
+
   public let bufferSize: AVAudioFrameCount
-  public var active = false
+  public private(set) var active = false
   public weak var delegate: PitchEngineDelegate?
 
-  private var estimator: Estimator
-  private var signalTracker: SignalTracker
-  private var queue: DispatchQueue
+  private let estimator: Estimator
+  private let signalTracker: SignalTracker
+  private let queue: DispatchQueue
 
   public var mode: SignalTrackerMode {
     return signalTracker.mode
@@ -44,7 +44,9 @@ public final class PitchEngine {
               signalTracker: SignalTracker? = nil,
               delegate: PitchEngineDelegate? = nil) {
     bufferSize = config.bufferSize
-    estimator = EstimationFactory.create(config.estimationStrategy)
+
+    let factory = EstimationFactory()
+    estimator = factory.create(config.estimationStrategy)
 
     if let signalTracker = signalTracker {
       self.signalTracker = signalTracker
@@ -56,7 +58,7 @@ public final class PitchEngine {
       }
     }
 
-    queue = DispatchQueue(label: "BeethovenQueue", attributes: [])
+    self.queue = DispatchQueue(label: "BeethovenQueue", attributes: [])
     self.signalTracker.delegate = self
     self.delegate = delegate
   }
@@ -85,8 +87,10 @@ public final class PitchEngine {
         guard let weakSelf = self else { return }
 
         guard granted else {
-          weakSelf.delegate?.pitchEngineDidReceiveError(weakSelf,
-            error: PitchEngineError.recordPermissionDenied as Error)
+          weakSelf.delegate?.pitchEngineDidReceiveError(
+            weakSelf,
+            error: Error.recordPermissionDenied
+          )
           return
         }
 
@@ -115,7 +119,6 @@ public final class PitchEngine {
 // MARK: - SignalTrackingDelegate
 
 extension PitchEngine: SignalTrackerDelegate {
-
   public func signalTracker(_ signalTracker: SignalTracker,
                             didReceiveBuffer buffer: AVAudioPCMBuffer,
                             atTime time: AVAudioTime) {

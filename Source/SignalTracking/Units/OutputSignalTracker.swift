@@ -1,16 +1,14 @@
 import AVFoundation
 
-class OutputSignalTracker: SignalTracker {
-
+final class OutputSignalTracker: SignalTracker {
   weak var delegate: SignalTrackerDelegate?
   var levelThreshold: Float?
 
-  fileprivate let bufferSize: AVAudioFrameCount
-  fileprivate let audioUrl: URL
-
-  fileprivate var audioEngine: AVAudioEngine!
-  fileprivate var audioPlayer: AVAudioPlayerNode!
-  fileprivate let bus = 0
+  private let bufferSize: AVAudioFrameCount
+  private let audioUrl: URL
+  private var audioEngine: AVAudioEngine!
+  private var audioPlayer: AVAudioPlayerNode!
+  private let bus = 0
 
   var peakLevel: Float? {
     return 0.0

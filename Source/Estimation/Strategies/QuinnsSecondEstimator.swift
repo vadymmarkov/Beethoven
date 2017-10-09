@@ -1,7 +1,6 @@
 import Foundation
 
-struct QuinnsSecondEstimator: LocationEstimator {
-
+final class QuinnsSecondEstimator: LocationEstimator {
   func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(from: elements)
@@ -27,7 +26,7 @@ struct QuinnsSecondEstimator: LocationEstimator {
     return sanitize(location: location, reserveLocation: maxIndex, elements: elements)
   }
 
-  func tau(_ x: Float) -> Float {
+  private func tau(_ x: Float) -> Float {
     let p1 = log(3 * pow(x, 2.0) + 6 * x + 1)
     let part1 = x + 1 - sqrt(2/3)
     let part2 = x + 1 + sqrt(2/3)

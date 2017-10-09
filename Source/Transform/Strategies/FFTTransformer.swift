@@ -1,8 +1,7 @@
 import AVFoundation
 import Accelerate
 
-struct FFTTransformer: Transformer {
-
+final class FFTTransformer: Transformer {
   func transform(buffer: AVAudioPCMBuffer) throws -> Buffer {
     let frameCount = buffer.frameLength
     let log2n = UInt(round(log2(Double(frameCount))))
@@ -46,7 +45,7 @@ struct FFTTransformer: Transformer {
 
   // MARK: - Helpers
 
-  func sqrtq(_ x: [Float]) -> [Float] {
+  private func sqrtq(_ x: [Float]) -> [Float] {
     var results = [Float](repeating: 0.0, count: x.count)
     vvsqrtf(&results, x, [Int32(x.count)])
 

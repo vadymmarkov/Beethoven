@@ -1,6 +1,6 @@
 import AVFoundation
 
-struct SimpleTransformer: Transformer {
+final class SimpleTransformer: Transformer {
   enum SimpleTransformerError: Error {
     case floatChannelDataIsNil
   }

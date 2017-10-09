@@ -2,8 +2,7 @@
 import Quick
 import Nimble
 
-class ArrayExtensionsSpec: QuickSpec {
-
+final class ArrayExtensionsSpec: QuickSpec {
   override func spec() {
     describe("Array+Extensions") {
 
