@@ -2,8 +2,7 @@
 import Quick
 import Nimble
 
-class EstimatorSpec: QuickSpec {
-
+final class EstimatorSpec: QuickSpec {
   override func spec() {
     describe("Estimator") {
       var estimator: Estimator!

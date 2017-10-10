@@ -3,7 +3,7 @@
 [![CI Status](http://img.shields.io/travis/vadymmarkov/Beethoven.svg?style=flat)](https://travis-ci.org/vadymmarkov/Beethoven)
 [![Version](https://img.shields.io/cocoapods/v/Beethoven.svg?style=flat)](http://cocoadocs.org/docsets/Beethoven)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Swift](https://img.shields.io/badge/%20in-swift%203.0-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
 [![License](https://img.shields.io/cocoapods/l/Beethoven.svg?style=flat)](http://cocoadocs.org/docsets/Beethoven)
 [![Platform](https://img.shields.io/cocoapods/p/Beethoven.svg?style=flat)](http://cocoadocs.org/docsets/Beethoven)
 
@@ -104,8 +104,8 @@ pitchEngine.delegate = pitchEngineDelegate
 the pitch detection has been started:
 
 ```swift
-func pitchEngineDidReceivePitch(_ pitchEngine: PitchEngine, pitch: Pitch)
-func pitchEngineDidReceiveError(_ pitchEngine: PitchEngine, error: Error)
+func pitchEngine(_ pitchEngine: PitchEngine, didReceivePitch pitch: Pitch)
+func pitchEngine(_ pitchEngine: PitchEngine, didReceiveError error: Error)
 func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
 ```
 

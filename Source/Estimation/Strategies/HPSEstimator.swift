@@ -1,7 +1,6 @@
-struct HPSEstimator: LocationEstimator {
-
-  let harmonics = 5
-  let minIndex = 20
+final class HPSEstimator: LocationEstimator {
+  private let harmonics = 5
+  private let minIndex = 20
 
   func estimateLocation(buffer: Buffer) throws -> Int {
     var spectrum = buffer.elements
@@ -32,6 +31,7 @@ struct HPSEstimator: LocationEstimator {
         maxsearch = location
       }
 
+      // swiftlint:disable for_where
       for i in (minIndex + 1)..<maxsearch {
         if spectrum[i] > spectrum[max2] {
           max2 = i

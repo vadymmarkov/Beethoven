@@ -1,7 +1,6 @@
 import Foundation
 
-struct QuinnsFirstEstimator: LocationEstimator {
-
+final class QuinnsFirstEstimator: LocationEstimator {
   func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(from: elements)

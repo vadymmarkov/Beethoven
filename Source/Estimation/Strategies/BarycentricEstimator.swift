@@ -1,7 +1,6 @@
 import Foundation
 
-struct BarycentricEstimator: LocationEstimator {
-
+final class BarycentricEstimator: LocationEstimator {
   func estimateLocation(buffer: Buffer) throws -> Int {
     let elements = buffer.elements
     let maxIndex = try maxBufferIndex(from: elements)
