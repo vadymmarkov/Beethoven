@@ -66,9 +66,11 @@ final class InputSignalTracker: SignalTracker {
       }
     }
 
-    captureSession.startRunning()
-    audioEngine?.prepare()
     try audioEngine?.start()
+    captureSession.startRunning()
+    guard captureSession.isRunning == true else {
+        throw InputSignalTrackerError.inputNodeMissing
+    }
   }
 
   func stop() {
