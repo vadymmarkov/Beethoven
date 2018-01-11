@@ -40,8 +40,19 @@ final class InputSignalTracker: SignalTracker {
 
   func start() throws {
     try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-    try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
 
+    // check input type
+    let currentRoute = session.currentRoute
+    if currentRoute.outputs.count != 0 {
+        for description in currentRoute.outputs {
+            if (description.portType != AVAudioSessionPortHeadphones) { // input from speaker if port is not headphones
+                try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+            } else { // input from default (headphones)
+                try session.overrideOutputAudioPort(.none)
+            }
+        }
+    }
+    
     audioEngine = AVAudioEngine()
 
     guard let inputNode = audioEngine?.inputNode else {
