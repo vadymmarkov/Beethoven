@@ -36,4 +36,9 @@ variable_name:
   excluded: # excluded via string array
     - x
     - y
+    - i
+    - j
+    - d
+    - v
+    - a
 reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)
