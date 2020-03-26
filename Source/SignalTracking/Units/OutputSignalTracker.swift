@@ -36,7 +36,7 @@ final class OutputSignalTracker: SignalTracker {
 
   func start() throws {
     let session = AVAudioSession.sharedInstance()
-    try session.setCategory(AVAudioSessionCategoryPlayback)
+    try session.setCategory(AVAudioSession.Category.playback)
 
     audioEngine = AVAudioEngine()
     audioPlayer = AVAudioPlayerNode()

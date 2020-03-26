@@ -31,11 +31,11 @@ final class ViewController: UIViewController {
     button.layer.cornerRadius = 20
     button.backgroundColor = UIColor(hex: "3DAFAE")
     button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-    button.setTitleColor(UIColor.white, for: UIControlState())
+    button.setTitleColor(UIColor.white, for: UIControl.State())
 
     button.addTarget(self, action: #selector(ViewController.actionButtonDidPress(_:)),
       for: .touchUpInside)
-    button.setTitle("Start".uppercased(), for: UIControlState())
+    button.setTitle("Start".uppercased(), for: UIControl.State())
 
     return button
   }()

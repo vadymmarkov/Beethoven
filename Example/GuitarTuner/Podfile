@@ -4,6 +4,21 @@ platform :ios, '9.0'
 
 target 'GuitarTuner' do
   pod 'Beethoven', path: '../../'
-  pod 'Hue', '~> 3.0'
-  pod 'Cartography'
+  pod 'Hue', '~> 5.0'
+  pod 'Cartography', '~> 3.0'
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '5.0'
+            config.build_settings.delete('CODE_SIGNING_ALLOWED')
+            config.build_settings.delete('CODE_SIGNING_REQUIRED')
+        end
+    end
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '5.0'
+        config.build_settings.delete('CODE_SIGNING_ALLOWED')
+        config.build_settings.delete('CODE_SIGNING_REQUIRED')
+    end
 end
