@@ -126,9 +126,7 @@
 				D57D40FA1BE95A350026B005 /* Frameworks */,
 				D57D40FB1BE95A350026B005 /* Resources */,
 				9A1FE1805890F1ADECBB5C91 /* [CP] Embed Pods Frameworks */,
-				C388AD861F71DDEC8588850E /* [CP] Copy Pods Resources */,
 				BBF9D165E87DC40FC3115EAE /* 📦 Embed Pods Frameworks */,
-				6F77F9EE9820226CF5C57DF3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,7 +148,7 @@
 				TargetAttributes = {
 					D57D40FC1BE95A350026B005 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 6YMA3EN78R;
+						DevelopmentTeam = KMUT74CVY5;
 						LastSwiftMigration = 0900;
 					};
 				};
@@ -160,6 +158,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -219,28 +218,13 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6F77F9EE9820226CF5C57DF3 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9A1FE1805890F1ADECBB5C91 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Beethoven/Beethoven.framework",
 				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
@@ -255,7 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BBF9D165E87DC40FC3115EAE /* 📦 Embed Pods Frameworks */ = {
@@ -271,21 +255,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C388AD861F71DDEC8588850E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuitarTuner/Pods-GuitarTuner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -363,7 +332,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -409,7 +378,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -420,13 +389,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6YMA3EN78R;
+				DEVELOPMENT_TEAM = KMUT74CVY5;
 				INFOPLIST_FILE = "$(SRCROOT)/GuitarTuner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.GuitarTuner;
 				PRODUCT_NAME = GuitarTuner;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -436,13 +405,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6YMA3EN78R;
+				DEVELOPMENT_TEAM = 4C97DN55EV;
 				INFOPLIST_FILE = "$(SRCROOT)/GuitarTuner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vadymmarkov.GuitarTuner;
 				PRODUCT_NAME = GuitarTuner;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

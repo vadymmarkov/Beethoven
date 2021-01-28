@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   lazy var viewController: ViewController = .init()
 
   func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = navigationController
 
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationBar.isTranslucent = false
     navigationBar.shadowImage = UIImage()
     navigationBar.titleTextAttributes = [
-      NSAttributedStringKey.foregroundColor: UIColor.white
+      NSAttributedString.Key.foregroundColor: UIColor.white
     ]
   }
 }
