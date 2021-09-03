@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Beethoven"
   s.summary          = "A maestro of pitch detection"
-  s.version          = "4.0.2"
+  s.version          = "5.0.0"
   s.homepage         = "https://github.com/vadymmarkov/Beethoven"
   s.license          = 'MIT'
   s.author           = { "Vadym Markov" => "markov.vadym@gmail.com" }
@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   s.frameworks = 'Foundation', 'AVFoundation', 'Accelerate'
   s.dependency 'Pitchy', '~> 3.0'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }
 end

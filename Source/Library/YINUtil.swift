@@ -38,7 +38,8 @@ final class YINUtil {
     var vSum: Float = 0.0
 
     for tau in 0 ..< bufferHalfCount {
-      let bufferTau = UnsafePointer<Float>(buffer).advanced(by: tau)
+        
+      let bufferTau = buffer.withUnsafeBufferPointer({ $0 }).baseAddress!.advanced(by: tau)
       // do a diff of buffer with itself at tau offset
       vDSP_vsub(buffer, 1, bufferTau, 1, &tempBuffer, 1, len)
       // square each value of the diff vector
@@ -90,9 +91,14 @@ final class YINUtil {
     let fftSetup = vDSP_create_fftsetup(log2n, Int32(kFFTRadix2))
     var audioRealp = [Float](repeating: 0, count: inputCount)
     var audioImagp = [Float](repeating: 0, count: inputCount)
-    var audioTransformedComplex = DSPSplitComplex(realp: &audioRealp, imagp: &audioImagp)
-
-    let temp = UnsafePointer<Float>(buffer)
+    var audioTransformedComplex:DSPSplitComplex!
+    audioRealp.withUnsafeMutableBufferPointer { realp in
+        audioImagp.withUnsafeMutableBufferPointer { imagp in
+            audioTransformedComplex = DSPSplitComplex(realp: realp.baseAddress!, imagp: imagp.baseAddress!)
+        }
+    }
+    
+    let temp = buffer.withUnsafeBufferPointer({ $0 }).baseAddress!
 
     temp.withMemoryRebound(to: DSPComplex.self, capacity: buffer.count) { (typeConvertedTransferBuffer) -> Void in
       vDSP_ctoz(typeConvertedTransferBuffer, 2, &audioTransformedComplex, 1, vDSP_Length(inputCount))
@@ -115,9 +121,14 @@ final class YINUtil {
 
     var kernelRealp = [Float](repeating: 0, count: frameSize)
     var kernelImagp = [Float](repeating: 0, count: frameSize)
-    var kernelTransformedComplex = DSPSplitComplex(realp: &kernelRealp, imagp: &kernelImagp)
-
-    let ktemp = UnsafePointer<Float>(kernel)
+    var kernelTransformedComplex:DSPSplitComplex!
+    kernelRealp.withUnsafeMutableBufferPointer { realp in
+        kernelImagp.withUnsafeMutableBufferPointer { imagp in
+            kernelTransformedComplex = DSPSplitComplex(realp: realp.baseAddress!, imagp: imagp.baseAddress!)
+          }
+      }
+    
+    let ktemp = kernel.withUnsafeBufferPointer({ $0 }).baseAddress!
 
     ktemp.withMemoryRebound(to: DSPComplex.self, capacity: kernel.count) { (typeConvertedTransferBuffer) -> Void in
       vDSP_ctoz(typeConvertedTransferBuffer, 2, &kernelTransformedComplex, 1, vDSP_Length(inputCount))
@@ -127,7 +138,13 @@ final class YINUtil {
 
     var yinStyleACFRealp = [Float](repeating: 0, count: frameSize)
     var yinStyleACFImagp = [Float](repeating: 0, count: frameSize)
-    var yinStyleACFComplex = DSPSplitComplex(realp: &yinStyleACFRealp, imagp: &yinStyleACFImagp)
+    var yinStyleACFComplex:DSPSplitComplex!
+    yinStyleACFRealp.withUnsafeMutableBufferPointer { realp in
+        yinStyleACFImagp.withUnsafeMutableBufferPointer { imagp in
+            yinStyleACFComplex = DSPSplitComplex(realp: realp.baseAddress!, imagp: imagp.baseAddress!)
+          }
+      }
+    
 
     for j in 0 ..< inputCount {
       yinStyleACFRealp[j] = audioRealp[j] * kernelRealp[j] - audioImagp[j] * kernelImagp[j]
@@ -211,7 +228,7 @@ final class YINUtil {
       betterTau = Float(tau)
     }
 
-    return fabs(betterTau)
+    return abs(betterTau)
   }
 
   class func sumSquare(yinBuffer: [Float], start: Int, end: Int) -> Float {
