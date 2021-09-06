@@ -1,5 +1,5 @@
 PODS:
-  - Beethoven (4.0.2):
+  - Beethoven (5.0.0):
     - Pitchy (~> 3.0)
   - Cartography (3.1.0)
   - Hue (5.0.0)
@@ -21,11 +21,11 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  Beethoven: 04f99571a7ad2a37184161762be757fe0b8ccc20
+  Beethoven: e318691697c38933a69081d4bf4d2506213505fd
   Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
   Hue: c129cb67be7d093a82bbbc30ce8a96757bf6f37a
   Pitchy: 15407e4425b6d88fa3e7eef8927ba659fab52d7a
 
-PODFILE CHECKSUM: 36c8d115bba4c2b8ff7ae95956fd288002fa13e5
+PODFILE CHECKSUM: 09339adf6e9f2003f0c75ae60b9eca9f6719d5e8
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

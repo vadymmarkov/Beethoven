@@ -2,7 +2,7 @@ import UIKit
 import AVFoundation
 import Pitchy
 
-public protocol PitchEngineDelegate: class {
+public protocol PitchEngineDelegate: AnyObject {
   func pitchEngine(_ pitchEngine: PitchEngine, didReceivePitch pitch: Pitch)
   func pitchEngine(_ pitchEngine: PitchEngine, didReceiveError error: Error)
   func pitchEngineWentBelowLevelThreshold(_ pitchEngine: PitchEngine)
@@ -74,15 +74,19 @@ public final class PitchEngine {
     let audioSession = AVAudioSession.sharedInstance()
 
     switch audioSession.recordPermission {
-    case AVAudioSessionRecordPermission.granted:
+    case AVAudioSession.RecordPermission.granted:
       activate()
-    case AVAudioSessionRecordPermission.denied:
+    case AVAudioSession.RecordPermission.denied:
       DispatchQueue.main.async {
         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-          UIApplication.shared.openURL(settingsURL)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(settingsURL)
+            }
         }
       }
-    case AVAudioSessionRecordPermission.undetermined:
+    case AVAudioSession.RecordPermission.undetermined:
       AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted  in
         guard let weakSelf = self else { return }
 
@@ -96,6 +100,8 @@ public final class PitchEngine {
           weakSelf.activate()
         }
       }
+    @unknown default:
+        break
     }
   }
 
