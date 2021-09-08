@@ -1,15 +1,16 @@
-osx_image: xcode9
+osx_image: xcode10
 language: objective-c
 xcode_sdk: iphonesimulator10.0
-
 before_install:
 - brew update
 - if brew outdated | grep -qx carthage; then brew upgrade carthage; fi
 - travis_wait 35 carthage bootstrap --platform iOS
-
 script:
 - set -o pipefail
-- travis_retry xcodebuild -project Beethoven.xcodeproj -scheme "Beethoven-iOS" -destination "platform=iOS Simulator,name=iPhone 6" build-for-testing test | xcpretty
-
+- travis_retry xcodebuild -project Beethoven.xcodeproj -scheme "Beethoven-iOS" -destination
+  "platform=iOS Simulator,name=iPhone 6" build-for-testing test | xcpretty
 notifications:
   email: false
+env:
+  global:
+    secure: n8IzprXBZebE5sMmW5pltuk1Oo1StTd8kLaPuMf6Q633aAk/FKM8z0cDW6VWt8r5kFIFfdcpU86/kDaKofGb4E5was4O9gAGUKegzdDE+eHqyeDwMCKRkfEP6IP662kWSAW6iPyk63FAxkIN8QrlHbwge/kAiJ1Lze3lUfvw8jT5gucXDDdTgQ+2hc4y8t5EKHfJNYFv1RKB3TtXC5nkANyHdhXaxdYqO3yEK+rPDue/C2g/+LNdlR+wJNyyZ7L7igqQZkTChskX1y5fgYD1UElXDZvGsYXfRdaE9SprQhwkzHvCWfGOq3dbTgHWLNtYDXoy6nqe9EgD30NQZEPEGPHHv4jYHvE5njxJHu2MDXcySVJ36Niee+4Ox02OjbGZNOFE1Os1geS1lKVh8hAHqS5W3IBxQ8jui3EfQp4BpBqm9JdcuxrG/lIcGah3Ix0kRfiDXk4QT7oiypWjQX54Y0wCb0Ix0D+fR4q3Ndbrc/Eck9GYpIB6+eW1bFl+jaxWeoeTAHt/dCrTzilOgFfbw+1gBWFR76WCdoRlr3m3fAnxZvlRh42SdefMGN8XsBxmUg7lgHbP24I1FF3l6Zv2MQfiiz4dKFb6S0krR1loTgdB7foMWLdXMGk9AsgK+njCiqawALUhj9I/wJ2k1+bsD28xhJ0aRrgLbPWXmGcFBR8=
